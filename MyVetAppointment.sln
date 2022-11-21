@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9FDD7CF-65D8-4C9C-8557-20AA17ABC8B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E1AD21F0-3BFB-4E31-AAC8-03117C87A280}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyVetAppointment.API", "src\MyVetAppointment.API\MyVetAppointment.API.csproj", "{0212FBE9-73A1-459B-9025-385F41087C3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyVetAppointment.Business", "src\MyVetAppointment.Business\MyVetAppointment.Business.csproj", "{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyVetAppointment.Data", "src\MyVetAppointment.Data\MyVetAppointment.Data.csproj", "{48008D88-E34E-4F81-8288-0C511223F60A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyVetAppointment.IntegrationTests", "tests\MyVetAppointment.IntegrationTests\MyVetAppointment.IntegrationTests.csproj", "{0FCC27D2-7325-40B1-9070-F6A426FE404C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyVetAppointment.UnitTests", "tests\MyVetAppointment.UnitTests\MyVetAppointment.UnitTests.csproj", "{94405D69-2094-4CE5-B7A6-D61EA35D7874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0212FBE9-73A1-459B-9025-385F41087C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0212FBE9-73A1-459B-9025-385F41087C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0212FBE9-73A1-459B-9025-385F41087C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0212FBE9-73A1-459B-9025-385F41087C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48008D88-E34E-4F81-8288-0C511223F60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48008D88-E34E-4F81-8288-0C511223F60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48008D88-E34E-4F81-8288-0C511223F60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48008D88-E34E-4F81-8288-0C511223F60A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCC27D2-7325-40B1-9070-F6A426FE404C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCC27D2-7325-40B1-9070-F6A426FE404C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCC27D2-7325-40B1-9070-F6A426FE404C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCC27D2-7325-40B1-9070-F6A426FE404C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94405D69-2094-4CE5-B7A6-D61EA35D7874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94405D69-2094-4CE5-B7A6-D61EA35D7874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94405D69-2094-4CE5-B7A6-D61EA35D7874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94405D69-2094-4CE5-B7A6-D61EA35D7874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0212FBE9-73A1-459B-9025-385F41087C3C} = {E1AD21F0-3BFB-4E31-AAC8-03117C87A280}
+		{FEDEB87A-E84F-4D20-B5E3-A8AECBE866DF} = {E1AD21F0-3BFB-4E31-AAC8-03117C87A280}
+		{48008D88-E34E-4F81-8288-0C511223F60A} = {E1AD21F0-3BFB-4E31-AAC8-03117C87A280}
+		{0FCC27D2-7325-40B1-9070-F6A426FE404C} = {C9FDD7CF-65D8-4C9C-8557-20AA17ABC8B7}
+		{94405D69-2094-4CE5-B7A6-D61EA35D7874} = {C9FDD7CF-65D8-4C9C-8557-20AA17ABC8B7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AE368B4-E706-48FD-A4D8-65108CCD156E}
+	EndGlobalSection
+EndGlobal
