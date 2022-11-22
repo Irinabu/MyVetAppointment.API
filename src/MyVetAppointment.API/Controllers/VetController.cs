@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.User;
 
 namespace MyVetAppointment.API.Controllers
 {
     [Route("[controller]")]
+    [Authorize]
     [ApiController]
     public class VetController : ControllerBase
     {
