@@ -9,6 +9,7 @@ namespace MyVetAppointment.Business
         public static IServiceCollection InjectBussinesServices(this IServiceCollection services)
         {
             services.AddTransient<IAuthenticateService, AuthenticateService>();
+            services.AddTransient<JwtService>();
             return services;
         }
     }

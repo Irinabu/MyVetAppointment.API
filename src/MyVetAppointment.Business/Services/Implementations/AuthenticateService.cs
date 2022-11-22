@@ -1,81 +1,85 @@
 ﻿using System.Security.Cryptography;
-using Microsoft.Identity.Client;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
+using MyVetAppointment.Data.Enums;
+using AutoMapper;
 
 namespace MyVetAppointment.Business.Services.Implementations;
 
 public class AuthenticateService:IAuthenticateService
 {
-    private readonly IUserRepository _userRepository;
+ 
+
     private readonly ICustomerRepository _customerRepository;
     private readonly IVetDoctorRepository _vetDoctorRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly JwtService _jwtService;
+    private readonly IMapper _mapper;
 
-    public AuthenticateService(IUserRepository userRepository, ICustomerRepository customerRepository, IVetDoctorRepository vetDoctorRepository)
+    public AuthenticateService(ICustomerRepository customerRepository, IVetDoctorRepository vetDoctorRepository, JwtService jwtService, IUserRepository userRepository, IMapper mapper)
     {
-        _userRepository = userRepository;
         _customerRepository = customerRepository;
         _vetDoctorRepository = vetDoctorRepository;
+        _jwtService = jwtService;
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
     {
-        var user =await _userRepository.GetFirstAsync(x => x.Email == loginRequest.Email);
-        if(user == null)
+        var user = await _userRepository.GetFirstAsync(x => x.Email == loginRequest.Email);
+        if (user == null)
             throw new Exception("Email or password is incorrect");
         var hashedGivenPassword = HashPassword(loginRequest.Password);
         if (user.Password != hashedGivenPassword)
             throw new Exception("Email or password is incorrect");
+
+  
+        var type = user.GetType().ToString().Split(".");
+        var role = type[type.Length-1];
+        var jwt = _jwtService.GenerateJwt(loginRequest, role);
+
         return new LoginResponse
         {
             Email = user.Email,
-            Role = "role",
-            FirstName = "sa",
-            LastName = "l",
-            Token = "tokem"
+            Role = role,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Token = jwt
         };
+
     }
 
     public async Task RegisterCustomerAsync(RegisterRequest registerRequest)
     {
         var hashedPassword = await CheckUser(registerRequest);
 
-        var user = new Customer
-        {
-            Email = registerRequest.Email,
-            FirstName = registerRequest.FirstName,
-            LastName = registerRequest.LastName,
-            Password = hashedPassword
-        };
-
-        await _customerRepository.AddAsync(user);
+        var customer = _mapper.Map<Customer>(registerRequest);
+        customer.Password = hashedPassword;
+ 
+        await _customerRepository.AddAsync(customer);
     }
 
     public async Task RegisterVetDoctorAsync(RegisterRequest registerRequest)
     {
-        var hashedPassword=await CheckUser(registerRequest);
-        
-        var user = new VetDoctor
-        {
-            Email = registerRequest.Email,
-            FirstName = registerRequest.FirstName,
-            LastName = registerRequest.LastName,
-            Password = hashedPassword
-        };
+        var hashedPassword = await CheckUser(registerRequest);
 
-        await _vetDoctorRepository.AddAsync(user);
+        var vetDoctor = _mapper.Map<VetDoctor>(registerRequest);
+        vetDoctor.Password = hashedPassword;
+
+        await _vetDoctorRepository.AddAsync(vetDoctor);
     }
 
     private async Task<string> CheckUser(RegisterRequest registerRequest)
     {
-        // var isAlreadyRegistered = await _userRepository.GetFirstAsync(x => x.Email == registerRequest.Email);
-        // if (isAlreadyRegistered != null)
-        // {
-        //     throw new Exception("Email already registered");
-        // }
+        var isAlreadyRegistered = await _userRepository.GetFirstAsync(x => x.Email == registerRequest.Email);
+        if (isAlreadyRegistered != null)
+        {
+            throw new Exception("Email already registered");
+        }
         var hashedPassword = HashPassword(registerRequest.Password);
 
         return hashedPassword;

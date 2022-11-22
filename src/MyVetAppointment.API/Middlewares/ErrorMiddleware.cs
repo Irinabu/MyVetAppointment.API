@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json;
+using System.Net;
 
 namespace MyVetAppointment.API.Middlewares;
 
@@ -27,10 +28,10 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        await context.Response.WriteAsync(new 
+        await context.Response.WriteAsync(JsonConvert.SerializeObject(new
         {
             StatusCode = context.Response.StatusCode,
             Message = "Internal Server Error from the custom middleware."
-        }.ToString());
+        }));
     }
 }

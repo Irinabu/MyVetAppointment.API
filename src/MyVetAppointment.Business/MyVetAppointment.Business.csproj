@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,11 +13,9 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="MappingProfiles\" />
     <Folder Include="Extensions\" />
     <Folder Include="Models\User\" />
     <Folder Include="Models\Pet\" />
-    <Folder Include="Services\Implementations\" />
   </ItemGroup>
 
   <ItemGroup>

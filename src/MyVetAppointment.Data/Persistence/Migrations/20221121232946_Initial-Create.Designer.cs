@@ -12,7 +12,7 @@ using MyVetAppointment.Data.Persistence;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221121190915_Initial-Create")]
+    [Migration("20221121232946_Initial-Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />

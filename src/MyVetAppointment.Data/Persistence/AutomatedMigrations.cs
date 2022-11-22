@@ -1,6 +1,20 @@
-﻿namespace MyVetAppointment.Data.Persistence;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MyVetAppointment.Data.Repositories;
 
-public class AutomatedMigrations
+namespace MyVetAppointment.Data.Persistence;
+
+public static class AutomatedMigration
 {
-    
+    public static async Task MigrateAsync(IServiceProvider services)
+    {
+        var context = services.GetRequiredService<DatabaseContext>();
+
+        if (context.Database.IsSqlServer()) await context.Database.MigrateAsync();
+        var userRepository = services.GetRequiredService<IUserRepository>();
+        var mapper = services.GetRequiredService<IMapper>();
+
+        await DatabaseContextSeed.SeedDatabaseAsync(context, userRepository, mapper);
+    }
 }
