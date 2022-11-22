@@ -15,7 +15,6 @@ public class AuthenticateController : BaseController
         _authenticateService = authenticateService;
     }
 
-   
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest model)
     {
