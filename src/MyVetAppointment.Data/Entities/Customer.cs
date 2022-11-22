@@ -2,7 +2,7 @@
 
 public class Customer : User
 {
-public ICollection<Animal> Animals { get; set; }
-public ICollection<CustomerVetDoctor> VetDoctors { get; set; }
-public ICollection<Appointment> Appointments { get; set; }
+    public ICollection<Animal> Animals { get; set; }
+    public ICollection<CustomerVetDoctor> VetDoctors { get; set; }
+    public ICollection<Appointment> Appointments { get; set; }
 }

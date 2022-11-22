@@ -2,7 +2,6 @@
 
 namespace MyVetAppointment.Data.Repositories;
 
-public interface IUserRepository:IBaseRepository<User>
+public interface IUserRepository : IBaseRepository<User>
 {
-    
 }
