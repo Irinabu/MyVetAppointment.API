@@ -14,19 +14,10 @@ public class DatabaseContext : DbContext
     public DbSet<VetDoctor> VetDoctors { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<CustomerVetDoctor> CustomerVetDoctors { get; set; }
-    protected readonly IConfiguration Configuration;
 
 
-    public DatabaseContext(DbContextOptions<DatabaseContext> options, IConfiguration configuration) : base(options)
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
-        Configuration = configuration;
-    }
-
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    {
-        // connect to sql server with connection string from app settings
-        options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase"));
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
