@@ -1,12 +1,8 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.Business.Models.User;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MyVetAppointment.Business.Services.Implementations
 {
@@ -34,7 +30,7 @@ namespace MyVetAppointment.Business.Services.Implementations
 
             var token = new JwtSecurityToken
             (
-                "MyVetAppointement",
+                "MyVetAppointment",
                 audience: "users",
                 claims,
                 DateTime.UtcNow.AddMilliseconds(-30),

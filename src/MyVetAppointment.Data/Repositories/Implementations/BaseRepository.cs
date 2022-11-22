@@ -1,7 +1,6 @@
 ﻿using MyVetAppointment.Data.Persistence;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using MyVetAppointment.Data.Exceptions;
 
 namespace MyVetAppointment.Data.Repositories.Implementations;
 

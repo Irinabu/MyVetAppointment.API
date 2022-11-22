@@ -15,7 +15,7 @@ public class DatabaseContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<CustomerVetDoctor> CustomerVetDoctors { get; set; }
     protected readonly IConfiguration Configuration;
-    
+
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options, IConfiguration configuration) : base(options)
     {
@@ -23,20 +23,19 @@ public class DatabaseContext : DbContext
     }
 
 
-  
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         // connect to sql server with connection string from app settings
-        var conn = Configuration.GetConnectionString("WebApiDatabase");
         options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase"));
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
         builder.Entity<Bill>()
             .HasOne<Appointment>(x => x.Appointment)
-            .WithOne(x=>x.Bill)
+            .WithOne(x => x.Bill)
             .HasForeignKey<Appointment>(x => x.Id);
 
         builder.Entity<CustomerVetDoctor>()
@@ -54,13 +53,14 @@ public class DatabaseContext : DbContext
             .HasForeignKey(x => x.VetDoctorId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        // builder.Entity<Customer>().HasMany<Appointment>(x=>x.Appointments).WithOne(x => x.Customer).OnDelete(DeleteBehavior.Cascade);
-        // builder.Entity<VetDoctor>().HasMany<Appointment>(x=>x.Appointments).WithOne(x => x.VetDoctor).OnDelete(DeleteBehavior.Cascade);
-
-        builder.Entity<Appointment>().HasOne(x => x.Customer).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
-        builder.Entity<Appointment>().HasOne(x => x.VetDoctor).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
-
-
-
+        builder.Entity<Appointment>()
+            .HasOne(x => x.Customer)
+            .WithMany(x => x.Appointments)
+            .OnDelete(DeleteBehavior.NoAction);
+        
+        builder.Entity<Appointment>()
+            .HasOne(x => x.VetDoctor)
+            .WithMany(x => x.Appointments)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

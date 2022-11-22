@@ -2,9 +2,7 @@
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
-using static System.Net.Mime.MediaTypeNames;
 using System.Text;
-using MyVetAppointment.Data.Enums;
 using AutoMapper;
 
 namespace MyVetAppointment.Business.Services.Implementations;

@@ -1,6 +1,4 @@
-﻿using MyVetAppointment.Data.Enums;
-
-namespace MyVetAppointment.Data.Entities;
+﻿namespace MyVetAppointment.Data.Entities;
 
 public  class  User
 {

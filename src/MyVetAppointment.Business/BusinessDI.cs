@@ -4,9 +4,9 @@ using MyVetAppointment.Business.Services.Implementations;
 
 namespace MyVetAppointment.Business
 {
-    public static class BussinessDI
+    public static class BusinessDI
     {
-        public static IServiceCollection InjectBussinesServices(this IServiceCollection services)
+        public static IServiceCollection InjectBusinessServices(this IServiceCollection services)
         {
             services.AddTransient<IAuthenticateService, AuthenticateService>();
             services.AddTransient<JwtService>();

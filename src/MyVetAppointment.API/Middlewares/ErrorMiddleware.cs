@@ -31,7 +31,7 @@ public class ExceptionMiddleware
         await context.Response.WriteAsync(JsonConvert.SerializeObject(new
         {
             StatusCode = context.Response.StatusCode,
-            Message = "Internal Server Error from the custom middleware."
+            Message = $"Internal Server Error from the custom middleware.{exception.Message}"
         }));
     }
 }

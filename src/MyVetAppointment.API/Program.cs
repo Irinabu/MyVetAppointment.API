@@ -6,9 +6,7 @@ using MyVetAppointment.Business;
 using MyVetAppointment.Business.MappingProfiles;
 using MyVetAppointment.Data;
 using MyVetAppointment.Data.Persistence;
-using System.Reflection;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +50,7 @@ builder.Services.AddDbContext<DatabaseContext>();
 
 
 builder.Services.InjectRepositories();
-builder.Services.InjectBussinesServices();
+builder.Services.InjectBusinessServices();
 
 builder.Services.AddCors(options =>
 {

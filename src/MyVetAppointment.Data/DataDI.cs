@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Repositories.Implementations;
 
