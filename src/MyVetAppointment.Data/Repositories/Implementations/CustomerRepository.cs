@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Persistence;
@@ -6,12 +7,12 @@ using System.Linq.Expressions;
 
 namespace MyVetAppointment.Data.Repositories.Implementations
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer>,ICustomerRepository
     {
         private readonly DatabaseContext _dbContext;
         private readonly DbSet<User> _entities;
 
-        public CustomerRepository(DatabaseContext appDbContext)
+        public CustomerRepository(DatabaseContext appDbContext):base(appDbContext)
         {
             _dbContext = appDbContext;
             _entities = _dbContext.Set<User>();
@@ -106,11 +107,6 @@ namespace MyVetAppointment.Data.Repositories.Implementations
         }
 
         public Task<List<Customer>> GetAllAsync(Expression<Func<Customer, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Customer> AddAsync(Customer entity)
         {
             throw new NotImplementedException();
         }
