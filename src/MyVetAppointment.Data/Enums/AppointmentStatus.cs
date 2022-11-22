@@ -1,6 +1,6 @@
 ﻿namespace MyVetAppointment.Data.Enums;
 
-public enum AppointementStatus
+public enum AppointmentStatus
 {
     Declined,
     Accepted,

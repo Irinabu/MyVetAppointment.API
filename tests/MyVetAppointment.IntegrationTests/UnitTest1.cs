@@ -1,3 +1,5 @@
+using NUnit.Framework;
+
 namespace MyVetAppointment.IntegrationTests
 {
     public class Tests
