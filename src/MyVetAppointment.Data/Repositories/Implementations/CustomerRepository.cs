@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Persistence;
