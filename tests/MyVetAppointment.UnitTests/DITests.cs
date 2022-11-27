@@ -1,9 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore.Migrations;
 using MyVetAppointment.Business.MappingProfiles;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Services.Implementations;

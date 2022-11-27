@@ -25,15 +25,15 @@ public class AuthenticateController : BaseController
     [HttpPost("register-customer")]
     public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest model)
     {
-        await _authenticateService.RegisterCustomerAsync(model);
+        RegisterResponse response = await _authenticateService.RegisterCustomerAsync(model);
 
-        return Created("af", model);
+        return Created("af", response);
     }
     [HttpPost("register-vet-doctor")]
     public async Task<IActionResult> RegisterVetDoctor([FromBody] RegisterRequest model)
     {
-        await _authenticateService.RegisterVetDoctorAsync(model);
+        RegisterResponse response = await _authenticateService.RegisterVetDoctorAsync(model);
 
-        return Created("af", model);
+        return Created("af", response);
     }
 }

@@ -7,17 +7,16 @@ using AutoMapper;
 
 namespace MyVetAppointment.Business.Services.Implementations;
 
-public class AuthenticateService:IAuthenticateService
+public class AuthenticateService : IAuthenticateService
 {
- 
-
     private readonly ICustomerRepository _customerRepository;
     private readonly IVetDoctorRepository _vetDoctorRepository;
     private readonly IUserRepository _userRepository;
     private readonly JwtService _jwtService;
     private readonly IMapper _mapper;
 
-    public AuthenticateService(ICustomerRepository customerRepository, IVetDoctorRepository vetDoctorRepository, JwtService jwtService, IUserRepository userRepository, IMapper mapper)
+    public AuthenticateService(ICustomerRepository customerRepository, IVetDoctorRepository vetDoctorRepository,
+        JwtService jwtService, IUserRepository userRepository, IMapper mapper)
     {
         _customerRepository = customerRepository;
         _vetDoctorRepository = vetDoctorRepository;
@@ -35,9 +34,9 @@ public class AuthenticateService:IAuthenticateService
         if (user.Password != hashedGivenPassword)
             throw new Exception("Email or password is incorrect");
 
-  
+
         var type = user.GetType().ToString().Split(".");
-        var role = type[type.Length-1];
+        var role = type[type.Length - 1];
         var jwt = _jwtService.GenerateJwt(loginRequest, role);
 
         return new LoginResponse
@@ -48,20 +47,26 @@ public class AuthenticateService:IAuthenticateService
             LastName = user.LastName,
             Token = jwt
         };
-
     }
 
-    public async Task RegisterCustomerAsync(RegisterRequest registerRequest)
+    public async Task<RegisterResponse> RegisterCustomerAsync(RegisterRequest registerRequest)
     {
         var hashedPassword = await CheckUser(registerRequest);
 
         var customer = _mapper.Map<Customer>(registerRequest);
         customer.Password = hashedPassword;
- 
+
         await _customerRepository.AddAsync(customer);
+        return new RegisterResponse()
+        {
+            Email = customer.Email,
+            FirstName = customer.FirstName,
+            LastName = customer.LastName,
+            Role = "Customer"
+        };
     }
 
-    public async Task RegisterVetDoctorAsync(RegisterRequest registerRequest)
+    public async Task<RegisterResponse> RegisterVetDoctorAsync(RegisterRequest registerRequest)
     {
         var hashedPassword = await CheckUser(registerRequest);
 
@@ -69,6 +74,13 @@ public class AuthenticateService:IAuthenticateService
         vetDoctor.Password = hashedPassword;
 
         await _vetDoctorRepository.AddAsync(vetDoctor);
+        return new RegisterResponse()
+        {
+            Email = vetDoctor.Email,
+            FirstName = vetDoctor.FirstName,
+            LastName = vetDoctor.LastName,
+            Role = "VetDoctor"
+        };
     }
 
     private async Task<string> CheckUser(RegisterRequest registerRequest)
@@ -78,10 +90,12 @@ public class AuthenticateService:IAuthenticateService
         {
             throw new Exception("Email already registered");
         }
+
         var hashedPassword = HashPassword(registerRequest.Password);
 
         return hashedPassword;
     }
+
     private string HashPassword(string password)
     {
         using (var sha256 = SHA256.Create())
@@ -90,5 +104,4 @@ public class AuthenticateService:IAuthenticateService
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
         }
     }
-    
 }

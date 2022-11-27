@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using System;
 using MyVetAppointment.Data.Persistence;
 using MyVetAppointment.UnitTests;
 
