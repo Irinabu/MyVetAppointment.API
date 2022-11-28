@@ -15,22 +15,23 @@ namespace MyVetAppointment.Business.Services.Implementations
 
         public bool DeleteVetDoctor(string id)
         {
-            var user = _vetDoctorRepository.Get(id);
+            var user = _vetDoctorRepository.GetFirstAsync(u => u.Id == Guid.Parse(id));
             if (user == null)
                 return false;
-            _vetDoctorRepository.Remove(user);
-            _vetDoctorRepository.SaveChanges();
+            _vetDoctorRepository.DeleteAsync(user.Result);
+            _vetDoctorRepository.SaveChangesAsync();
             return true;
         }
 
-        public IEnumerable<User> GetAllVetDoctorsAsync()
+        public List<VetDoctor> GetAllAsync()
         {
-            return _vetDoctorRepository.GetAll();
+            return _vetDoctorRepository.GetAllAsync(exp => true).Result;
         }
 
-        public User GetVetDoctorByEmailAsync(string email)
+
+        public VetDoctor GetVetDoctorByEmailAsync(string email)
         {
-            return _vetDoctorRepository.GetVetDoctorByEmail(email);
+            return _vetDoctorRepository.GetFirstAsync(u => u.Email == email).Result;
         }
 
         public bool UpdateVetDoctorAsync(string id, UpdateRequest model)
@@ -39,5 +40,6 @@ namespace MyVetAppointment.Business.Services.Implementations
 
 
         }
+
     }
 }

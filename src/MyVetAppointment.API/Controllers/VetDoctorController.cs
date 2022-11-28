@@ -26,7 +26,7 @@ namespace MyVetAppointment.API.Controllers
         [HttpGet("vets")]
         public async Task<IActionResult> GetVets()
         {
-            return Ok(_vetDoctorService.GetAllVetDoctorsAsync());
+            return Ok(_vetDoctorService.GetAllAsync());
 
         }
 

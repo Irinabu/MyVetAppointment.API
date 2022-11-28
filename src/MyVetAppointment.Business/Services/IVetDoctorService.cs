@@ -5,9 +5,10 @@ namespace MyVetAppointment.Business.Services
 {
     public interface IVetDoctorService
     {
-        IEnumerable<User> GetAllVetDoctorsAsync();
-        User GetVetDoctorByEmailAsync(string email);
+        VetDoctor GetVetDoctorByEmailAsync(string email);
         bool UpdateVetDoctorAsync(string id, UpdateRequest model);
         bool DeleteVetDoctor(string id);
+
+        List<VetDoctor> GetAllAsync();
     }
 }
