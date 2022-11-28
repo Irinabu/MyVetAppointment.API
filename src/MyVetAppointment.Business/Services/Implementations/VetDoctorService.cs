@@ -31,5 +31,10 @@ namespace MyVetAppointment.Business.Services.Implementations
         {
             return _vetDoctorRepository.GetAll();
         }
+
+        public User GetVetDoctorByEmailAsync(string email)
+        {
+            return _vetDoctorRepository.GetVetDoctorByEmail(email);
+        }
     }
 }

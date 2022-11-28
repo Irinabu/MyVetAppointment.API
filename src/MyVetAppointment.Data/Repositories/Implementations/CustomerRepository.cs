@@ -43,7 +43,8 @@ namespace MyVetAppointment.Data.Repositories.Implementations
         {
             try
             {
-                var ent = _entities.AsEnumerable();
+                //var ent = _entities.AsEnumerable();
+                var ent = _dbContext.Customers.ToList();
                 return ent;
             }
             catch (Exception e)

@@ -6,7 +6,7 @@ namespace MyVetAppointment.Data.Repositories
     {
         IEnumerable<User> GetAll();
         User Get(string id);
-        User GetByEmail(string email);
+        User GetVetDoctorByEmail(string email);
         bool Insert(User entity);
         void Update(User entity);
         void Delete(User entity);

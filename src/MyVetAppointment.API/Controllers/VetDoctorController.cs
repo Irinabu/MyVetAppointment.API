@@ -17,10 +17,10 @@ namespace MyVetAppointment.API.Controllers
             _vetDoctorService= vetDoctorService;
         }
 
-        [HttpDelete("delete-vet")]
-        public async Task<IActionResult> DeleteVet([FromBody] DeleteRequest model)
+        [HttpDelete("delete-vet/{id}")]
+        public async Task<IActionResult> DeleteVet(string id)
         {
-            return Ok(_vetDoctorService.DeleteVetDoctor(model.id));
+            return Ok(_vetDoctorService.DeleteVetDoctor(id));
 
         }
         [HttpGet("vets")]
@@ -29,6 +29,14 @@ namespace MyVetAppointment.API.Controllers
             return Ok(_vetDoctorService.GetAllVetDoctorsAsync());
 
         }
+
+        [HttpGet("{email}")]
+         public async Task<IActionResult> GetVetByEmail(string email)
+        {
+            return Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email));
+
+        }
+
         [HttpPut("update-vet")]
         public async Task<IActionResult> UpdateVet([FromBody] UpdateRequest model)
         {

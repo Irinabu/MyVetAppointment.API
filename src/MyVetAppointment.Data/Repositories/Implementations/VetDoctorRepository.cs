@@ -39,11 +39,17 @@ namespace MyVetAppointment.Data.Repositories.Implementations
             return _entities.SingleOrDefault(c => c.Id == new Guid(id));
         }
 
+        public User GetVetDoctorByEmail(string email)
+        {
+            return _entities.SingleOrDefault(c => c.Email == email);
+        }
+    
         public IEnumerable<User> GetAll()
         {
             try
             {
-                var ent = _entities.AsEnumerable();
+                //var ent = _entities.AsEnumerable();
+                var ent = _dbContext.VetDoctors.ToList();
                 return ent;
             }
             catch (Exception e)
@@ -59,10 +65,6 @@ namespace MyVetAppointment.Data.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public User GetByEmail(string email)
-        {
-            return _entities.FirstOrDefault(u => u.Email == email);
-        }
 
         public Task<VetDoctor> GetFirstAsync(Expression<Func<VetDoctor, bool>> predicate)
         {
