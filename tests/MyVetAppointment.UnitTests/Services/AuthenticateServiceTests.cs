@@ -1,12 +1,6 @@
 ﻿using Application.UnitTests;
-using Moq;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Services.Implementations;
-using MyVetAppointment.Data.Entities;
-using MyVetAppointment.UnitTests.Config;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
 
 namespace MyVetAppointment.UnitTests.Services;
 

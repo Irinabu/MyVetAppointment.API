@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-
-namespace MyVetAppointment.IntegrationTests.Config;
+﻿namespace MyVetAppointment.IntegrationTests.Config;
 
 public class CustomBaseTest
 {

@@ -1,13 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Text;
-using System.Web;
-using Moq;
 using MyVetAppointment.Business.Models.User;
-using MyVetAppointment.Data.Entities;
 using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace MyVetAppointment.IntegrationTests.Services;

@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 using Moq;
-using MyVetAppointment.Business.Services;
-using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.IntegrationTests.Config;
 

@@ -18,7 +18,7 @@ public static class DatabaseContextSeed
                 FirstName = "Doctor",
                 LastName = "Test,parola:string12",
                 Email = "doctor.test@test.com",
-                Password= "6a6a15287530d0de99de4a998ea33e5f36d204337da797254cee9326af502307"
+                Password= "6a6a15287530d0de99de4a998ea33e5f36d204337da797254cee9326af502307",
             };
             var user1 = new Customer
             {
