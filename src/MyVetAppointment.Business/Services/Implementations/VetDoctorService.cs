@@ -1,4 +1,5 @@
-﻿using MyVetAppointment.Data.Entities;
+﻿using MyVetAppointment.Business.Models.User;
+using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,13 @@ namespace MyVetAppointment.Business.Services.Implementations
         public User GetVetDoctorByEmailAsync(string email)
         {
             return _vetDoctorRepository.GetVetDoctorByEmail(email);
+        }
+
+        public bool UpdateVetDoctorAsync(string id, UpdateRequest model)
+        {
+            return false;
+
+
         }
     }
 }

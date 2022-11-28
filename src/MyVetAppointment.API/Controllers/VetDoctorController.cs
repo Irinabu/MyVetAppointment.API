@@ -6,7 +6,7 @@ using MyVetAppointment.Business.Services;
 namespace MyVetAppointment.API.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class VetDoctorController : BaseController
     {
@@ -37,10 +37,10 @@ namespace MyVetAppointment.API.Controllers
 
         }
 
-        [HttpPut("update-vet")]
-        public async Task<IActionResult> UpdateVet([FromBody] UpdateRequest model)
+        [HttpPut("update-vet/{id}")]
+        public async Task<IActionResult> UpdateVet(string id, [FromBody] UpdateRequest model)
         {
-            return Ok();
+            return Ok(_vetDoctorService.UpdateVetDoctorAsync(id,model));
         }
 
     }

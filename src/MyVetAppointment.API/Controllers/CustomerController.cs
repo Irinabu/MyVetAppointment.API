@@ -6,8 +6,7 @@ using MyVetAppointment.Business.Services;
 namespace MyVetAppointment.API.Controllers
 {
     [ApiController]
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class CustomerController : BaseController
 
