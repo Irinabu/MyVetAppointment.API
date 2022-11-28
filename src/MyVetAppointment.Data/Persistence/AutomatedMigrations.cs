@@ -13,8 +13,10 @@ public static class AutomatedMigration
 
         if (context.Database.IsSqlServer()) await context.Database.MigrateAsync();
         var userRepository = services.GetRequiredService<IUserRepository>();
+        var appointmentRepository = services.GetRequiredService<IAppointmentRepository>();
+        var billRepository = services.GetRequiredService<IBillRepository>();
         var mapper = services.GetRequiredService<IMapper>();
 
-        await DatabaseContextSeed.SeedDatabaseAsync(context, userRepository, mapper);
+        await DatabaseContextSeed.SeedDatabaseAsync(context, userRepository, appointmentRepository,billRepository, mapper);
     }
 }

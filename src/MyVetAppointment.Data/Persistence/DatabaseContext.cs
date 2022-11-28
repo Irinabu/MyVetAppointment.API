@@ -24,9 +24,7 @@ public class DatabaseContext : DbContext
         base.OnModelCreating(builder);
 
         builder.Entity<Bill>()
-            .HasOne<Appointment>(x => x.Appointment)
-            .WithOne(x => x.Bill)
-            .HasForeignKey<Appointment>(x => x.Id);
+            .HasOne<Appointment>(x => x.Appointment);
 
         builder.Entity<CustomerVetDoctor>()
             .HasKey(x => new { x.CustomerId, x.VetDoctorId });

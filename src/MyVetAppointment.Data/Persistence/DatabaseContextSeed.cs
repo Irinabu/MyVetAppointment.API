@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Enums;
 using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.Data.Persistence;
@@ -7,7 +8,7 @@ namespace MyVetAppointment.Data.Persistence;
 
 public static class DatabaseContextSeed
 {
-    public static async Task SeedDatabaseAsync(DatabaseContext context, IUserRepository userRepository, IMapper mapper)
+    public static async Task SeedDatabaseAsync(DatabaseContext context, IUserRepository userRepository, IAppointmentRepository appointmentRepository, IBillRepository billRepository, IMapper mapper)
     {
 
         if ((await userRepository.GetAllAsync(x => x.Id != Guid.Empty)).Count == 0)
@@ -31,6 +32,18 @@ public static class DatabaseContextSeed
             await userRepository.AddAsync(user);
             await userRepository.AddAsync(user1);
 
+            var appointment = new Appointment
+            {
+                Id = Guid.NewGuid(),
+                Customer = user1,
+                VetDoctor = user,
+                DateTime = DateTime.Now,
+                Description = "Test",
+                AppointmentStatus = AppointmentStatus.Pending,
+
+            };
+
+            await appointmentRepository.AddAsync(appointment);
         }
         await context.SaveChangesAsync();
     }

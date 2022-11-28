@@ -9,14 +9,14 @@ namespace MyVetAppointment.Business.MappingProfiles
     {
         public UserMappingProfile()
         {
-            CreateMap<User, RegisterRequest>();
-            CreateMap<Customer, RegisterRequest>();
-            CreateMap<VetDoctor, RegisterRequest>();
+            CreateMap<User, RegisterResponse>();
+            CreateMap<Customer, RegisterResponse>();
+            CreateMap<VetDoctor, RegisterResponse>();
 
             CreateMap<RegisterRequest, VetDoctor>();
             CreateMap<RegisterRequest, Customer>();
             CreateMap<RegisterRequest, User>();
-
+            
         }
     }
 }

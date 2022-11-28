@@ -18,10 +18,11 @@ public class AuthenticateController : BaseController
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest model)
     {
-        var response =await _authenticateService.LoginAsync(model);
-        
+        var response = await _authenticateService.LoginAsync(model);
+
         return Ok(response);
     }
+
     [HttpPost("register-customer")]
     public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest model)
     {
@@ -29,6 +30,7 @@ public class AuthenticateController : BaseController
 
         return Created("af", response);
     }
+
     [HttpPost("register-vet-doctor")]
     public async Task<IActionResult> RegisterVetDoctor([FromBody] RegisterRequest model)
     {

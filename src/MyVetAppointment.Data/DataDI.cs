@@ -11,6 +11,8 @@ namespace MyVetAppointment.Data
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+            services.AddTransient<IBillRepository, BillRepository>();
             
             return services;
         }
