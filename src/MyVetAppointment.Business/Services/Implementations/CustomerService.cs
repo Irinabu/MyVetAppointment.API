@@ -1,5 +1,7 @@
 ﻿using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Business.Models.User;
+using MyVetAppointment.Data.Repositories.Implementations;
 
 namespace MyVetAppointment.Business.Services.Implementations
 {
@@ -14,23 +16,30 @@ namespace MyVetAppointment.Business.Services.Implementations
 
         public bool DeleteCustomer(string id)
         {
-            var user = _customerRepository.Get(id);
-            if (user == null) 
+            var user = _customerRepository.GetFirstAsync(u => u.Id == Guid.Parse(id));
+            if (user == null)
                 return false;
-            _customerRepository.Remove(user);
-            _customerRepository.SaveChanges();
+            _customerRepository.DeleteAsync(user.Result);
+            _customerRepository.SaveChangesAsync();
             return true;
         }
 
-        public IEnumerable<User> GetAllCustomersAsync()
+        public List<Customer> GetAllAsync()
         {
-            return _customerRepository.GetAll();
+            return _customerRepository.GetAllAsync(exp => true).Result;
         }
 
 
-/*        Task<IEnumerable<User>> ICustomerService.GetAllCustomersAsync()
+        public Customer GetCustomerByEmailAsync(string email)
         {
-            return (Task<IEnumerable<User>>)_customerRepository.GetAll();
-        }*/
+            return _customerRepository.GetFirstAsync(u => u.Email == email).Result;
+        }
+
+        public bool UpdateCustomerAsync(string id, UpdateRequest model)
+        {
+            return false;
+
+
+        }
     }
 }

@@ -6,7 +6,7 @@ using MyVetAppointment.Business.Services;
 namespace MyVetAppointment.API.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class VetDoctorController : BaseController
     {
@@ -17,22 +17,30 @@ namespace MyVetAppointment.API.Controllers
             _vetDoctorService= vetDoctorService;
         }
 
-        [HttpDelete("delete-vet")]
-        public async Task<IActionResult> DeleteVet([FromBody] DeleteRequest model)
+        [HttpDelete("delete-vet/{id}")]
+        public async Task<IActionResult> DeleteVet(string id)
         {
-            return Ok(_vetDoctorService.DeleteVetDoctor(model.id));
+            return Ok(_vetDoctorService.DeleteVetDoctor(id));
 
         }
         [HttpGet("vets")]
         public async Task<IActionResult> GetVets()
         {
-            return Ok(_vetDoctorService.GetAllVetDoctorsAsync());
+            return Ok(_vetDoctorService.GetAllAsync());
 
         }
-        [HttpPut("update-vet")]
-        public async Task<IActionResult> UpdateVet([FromBody] UpdateRequest model)
+
+        [HttpGet("{email}")]
+         public async Task<IActionResult> GetVetByEmail(string email)
         {
-            return Ok();
+            return Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email));
+
+        }
+
+        [HttpPut("update-vet/{id}")]
+        public async Task<IActionResult> UpdateVet(string id, [FromBody] UpdateRequest model)
+        {
+            return Ok(_vetDoctorService.UpdateVetDoctorAsync(id,model));
         }
 
     }

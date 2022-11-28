@@ -6,7 +6,8 @@ using MyVetAppointment.Business.Services;
 namespace MyVetAppointment.API.Controllers
 {
     [ApiController]
-    [Authorize]
+    /*    [Authorize]*/
+    [AllowAnonymous]
     [Route("[controller]")]
     public class CustomerController : BaseController
 
@@ -26,7 +27,7 @@ namespace MyVetAppointment.API.Controllers
         [HttpGet("customers")]
         public async Task<IActionResult> GetCustomers()
         {
-            return Ok(_customerService.GetAllCustomersAsync());
+            return Ok(_customerService.GetAllAsync());
 
         }
         [HttpPut("update-customer")]
