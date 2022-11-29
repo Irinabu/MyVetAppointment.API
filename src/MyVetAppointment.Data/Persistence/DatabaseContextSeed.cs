@@ -38,9 +38,35 @@ public static class DatabaseContextSeed
                 Customer = user1,
                 VetDoctor = user,
                 DateTime = DateTime.Now,
-                Description = "Test",
+                Description = "Mi-a cazut calul in balta",
                 AppointmentStatus = AppointmentStatus.Pending,
+                Title = "Cal lesinat"
+            };
 
+            await appointmentRepository.AddAsync(appointment);
+
+            appointment = new Appointment
+            {
+                Id = Guid.NewGuid(),
+                Customer = user1,
+                VetDoctor = user,
+                DateTime = DateTime.Now,
+                Description = "Pisicii mele prea birmaneze i-a cazut un whiskas de asta sau cum se cheama. Ajutor domn' doctor va rog.",
+                Title = "Pisica fara un whisker",
+                AppointmentStatus = AppointmentStatus.Pending
+            };
+
+            await appointmentRepository.AddAsync(appointment);
+
+            appointment = new Appointment
+            {
+                Id = Guid.NewGuid(),
+                Customer = user1,
+                VetDoctor = user,
+                DateTime = DateTime.Now,
+                Description = "De cateva zile vad ca nu mai stie sa inoate Nemo asta a meu. Ce ii fac",
+                Title = "Peste inecat",
+                AppointmentStatus = AppointmentStatus.Pending
             };
 
             await appointmentRepository.AddAsync(appointment);

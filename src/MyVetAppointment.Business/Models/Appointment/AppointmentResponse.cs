@@ -10,6 +10,7 @@ namespace MyVetAppointment.Business.Models.Appointment
     public class AppointmentResponse
     {
         public DateTime DateTime { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string AppointmentStatus { get; set; }
         public VetDoctorResponse VetDoctor { get; set; }
