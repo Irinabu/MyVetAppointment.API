@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyVetAppointment.Business.Models.User;
 
 namespace MyVetAppointment.Business.Models.Appointment
 {
@@ -11,6 +12,7 @@ namespace MyVetAppointment.Business.Models.Appointment
         public DateTime DateTime { get; set; }
         public string Description { get; set; }
         public string AppointmentStatus { get; set; }
-        public string VetDoctor { get; set; }
+        public VetDoctorResponse VetDoctor { get; set; }
+        public CustomerResponse Customer { get; set; }
     }
 }

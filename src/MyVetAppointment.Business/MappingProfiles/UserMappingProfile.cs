@@ -11,7 +11,9 @@ namespace MyVetAppointment.Business.MappingProfiles
         {
             CreateMap<User, RegisterResponse>();
             CreateMap<Customer, RegisterResponse>();
-            CreateMap<VetDoctor, RegisterResponse>();
+            CreateMap<VetDoctor, RegisterResponse>(); 
+            CreateMap<Customer, CustomerResponse>();
+            CreateMap<VetDoctor, VetDoctorResponse>();
 
             CreateMap<RegisterRequest, VetDoctor>();
             CreateMap<RegisterRequest, Customer>();

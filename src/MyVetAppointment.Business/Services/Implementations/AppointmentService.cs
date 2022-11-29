@@ -36,8 +36,8 @@ namespace MyVetAppointment.Business.Services.Implementations
             else if (role == "VetDoctor")
             {
                 var appointments = _appointmentRepository.GetAllAsync(x => x.VetDoctor.Id == user.Id);
-                return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.);
-
+                return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.Result);
+                
             }
 
             return null;
