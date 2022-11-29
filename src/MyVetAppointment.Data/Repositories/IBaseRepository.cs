@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MyVetAppointment.Data.Repositories;
 
@@ -8,7 +9,7 @@ public interface IBaseRepository<TEntity>
     Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 
     Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
-
+    IQueryable<TEntity> GetAllLazyLoad(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] children);
     Task<TEntity> AddAsync(TEntity entity);
 
     Task<TEntity> UpdateAsync(TEntity entity);
