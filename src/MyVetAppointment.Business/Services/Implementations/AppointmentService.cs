@@ -7,19 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Enums;
+using MyVetAppointment.Data.Repositories.Implementations;
 
 namespace MyVetAppointment.Business.Services.Implementations
 {
     public class AppointmentService : IAppointmentService
     {
         private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IAppointmentRepository _userRepository;
+        private readonly IVetDoctorRepository _vetRepository;
         private readonly IMapper _mapper;
 
-        public AppointmentService(IAppointmentRepository appointmentRepository, IAppointmentRepository userRepository, IMapper mapper)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IVetDoctorRepository userRepository, IMapper mapper)
         {
             _appointmentRepository = appointmentRepository;
-            _userRepository = userRepository;
+            _vetRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -41,6 +43,17 @@ namespace MyVetAppointment.Business.Services.Implementations
             }
 
             return null;
+        }
+
+        public async Task<AppointmentResponse> AddAppointment(AppointmentRequest appointment, User user)
+        {
+            var appointmentEntity = _mapper.Map<AppointmentRequest, Appointment>(appointment);
+            var vetDoctor = _vetRepository.GetFirstAsync(x => x.FirstName.Equals(appointment.FirstName) && x.LastName.Equals(appointment.LastName));
+            appointmentEntity.Customer = (Customer)user;
+            appointmentEntity.VetDoctor = vetDoctor.Result;
+            appointmentEntity.AppointmentStatus = AppointmentStatus.Pending;
+            return _mapper.Map<Appointment, AppointmentResponse>(_appointmentRepository.AddAsync(appointmentEntity).Result);
+
         }
 
     }

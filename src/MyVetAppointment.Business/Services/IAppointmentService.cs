@@ -11,5 +11,6 @@ namespace MyVetAppointment.Business.Services
     public interface IAppointmentService
     {
         public Task<List<AppointmentResponse>> GetUserAppointments(User user);
+        public Task<AppointmentResponse> AddAppointment(AppointmentRequest appointment, User user);
     }
 }

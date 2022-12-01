@@ -19,13 +19,22 @@ namespace MyVetAppointment.API.Controllers
             _appointmentService = appointmentService;
         }
 
-        [HttpPost("appointment")]
+        [HttpGet]
         public async Task<IActionResult> GetAppointments()
         {
             var user = HttpContext.Items["User"] as User;
             var response = await _appointmentService.GetUserAppointments(user);
 
             return Ok(response);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> AddAppointment([FromBody] AppointmentRequest model)
+        {
+            var user = HttpContext.Items["User"] as User;
+            var response = await _appointmentService.AddAppointment(model, user);
+            return Created("af", response);
         }
     }
 }
