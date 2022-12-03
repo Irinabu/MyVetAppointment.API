@@ -14,34 +14,32 @@ namespace MyVetAppointment.API.Controllers
 
         public VetDoctorController(IVetDoctorService vetDoctorService)
         {
-            _vetDoctorService= vetDoctorService;
+            _vetDoctorService = vetDoctorService;
         }
 
         [HttpDelete("delete-vet/{id}")]
         public async Task<IActionResult> DeleteVet(string id)
         {
             return Ok(_vetDoctorService.DeleteVetDoctor(id));
-
         }
         [HttpGet("vets")]
         public async Task<IActionResult> GetVets()
         {
             return Ok(_vetDoctorService.GetAllAsync());
-
         }
 
         [HttpGet("{email}")]
-         public async Task<IActionResult> GetVetByEmail(string email)
+        public async Task<IActionResult> GetVetByEmail(string email)
         {
             return Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email));
-
         }
 
+        /*
         [HttpPut("update-vet/{id}")]
         public async Task<IActionResult> UpdateVet(string id, [FromBody] UpdateRequest model)
         {
             return Ok(_vetDoctorService.UpdateVetDoctorAsync(id,model));
         }
-
+        */
     }
 }

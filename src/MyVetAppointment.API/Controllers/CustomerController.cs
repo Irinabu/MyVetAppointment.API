@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Services.Implementations;
 
 namespace MyVetAppointment.API.Controllers
 {
     [ApiController]
-    /*    [Authorize]*/
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class CustomerController : BaseController
 
@@ -19,22 +19,33 @@ namespace MyVetAppointment.API.Controllers
             _customerService = customerService;
         }
 
-        [HttpDelete("delete-customer")]
-        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteRequest model)
+        [HttpDelete("delete-customer/{id}")]
+        public async Task<IActionResult> DeleteCustomer(string id)
         {
-            return Ok(_customerService.DeleteCustomer(model.id));
+            return Ok(_customerService.DeleteCustomer(id));
         }
+
+
         [HttpGet("customers")]
         public async Task<IActionResult> GetCustomers()
         {
             return Ok(_customerService.GetAllAsync());
+        }
+
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetCustomerByEmail(string email)
+        {
+            return Ok(_customerService.GetCustomerByEmailAsync(email));
 
         }
+
+        /*
         [HttpPut("update-customer")]
         public async Task<IActionResult> UpdateCustomers([FromBody] UpdateRequest model)
         {
             return Ok();
         }
+        */
 
     }
 }
