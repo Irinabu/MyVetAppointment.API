@@ -53,5 +53,22 @@ public class AuthenticateServiceTests
         await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
         //ASSERT
     }
+    [Fact]
+    public async void Login_Should_Fail_With_Null_Email()
+    {
+        //ARRANGE
+        var loginService = diKernel.ResolveService<IAuthenticateService>();
+
+        var loginRequest = new LoginRequest
+        {
+            Email = null,
+            Password = "string123",
+        };
+
+        //ACT
+
+        await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
+        //ASSERT
+    }
 
 }

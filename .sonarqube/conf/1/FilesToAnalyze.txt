@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\BusinessDI.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\MappingProfiles\AppointmentMappingProfiles.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\MappingProfiles\IMappingProfilesMarker.cs
@@ -22,3 +23,30 @@ D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyV
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\Services\Implementations\JwtService.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\Services\Implementations\VetDoctorService.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.Business\Services\IVetDoctorService.cs
+||||||| 6015317
+=======
+﻿D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\BusinessDI.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\MappingProfiles\AppointmentMappingProfiles.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\MappingProfiles\IMappingProfilesMarker.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\MappingProfiles\UserMappingProfile.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\Appointment\AppointmentRequest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\Appointment\AppointmentResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\CustomerResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\DeleteRequest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\GetUserResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\LoginRequest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\LoginResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\RegisterRequest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\RegisterResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\UpdateRequest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Models\User\VetDoctorResponse.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\IAppointmentService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\IAuthenticateService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\ICustomerService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\Implementations\AppointmentService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\Implementations\AuthenticateService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\Implementations\CustomerService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\Implementations\JwtService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\Implementations\VetDoctorService.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Business\Services\IVetDoctorService.cs
+>>>>>>> ef82f6b1e25a0ba14c6b213d51f4d6a57e6c198d

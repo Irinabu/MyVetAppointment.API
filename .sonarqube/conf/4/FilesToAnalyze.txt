@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Config\CustomBaseTest.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Config\CustomWebApplicationFactory.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Config\ExternalServicesMock.cs
@@ -13,3 +14,21 @@ C:\Users\irina\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit
 C:\Users\irina\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit.engine.api.dll
 C:\Users\irina\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit.engine.core.dll
 C:\Users\irina\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\testcentric.engine.metadata.dll
+||||||| 6015317
+=======
+﻿D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Config\CustomBaseTest.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Config\CustomWebApplicationFactory.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Config\ExternalServicesMock.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Controllers\AuthenticateTests.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Controllers\RegisterTests.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\tests\MyVetAppointment.IntegrationTests\Controllers\VetDoctorTests.cs
+C:\Users\Nico\.nuget\packages\microsoft.net.test.sdk\17.4.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\Nico\.nuget\packages\microsoft.testplatform.testhost\17.4.0\build\netcoreapp3.1\x64\testhost.exe
+C:\Users\Nico\.nuget\packages\microsoft.testplatform.testhost\17.4.0\build\netcoreapp3.1\x64\testhost.dll
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\NUnit3.TestAdapter.dll
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\NUnit3.TestAdapter.pdb
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit.engine.dll
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit.engine.api.dll
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\nunit.engine.core.dll
+C:\Users\Nico\.nuget\packages\nunit3testadapter\4.3.1\build\netcoreapp3.1\testcentric.engine.metadata.dll
+>>>>>>> ef82f6b1e25a0ba14c6b213d51f4d6a57e6c198d
