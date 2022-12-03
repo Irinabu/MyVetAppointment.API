@@ -47,8 +47,16 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+if (builder.Environment.EnvironmentName.Equals("IntegrationTesting"))
+{
+    builder.Services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase("TestDb"));
+}
+else
+{
+    builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
+}
+
 
 builder.Services.InjectRepositories();
 builder.Services.InjectBusinessServices();

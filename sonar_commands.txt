@@ -1,0 +1,19 @@
+7d9079a44509a0930810a30692311742c7e7c404
+MyVetAppointment.API
+
+
+intri in folder poriect in backend
+
+1.
+
+dotnet sonarscanner begin /k:"MyVetAppointment.API" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="7d9079a44509a0930810a30692311742c7e7c404" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+
+2 
+
+dotnet build --no-incremental
+
+3
+dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
+
+4
+dotnet sonarscanner end /d:sonar.login="7d9079a44509a0930810a30692311742c7e7c404"

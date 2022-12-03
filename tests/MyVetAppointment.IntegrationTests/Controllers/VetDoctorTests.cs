@@ -33,7 +33,7 @@ public class VetDoctorTests : CustomBaseTest
     public async Task GET_VetDoctorByEmail_ShouldBe_Status_OK()
     {
         //Arrange
-        var email = "doctor@test.com";
+        var email = "doctor.test@test.com";
         var client = GetClient();
         var token = await LoginVet();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);

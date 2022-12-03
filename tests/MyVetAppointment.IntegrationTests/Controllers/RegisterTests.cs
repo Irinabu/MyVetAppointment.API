@@ -45,7 +45,7 @@ public class RegisterTests : CustomBaseTest
         //Arrange
         var expected = new RegisterRequest
         {
-            Email = "doctor1.test@gmail.com",
+            Email = "doctor.test@test.com",
             FirstName = "DoctorTest",
             LastName = "DoctorTest",
             Password = "PasswordTest",

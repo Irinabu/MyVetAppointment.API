@@ -32,12 +32,12 @@ namespace MyVetAppointment.Business.Services.Implementations
 
             if (role == "Customer")
             {
-                var appointments = _appointmentRepository.GetAllLazyLoad(x => x.Customer.Id == user.Id, x => x.VetDoctor, x => x.Customer);
+                var appointments =await _appointmentRepository.GetAllLazyLoad(x => x.Customer.Id == user.Id, x => x.VetDoctor, x => x.Customer);
                 return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.ToList());
             }
             else if (role == "VetDoctor")
             {
-                var appointments = _appointmentRepository.GetAllLazyLoad(x => x.VetDoctor.Id == user.Id, x => x.VetDoctor, x => x.Customer);
+                var appointments = await _appointmentRepository.GetAllLazyLoad(x => x.VetDoctor.Id == user.Id, x => x.VetDoctor, x => x.Customer);
                 return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.ToList());
 
             }
@@ -48,12 +48,23 @@ namespace MyVetAppointment.Business.Services.Implementations
         public async Task<AppointmentResponse> AddAppointment(AppointmentRequest appointment, User user)
         {
             var appointmentEntity = _mapper.Map<AppointmentRequest, Appointment>(appointment);
-            var vetDoctor = _vetRepository.GetFirstAsync(x => x.FirstName.Equals(appointment.FirstName) && x.LastName.Equals(appointment.LastName));
+            var vetDoctor =await _vetRepository.GetFirstAsync(x => x.FirstName.Equals(appointment.FirstName) && x.LastName.Equals(appointment.LastName));
             appointmentEntity.Customer = (Customer)user;
-            appointmentEntity.VetDoctor = vetDoctor.Result;
+            appointmentEntity.VetDoctor = vetDoctor;
             appointmentEntity.AppointmentStatus = AppointmentStatus.Pending;
-            return _mapper.Map<Appointment, AppointmentResponse>(_appointmentRepository.AddAsync(appointmentEntity).Result);
+            return _mapper.Map<Appointment, AppointmentResponse>(await _appointmentRepository.AddAsync(appointmentEntity));
 
+        }
+
+        public async Task<AppointmentResponse> UpdateAppointment(AppointmentRequest appointment, Guid id, User user)
+        {
+            var appointmentEntity = (await _appointmentRepository.GetFirstLazyLoad(x => x.Id == id, x => x.VetDoctor, x => x.Customer));
+            appointmentEntity.AppointmentStatus = appointment.Status;
+            appointmentEntity.Description = appointment.Description;
+            appointmentEntity.Title = appointment.Title;
+            appointmentEntity.DateTime = appointment.DateTime;
+
+            return _mapper.Map<Appointment, AppointmentResponse>(await _appointmentRepository.UpdateAsync(appointmentEntity));
         }
 
     }

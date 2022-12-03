@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyVetAppointment.Data.Enums;
 
 namespace MyVetAppointment.Business.Models.Appointment
 {
@@ -13,5 +14,6 @@ namespace MyVetAppointment.Business.Models.Appointment
         public string Description { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        public AppointmentStatus Status { get; set; }
     }
 }

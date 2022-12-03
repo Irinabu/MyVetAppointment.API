@@ -12,5 +12,6 @@ namespace MyVetAppointment.Business.Services
     {
         public Task<List<AppointmentResponse>> GetUserAppointments(User user);
         public Task<AppointmentResponse> AddAppointment(AppointmentRequest appointment, User user);
+        public Task<AppointmentResponse> UpdateAppointment(AppointmentRequest appointment, Guid id, User user);
     }
 }

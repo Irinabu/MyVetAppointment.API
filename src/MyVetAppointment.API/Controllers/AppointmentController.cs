@@ -36,5 +36,16 @@ namespace MyVetAppointment.API.Controllers
             var response = await _appointmentService.AddAppointment(model, user);
             return Created("af", response);
         }
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, Guid id)
+        {
+            var user = HttpContext.Items["User"] as User;
+            var response = await _appointmentService.UpdateAppointment(model, id, user);
+            return Ok(response);
+        }
+
+
     }
 }

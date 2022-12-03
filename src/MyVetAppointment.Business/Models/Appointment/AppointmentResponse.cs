@@ -9,6 +9,7 @@ namespace MyVetAppointment.Business.Models.Appointment
 {
     public class AppointmentResponse
     {
+        public Guid Id { get; set; }
         public DateTime DateTime { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
