@@ -6,5 +6,5 @@ public class CustomerVetDoctor
     public Customer Customer { get; set; }
 
     public Guid VetDoctorId { get; set; }
-    public VetDoctor VetDoctor{ get; set; }
+    public VetDoctor VetDoctor { get; set; }
 }

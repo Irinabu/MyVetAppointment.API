@@ -19,7 +19,7 @@ public class AuthenticateTests : CustomBaseTest
             Email = "doctor.test@test.com",
             Password = "string12"
         };
-        
+
         var json = JsonContent.Create(expected);
         var client = GetClient();
 
@@ -27,12 +27,11 @@ public class AuthenticateTests : CustomBaseTest
         var response = await client.PostAsync("https://localhost:5001/Authenticate/login", json);
         var responseMessage = await response.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
-        
+
         //Assert
         Assert.IsNotNull(responseDeserialized);
         Assert.IsNotNull(responseDeserialized.Token);
         Assert.AreEqual("VetDoctor", responseDeserialized.Role);
-
     }
 
     [Test]
@@ -55,6 +54,5 @@ public class AuthenticateTests : CustomBaseTest
         //Assert
         Assert.IsNotNull(responseMessage);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-
     }
 }

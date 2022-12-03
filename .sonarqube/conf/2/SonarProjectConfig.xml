@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <SonarProjectConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
   <AnalysisConfigPath>D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\.sonarqube\conf\SonarQubeAnalysisConfig.xml</AnalysisConfigPath>
@@ -8,15 +7,3 @@
   <ProjectType>Product</ProjectType>
   <TargetFramework>net7.0</TargetFramework>
 </SonarProjectConfig>
-||||||| 6015317
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<SonarProjectConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
-  <AnalysisConfigPath>D:\Facultate\DotNet-Proiect\MyVetAppointment.API\.sonarqube\conf\SonarQubeAnalysisConfig.xml</AnalysisConfigPath>
-  <ProjectPath>D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\MyVetAppointment.API.csproj</ProjectPath>
-  <FilesToAnalyzePath>D:\Facultate\DotNet-Proiect\MyVetAppointment.API\.sonarqube\conf\2\FilesToAnalyze.txt</FilesToAnalyzePath>
-  <OutPath>D:\Facultate\DotNet-Proiect\MyVetAppointment.API\.sonarqube\out\2</OutPath>
-  <ProjectType>Product</ProjectType>
-  <TargetFramework>net7.0</TargetFramework>
-</SonarProjectConfig>
->>>>>>> ef82f6b1e25a0ba14c6b213d51f4d6a57e6c198d

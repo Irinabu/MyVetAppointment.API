@@ -6,6 +6,4 @@ public class Animal
 {
     public Guid Id { get; set; }
     public AnimalType AnimalType { get; set; }
-    
-
 }

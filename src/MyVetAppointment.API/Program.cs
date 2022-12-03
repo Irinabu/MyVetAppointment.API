@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +8,6 @@ using MyVetAppointment.Business;
 using MyVetAppointment.Business.MappingProfiles;
 using MyVetAppointment.Data;
 using MyVetAppointment.Data.Persistence;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(c =>
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
         Description =
-            "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+            "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -48,14 +48,10 @@ builder.Services.AddSwaggerGen(c =>
 
 
 if (builder.Environment.EnvironmentName.Equals("IntegrationTesting"))
-{
     builder.Services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase("TestDb"));
-}
 else
-{
     builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
-}
+        options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
 
 
 builder.Services.InjectRepositories();
@@ -112,4 +108,6 @@ app.MapControllers();
 app.Run();
 
 
-public partial class Program { }
+public partial class Program
+{
+}

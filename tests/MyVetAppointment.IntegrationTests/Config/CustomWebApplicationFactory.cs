@@ -21,7 +21,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         builder
             .ConfigureServices(services =>
             {
-                foreach ((var interfaceType, var serviceMock) in _externalServicesMock.GetMocks())
+                foreach (var (interfaceType, serviceMock) in _externalServicesMock.GetMocks())
                 {
                     services.Remove(services.SingleOrDefault(d => d.ServiceType == interfaceType));
 

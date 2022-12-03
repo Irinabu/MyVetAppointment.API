@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using MyVetAppointment.Business.Models.Appointment;
+using MyVetAppointment.Data.Entities;
 
-namespace MyVetAppointment.Business.MappingProfiles
+namespace MyVetAppointment.Business.MappingProfiles;
+
+public class AppointmentMappingProfiles : Profile
 {
-    public class AppointmentMappingProfiles : Profile
+    public AppointmentMappingProfiles()
     {
-        public AppointmentMappingProfiles()
-        {
-            CreateMap<Data.Entities.Appointment, Models.Appointment.AppointmentResponse>();
-            CreateMap<Models.Appointment.AppointmentRequest, Data.Entities.Appointment>();
-
-        }
-
+        CreateMap<Appointment, AppointmentResponse>();
+        CreateMap<AppointmentRequest, Appointment>();
     }
 }

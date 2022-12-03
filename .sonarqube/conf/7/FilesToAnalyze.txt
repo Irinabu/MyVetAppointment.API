@@ -3,11 +3,9 @@ D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyV
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\BaseController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\CustomerController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\VetDoctorController.cs
-D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\WeatherForecastController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Middlewares\ErrorMiddleware.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Middlewares\TokenMiddleware.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Program.cs
-D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\WeatherForecast.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.GlobalUsings.g.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.AssemblyInfo.cs

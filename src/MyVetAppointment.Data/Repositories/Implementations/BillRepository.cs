@@ -1,12 +1,11 @@
 ﻿using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Persistence;
 
-namespace MyVetAppointment.Data.Repositories.Implementations
+namespace MyVetAppointment.Data.Repositories.Implementations;
+
+public class BillRepository : BaseRepository<Bill>, IBillRepository
 {
-    public class BillRepository : BaseRepository<Bill>, IBillRepository
+    public BillRepository(DatabaseContext context) : base(context)
     {
-        public BillRepository(DatabaseContext context) : base(context)
-        {
-        }
     }
 }

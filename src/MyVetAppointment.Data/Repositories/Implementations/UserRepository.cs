@@ -6,5 +6,6 @@ namespace MyVetAppointment.Data.Repositories.Implementations;
 public class UserRepository : BaseRepository<User>, IUserRepository
 {
     public UserRepository(DatabaseContext context) : base(context)
-    { }
+    {
+    }
 }

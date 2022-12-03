@@ -2,6 +2,7 @@
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Config\CustomWebApplicationFactory.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Config\ExternalServicesMock.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Controllers\AuthenticateTests.cs
+D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Controllers\CustomerTests.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Controllers\RegisterTests.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\tests\MyVetAppointment.IntegrationTests\Controllers\VetDoctorTests.cs
 C:\Users\irina\.nuget\packages\microsoft.net.test.sdk\17.4.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs

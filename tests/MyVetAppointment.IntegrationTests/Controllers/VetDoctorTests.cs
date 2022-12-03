@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Numerics;
-using System.Text;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
@@ -12,7 +10,6 @@ namespace MyVetAppointment.IntegrationTests.Services;
 [TestFixture]
 public class VetDoctorTests : CustomBaseTest
 {
-
     [Test]
     public async Task GET_VetDoctors_ShouldBe_Status_OK()
     {

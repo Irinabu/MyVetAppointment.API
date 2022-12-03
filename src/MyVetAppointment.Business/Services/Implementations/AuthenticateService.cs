@@ -1,19 +1,19 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
+using AutoMapper;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
-using System.Text;
-using AutoMapper;
 
 namespace MyVetAppointment.Business.Services.Implementations;
 
 public class AuthenticateService : IAuthenticateService
 {
     private readonly ICustomerRepository _customerRepository;
-    private readonly IVetDoctorRepository _vetDoctorRepository;
-    private readonly IUserRepository _userRepository;
     private readonly JwtService _jwtService;
     private readonly IMapper _mapper;
+    private readonly IUserRepository _userRepository;
+    private readonly IVetDoctorRepository _vetDoctorRepository;
 
     public AuthenticateService(ICustomerRepository customerRepository, IVetDoctorRepository vetDoctorRepository,
         JwtService jwtService, IUserRepository userRepository, IMapper mapper)
@@ -57,7 +57,7 @@ public class AuthenticateService : IAuthenticateService
         customer.Password = hashedPassword;
 
         await _customerRepository.AddAsync(customer);
-        return new RegisterResponse()
+        return new RegisterResponse
         {
             Email = customer.Email,
             FirstName = customer.FirstName,
@@ -74,7 +74,7 @@ public class AuthenticateService : IAuthenticateService
         vetDoctor.Password = hashedPassword;
 
         await _vetDoctorRepository.AddAsync(vetDoctor);
-        return new RegisterResponse()
+        return new RegisterResponse
         {
             Email = vetDoctor.Email,
             FirstName = vetDoctor.FirstName,
@@ -86,10 +86,7 @@ public class AuthenticateService : IAuthenticateService
     private async Task<string> CheckUser(RegisterRequest registerRequest)
     {
         var isAlreadyRegistered = await _userRepository.GetFirstAsync(x => x.Email == registerRequest.Email);
-        if (isAlreadyRegistered != null)
-        {
-            throw new Exception("Email already registered");
-        }
+        if (isAlreadyRegistered != null) throw new Exception("Email already registered");
 
         var hashedPassword = HashPassword(registerRequest.Password);
 

@@ -1,6 +1,6 @@
-﻿namespace MyVetAppointment.Business.MappingProfiles
-{
+﻿namespace MyVetAppointment.Business.MappingProfiles;
 
-    // This marker is used for assembly scanning
-    public interface IMappingProfilesMarker { }
+// This marker is used for assembly scanning
+public interface IMappingProfilesMarker
+{
 }

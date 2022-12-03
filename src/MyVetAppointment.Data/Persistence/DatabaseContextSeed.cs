@@ -5,12 +5,11 @@ using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.Data.Persistence;
 
-
 public static class DatabaseContextSeed
 {
-    public static async Task SeedDatabaseAsync(DatabaseContext context, IUserRepository userRepository, IAppointmentRepository appointmentRepository, IBillRepository billRepository, IMapper mapper)
+    public static async Task SeedDatabaseAsync(DatabaseContext context, IUserRepository userRepository,
+        IAppointmentRepository appointmentRepository, IBillRepository billRepository, IMapper mapper)
     {
-
         if ((await userRepository.GetAllAsync(x => x.Id != Guid.Empty)).Count == 0)
         {
             var user = new VetDoctor
@@ -19,7 +18,7 @@ public static class DatabaseContextSeed
                 FirstName = "Doctor",
                 LastName = "Test,parola:string12",
                 Email = "doctor.test@test.com",
-                Password= "6a6a15287530d0de99de4a998ea33e5f36d204337da797254cee9326af502307",
+                Password = "6a6a15287530d0de99de4a998ea33e5f36d204337da797254cee9326af502307"
             };
             var user1 = new Customer
             {
@@ -51,7 +50,8 @@ public static class DatabaseContextSeed
                 Customer = user1,
                 VetDoctor = user,
                 DateTime = DateTime.Now,
-                Description = "Pisicii mele prea birmaneze i-a cazut un whiskas de asta sau cum se cheama. Ajutor domn' doctor va rog.",
+                Description =
+                    "Pisicii mele prea birmaneze i-a cazut un whiskas de asta sau cum se cheama. Ajutor domn' doctor va rog.",
                 Title = "Pisica fara un whisker",
                 AppointmentStatus = AppointmentStatus.Pending
             };
@@ -71,6 +71,7 @@ public static class DatabaseContextSeed
 
             await appointmentRepository.AddAsync(appointment);
         }
+
         await context.SaveChangesAsync();
     }
 }

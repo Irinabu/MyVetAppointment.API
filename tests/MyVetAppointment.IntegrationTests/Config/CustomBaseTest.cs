@@ -3,7 +3,6 @@
 public class CustomBaseTest
 {
     private readonly CustomWebApplicationFactory _webApplicationFactory;
-    public ExternalServicesMock ExternalServicesMock { get; }
 
     public CustomBaseTest()
     {
@@ -11,5 +10,10 @@ public class CustomBaseTest
         _webApplicationFactory = new CustomWebApplicationFactory(ExternalServicesMock);
     }
 
-    public HttpClient GetClient() => _webApplicationFactory.CreateDefaultClient();
+    public ExternalServicesMock ExternalServicesMock { get; }
+
+    public HttpClient GetClient()
+    {
+        return _webApplicationFactory.CreateDefaultClient();
+    }
 }

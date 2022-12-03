@@ -1,6 +1,6 @@
-﻿using MyVetAppointment.Data.Persistence;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using MyVetAppointment.Data.Persistence;
 
 namespace MyVetAppointment.Data.Repositories.Implementations;
 
@@ -36,7 +36,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return await DbSet.Where(predicate).ToListAsync();
     }
 
-    public async Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+    public async Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter,
+        params Expression<Func<TEntity, object>>[] includes)
     {
         includes.ToList().ForEach(x => DbSet.Include(x).Load());
         return DbSet;
@@ -48,7 +49,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
         return (await DbSet.Where(predicate).FirstOrDefaultAsync())!;
     }
-    public async Task<TEntity> GetFirstLazyLoad(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+
+    public async Task<TEntity> GetFirstLazyLoad(Expression<Func<TEntity, bool>> filter,
+        params Expression<Func<TEntity, object>>[] includes)
     {
         includes.ToList().ForEach(x => DbSet.Include(x).Load());
         return await DbSet.FirstOrDefaultAsync(filter);
@@ -74,5 +77,4 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
         return changes;
     }
-
 }

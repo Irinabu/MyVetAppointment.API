@@ -1,17 +1,19 @@
-﻿using Newtonsoft.Json;
-using System.Net;
+﻿using System.Net;
+using Newtonsoft.Json;
 
 namespace MyVetAppointment.API.Middlewares;
 
 public class ExceptionMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionMiddleware> _logger;
+    private readonly RequestDelegate _next;
+
     public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
     {
         _logger = logger;
         _next = next;
     }
+
     public async Task InvokeAsync(HttpContext httpContext)
     {
         try
@@ -24,13 +26,14 @@ public class ExceptionMiddleware
             await HandleExceptionAsync(httpContext, ex);
         }
     }
+
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         await context.Response.WriteAsync(JsonConvert.SerializeObject(new
         {
-            StatusCode = context.Response.StatusCode,
+            context.Response.StatusCode,
             Message = $"Internal Server Error from the custom middleware.{exception.Message}"
         }));
     }

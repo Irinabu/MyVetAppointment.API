@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 ﻿D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\AppointmentController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\AuthenticateController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\BaseController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\CustomerController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\VetDoctorController.cs
-D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Controllers\WeatherForecastController.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Middlewares\ErrorMiddleware.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Middlewares\TokenMiddleware.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Program.cs
-D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\WeatherForecast.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.GlobalUsings.g.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.AssemblyInfo.cs
@@ -17,24 +14,3 @@ D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyV
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\appsettings.IntegrationTesting.json
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\appsettings.json
 D:\facultate-an3-sem1\.net_lab\Proiect\MyVetAppointment\MyVetAppointment\src\MyVetAppointment.API\Properties\launchSettings.json
-||||||| 6015317
-=======
-﻿D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\AppointmentController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\AuthenticateController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\BaseController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\CustomerController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\VetDoctorController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Controllers\WeatherForecastController.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Middlewares\ErrorMiddleware.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Middlewares\TokenMiddleware.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Program.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\WeatherForecast.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.GlobalUsings.g.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.AssemblyInfo.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\obj\Debug\net7.0\MyVetAppointment.API.MvcApplicationPartsAssemblyInfo.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\appsettings.Development.json
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\appsettings.IntegrationTesting.json
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\appsettings.json
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.API\Properties\launchSettings.json
->>>>>>> ef82f6b1e25a0ba14c6b213d51f4d6a57e6c198d

@@ -6,17 +6,15 @@ namespace MyVetAppointment.UnitTests.Services;
 
 public class AuthenticateServiceTests
 {
-    private readonly DITests diKernel;
     private readonly IAuthenticateService authenticateServiceMock;
-    
+    private readonly DITests diKernel;
+
     public AuthenticateServiceTests()
     {
         diKernel = new DITests();
-        authenticateServiceMock= diKernel.ResolveService<IAuthenticateService>();
+        authenticateServiceMock = diKernel.ResolveService<IAuthenticateService>();
     }
 
-
- 
 
     [Fact]
     public async void Login_Should_Return_Token()
@@ -27,7 +25,7 @@ public class AuthenticateServiceTests
         var loginRequest = new LoginRequest
         {
             Email = "test@test.com",
-            Password = "string12",
+            Password = "string12"
         };
 
         //ACT
@@ -36,6 +34,7 @@ public class AuthenticateServiceTests
         //ASSERT
         Assert.False(string.IsNullOrEmpty(loginResponse.Token));
     }
+
     [Fact]
     public async void Login_Should_Return_Error()
     {
@@ -45,7 +44,7 @@ public class AuthenticateServiceTests
         var loginRequest = new LoginRequest
         {
             Email = "test@test.com",
-            Password = "string123",
+            Password = "string123"
         };
 
         //ACT
@@ -53,6 +52,7 @@ public class AuthenticateServiceTests
         await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
         //ASSERT
     }
+
     [Fact]
     public async void Login_Should_Fail_With_Null_Email()
     {
@@ -62,7 +62,7 @@ public class AuthenticateServiceTests
         var loginRequest = new LoginRequest
         {
             Email = null,
-            Password = "string123",
+            Password = "string123"
         };
 
         //ACT
@@ -70,5 +70,4 @@ public class AuthenticateServiceTests
         await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
         //ASSERT
     }
-
 }

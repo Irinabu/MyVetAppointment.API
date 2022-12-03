@@ -14,14 +14,14 @@ public class RegisterTests : CustomBaseTest
     public async Task Should_RegisterVetDoctor()
     {
         //Arrange
-        Random random = new Random();
+        var random = new Random();
         var expected = new RegisterRequest
         {
             Email = "doctor" + random.Next() + ".test@gmail.com",
             FirstName = "DoctorTest",
             LastName = "DoctorTest",
             Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest",
+            PasswordConfirm = "PasswordTest"
         };
 
 
@@ -50,7 +50,7 @@ public class RegisterTests : CustomBaseTest
             FirstName = "DoctorTest",
             LastName = "DoctorTest",
             Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest",
+            PasswordConfirm = "PasswordTest"
         };
 
         var json = JsonContent.Create(expected);
@@ -69,14 +69,14 @@ public class RegisterTests : CustomBaseTest
     public async Task Should_RegisterCustomer()
     {
         //Arrange
-        Random random = new Random();
+        var random = new Random();
         var expected = new RegisterRequest
         {
             Email = "cust" + random.Next() + ".test@gmail.com",
             FirstName = "custTest",
             LastName = "custTest",
             Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest",
+            PasswordConfirm = "PasswordTest"
         };
 
 
@@ -105,7 +105,7 @@ public class RegisterTests : CustomBaseTest
             FirstName = "custTest",
             LastName = "custTest",
             Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest",
+            PasswordConfirm = "PasswordTest"
         };
 
         var json = JsonContent.Create(expected);

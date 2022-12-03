@@ -8,12 +8,6 @@ public class ExternalServicesMock
     //public Mock<IAuthenticateService> _authenticateService { get; }
     //public Mock<IUserRepository> _userRepository { get; }
 
-    public ExternalServicesMock()
-    {
-        //_authenticateService = new Mock<IAuthenticateService>();
-        //_userRepository = new Mock<IUserRepository>();
-    }
-
     public IEnumerable<(Type, object)> GetMocks()
     {
         return GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)

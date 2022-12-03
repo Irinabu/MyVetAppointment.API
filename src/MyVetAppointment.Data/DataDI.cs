@@ -2,19 +2,18 @@
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Repositories.Implementations;
 
-namespace MyVetAppointment.Data
+namespace MyVetAppointment.Data;
+
+public static class DataDI
 {
-    public static class DataDI
+    public static IServiceCollection InjectRepositories(this IServiceCollection services)
     {
-        public static IServiceCollection InjectRepositories(this IServiceCollection services)
-        {
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
-            services.AddTransient<IBillRepository, BillRepository>();
-            
-            return services;
-        }
+        services.AddTransient<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
+        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+        services.AddTransient<IBillRepository, BillRepository>();
+
+        return services;
     }
 }

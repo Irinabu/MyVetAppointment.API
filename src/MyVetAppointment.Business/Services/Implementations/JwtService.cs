@@ -1,70 +1,70 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using MyVetAppointment.Business.Models.User;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using MyVetAppointment.Business.Models.User;
 
-namespace MyVetAppointment.Business.Services.Implementations
+namespace MyVetAppointment.Business.Services.Implementations;
+
+public class JwtService
 {
-    public class JwtService
+    private readonly SigningCredentials _credentials;
+    private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+    private readonly SymmetricSecurityKey _securityKey;
+
+    public JwtService()
     {
-        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
-        private readonly SymmetricSecurityKey _securityKey;
-        private readonly SigningCredentials _credentials;
+        _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+        _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyVetAppointmentSecretKey"));
+        _credentials = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
+    }
 
-        public JwtService()
+    public string GenerateJwt(LoginRequest userInfo, string role)
+    {
+        var claims = new[]
         {
-            _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyVetAppointmentSecretKey"));
-            _credentials = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+            new Claim(ClaimsIdentity.DefaultNameClaimType, userInfo.Email),
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+        };
+
+        var token = new JwtSecurityToken
+        (
+            "MyVetAppointment",
+            "users",
+            claims,
+            DateTime.UtcNow.AddMilliseconds(-30),
+            DateTime.UtcNow.AddDays(7),
+            _credentials
+        );
+
+        return _jwtSecurityTokenHandler.WriteToken(token);
+    }
+
+    public string ValidateToken(string token)
+    {
+        if (token == null)
+            return null;
+
+        try
+        {
+            _jwtSecurityTokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _securityKey,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            }, out var validatedToken);
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+            var userName = jwtToken.Claims.First(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
+
+            return userName;
         }
-        public string GenerateJwt(LoginRequest userInfo,string role)
+        catch
         {
-
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userInfo.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType,role)
-            };
-
-            var token = new JwtSecurityToken
-            (
-                "MyVetAppointment",
-                audience: "users",
-                claims,
-                DateTime.UtcNow.AddMilliseconds(-30),
-                DateTime.UtcNow.AddDays(7),
-                _credentials
-            );
-
-            return _jwtSecurityTokenHandler.WriteToken(token);
-        }
-        public string ValidateToken(string token)
-        {
-            if (token == null)
-                return null;
-
-            try
-            {
-                _jwtSecurityTokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = _securityKey,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken)validatedToken;
-                var userName = jwtToken.Claims.First(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
-
-                return userName;
-            }
-            catch
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

@@ -7,6 +7,4 @@ public class Bill
     public ICollection<PrescriptionDrug> PrescriptionDrugs { get; set; }
 
     public Appointment Appointment { get; set; }
-    
-    
 }
