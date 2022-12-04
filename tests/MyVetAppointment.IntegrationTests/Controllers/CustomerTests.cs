@@ -97,22 +97,4 @@ public class CustomerTests : CustomBaseTest
         Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
-
-    public async Task<string> LoginCustomer()
-    {
-        var clientLogin = GetClient();
-
-        var expected = new LoginRequest
-        {
-            Email = "doctor.test@test.com",
-            Password = "string12"
-        };
-
-        var json = JsonContent.Create(expected);
-        var responseLogin = await clientLogin.PostAsync("https://localhost:5001/Authenticate/login", json);
-        var responseMessage = await responseLogin.Content.ReadAsStringAsync();
-        var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
-
-        return responseDeserialized.Token;
-    }
 }
