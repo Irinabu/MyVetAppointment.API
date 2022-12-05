@@ -13,6 +13,8 @@ public static class DataDI
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IAppointmentRepository, AppointmentRepository>();
         services.AddTransient<IBillRepository, BillRepository>();
+        services.AddTransient<IDrugRepository, DrugRepository>();
+        services.AddTransient<IPrescriptionDrugRepository, PrescriptionDrugRepository>();
 
         return services;
     }

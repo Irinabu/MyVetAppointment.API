@@ -8,7 +8,8 @@ namespace MyVetAppointment.Data.Persistence;
 public static class DatabaseContextSeed
 {
     public static async Task SeedDatabaseAsync(DatabaseContext context, IUserRepository userRepository,
-        IAppointmentRepository appointmentRepository, IBillRepository billRepository, IMapper mapper)
+        IAppointmentRepository appointmentRepository, IBillRepository billRepository, IDrugRepository drugRepository,
+        IPrescriptionDrugRepository prescriptionDrugRepository, IMapper mapper)
     {
         if ((await userRepository.GetAllAsync(x => x.Id != Guid.Empty)).Count == 0)
         {
@@ -70,6 +71,32 @@ public static class DatabaseContextSeed
             };
 
             await appointmentRepository.AddAsync(appointment);
+
+            var drug = new Drug
+            {
+                Id = Guid.NewGuid(),
+                Name = "Paracetamol",
+                TotalQuantity = 50
+            };
+            await drugRepository.AddAsync(drug);
+
+            var prescriptionDrug = new PrescriptionDrug
+            {
+                Id = Guid.NewGuid(),
+                Drug = drug,
+                QuantityPerDay = 10
+            };
+            await prescriptionDrugRepository.AddAsync(prescriptionDrug);
+
+            var bill = new Bill()
+            {
+                Appointment = appointment,
+                Diagnose = "test",
+                Id = Guid.NewGuid(),
+                PrescriptionDrugs = new List<PrescriptionDrug>() { prescriptionDrug }
+
+            };
+            await billRepository.AddAsync(bill);
         }
 
         await context.SaveChangesAsync();

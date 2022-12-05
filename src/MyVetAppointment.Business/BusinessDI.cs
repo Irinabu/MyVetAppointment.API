@@ -12,6 +12,8 @@ public static class BusinessDI
         services.AddTransient<ICustomerService, CustomerService>();
         services.AddTransient<IVetDoctorService, VetDoctorService>();
         services.AddTransient<IAppointmentService, AppointmentService>();
+        services.AddTransient<IBillService, BillService>();
+        services.AddTransient<IDrugService, DrugService>();
         services.AddTransient<JwtService>();
         return services;
     }

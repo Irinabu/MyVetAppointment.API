@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVetAppointment.Data.Persistence;
 
@@ -11,9 +12,11 @@ using MyVetAppointment.Data.Persistence;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221205161610_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +99,21 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.ToTable("Bills");
                 });
 
+            modelBuilder.Entity("MyVetAppointment.Data.Entities.CustomerVetDoctor", b =>
+                {
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VetDoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CustomerId", "VetDoctorId");
+
+                    b.HasIndex("VetDoctorId");
+
+                    b.ToTable("CustomerVetDoctors");
+                });
+
             modelBuilder.Entity("MyVetAppointment.Data.Entities.Drug", b =>
                 {
                     b.Property<Guid>("Id")
@@ -120,7 +138,7 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BillId")
+                    b.Property<Guid>("BillId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DrugId")
@@ -224,17 +242,40 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.Navigation("Appointment");
                 });
 
+            modelBuilder.Entity("MyVetAppointment.Data.Entities.CustomerVetDoctor", b =>
+                {
+                    b.HasOne("MyVetAppointment.Data.Entities.Customer", "Customer")
+                        .WithMany("VetDoctors")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MyVetAppointment.Data.Entities.VetDoctor", "VetDoctor")
+                        .WithMany("Customers")
+                        .HasForeignKey("VetDoctorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("VetDoctor");
+                });
+
             modelBuilder.Entity("MyVetAppointment.Data.Entities.PrescriptionDrug", b =>
                 {
-                    b.HasOne("MyVetAppointment.Data.Entities.Bill", null)
+                    b.HasOne("MyVetAppointment.Data.Entities.Bill", "Bill")
                         .WithMany("PrescriptionDrugs")
-                        .HasForeignKey("BillId");
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MyVetAppointment.Data.Entities.Drug", "Drug")
                         .WithMany()
                         .HasForeignKey("DrugId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Bill");
 
                     b.Navigation("Drug");
                 });
@@ -249,11 +290,15 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.Navigation("Animals");
 
                     b.Navigation("Appointments");
+
+                    b.Navigation("VetDoctors");
                 });
 
             modelBuilder.Entity("MyVetAppointment.Data.Entities.VetDoctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

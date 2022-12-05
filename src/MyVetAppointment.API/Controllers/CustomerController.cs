@@ -36,11 +36,4 @@ public class CustomerController : BaseController
         return Ok(_customerService.GetCustomerByEmailAsync(email));
     }
 
-    /*
-    [HttpPut("update-customer")]
-    public async Task<IActionResult> UpdateCustomers([FromBody] UpdateRequest model)
-    {
-        return Ok();
-    }
-    */
 }

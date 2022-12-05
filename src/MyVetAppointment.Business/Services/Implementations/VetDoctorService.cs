@@ -34,8 +34,4 @@ public class VetDoctorService : IVetDoctorService
         return _vetDoctorRepository.GetFirstAsync(u => u.Email == email).Result;
     }
 
-    public bool UpdateVetDoctorAsync(string id, UpdateRequest model)
-    {
-        return false;
-    }
 }

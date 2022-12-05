@@ -5,7 +5,7 @@ namespace MyVetAppointment.Data.Repositories.Implementations;
 
 public class DrugRepository : BaseRepository<Drug>, IDrugRepository
 {
-    protected DrugRepository(DatabaseContext context) : base(context)
+    public DrugRepository(DatabaseContext context) : base(context)
     {
     }
 }

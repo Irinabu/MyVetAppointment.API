@@ -34,11 +34,4 @@ public class VetDoctorController : BaseController
         return Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email));
     }
 
-    /*
-    [HttpPut("update-vet/{id}")]
-    public async Task<IActionResult> UpdateVet(string id, [FromBody] UpdateRequest model)
-    {
-        return Ok(_vetDoctorService.UpdateVetDoctorAsync(id,model));
-    }
-    */
 }

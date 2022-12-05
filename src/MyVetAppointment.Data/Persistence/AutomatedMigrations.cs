@@ -15,9 +15,10 @@ public static class AutomatedMigration
         var userRepository = services.GetRequiredService<IUserRepository>();
         var appointmentRepository = services.GetRequiredService<IAppointmentRepository>();
         var billRepository = services.GetRequiredService<IBillRepository>();
+        var drugRepository = services.GetRequiredService<IDrugRepository>();
+        var prescriptionDrugRepository = services.GetRequiredService<IPrescriptionDrugRepository>();
         var mapper = services.GetRequiredService<IMapper>();
 
-        await DatabaseContextSeed.SeedDatabaseAsync(context, userRepository, appointmentRepository, billRepository,
-            mapper);
+        await DatabaseContextSeed.SeedDatabaseAsync(context, userRepository, appointmentRepository, billRepository, drugRepository, prescriptionDrugRepository, mapper);
     }
 }

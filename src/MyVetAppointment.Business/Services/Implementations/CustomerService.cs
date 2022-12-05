@@ -34,8 +34,4 @@ public class CustomerService : ICustomerService
         return _customerRepository.GetFirstAsync(u => u.Email == email).Result;
     }
 
-    public bool UpdateCustomerAsync(string id, UpdateRequest model)
-    {
-        return false;
-    }
 }

@@ -16,29 +16,13 @@ public class DatabaseContext : DbContext
     public DbSet<Drug> Drugs { get; set; }
     public DbSet<VetDoctor> VetDoctors { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<CustomerVetDoctor> CustomerVetDoctors { get; set; }
-
+  
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         builder.Entity<Bill>()
             .HasOne(x => x.Appointment);
-
-        builder.Entity<CustomerVetDoctor>()
-            .HasKey(x => new { x.CustomerId, x.VetDoctorId });
-
-        builder.Entity<CustomerVetDoctor>()
-            .HasOne(x => x.Customer)
-            .WithMany(x => x.VetDoctors)
-            .HasForeignKey(x => x.CustomerId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        builder.Entity<CustomerVetDoctor>()
-            .HasOne(x => x.VetDoctor)
-            .WithMany(x => x.Customers)
-            .HasForeignKey(x => x.VetDoctorId)
-            .OnDelete(DeleteBehavior.NoAction);
 
         builder.Entity<Appointment>()
             .HasOne(x => x.Customer)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVetAppointment.Data.Persistence;
 
@@ -11,9 +12,11 @@ using MyVetAppointment.Data.Persistence;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221205164403_FourthMigration")]
+    partial class FourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,6 +97,21 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.HasIndex("AppointmentId");
 
                     b.ToTable("Bills");
+                });
+
+            modelBuilder.Entity("MyVetAppointment.Data.Entities.CustomerVetDoctor", b =>
+                {
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VetDoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CustomerId", "VetDoctorId");
+
+                    b.HasIndex("VetDoctorId");
+
+                    b.ToTable("CustomerVetDoctors");
                 });
 
             modelBuilder.Entity("MyVetAppointment.Data.Entities.Drug", b =>
@@ -224,6 +242,25 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.Navigation("Appointment");
                 });
 
+            modelBuilder.Entity("MyVetAppointment.Data.Entities.CustomerVetDoctor", b =>
+                {
+                    b.HasOne("MyVetAppointment.Data.Entities.Customer", "Customer")
+                        .WithMany("VetDoctors")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MyVetAppointment.Data.Entities.VetDoctor", "VetDoctor")
+                        .WithMany("Customers")
+                        .HasForeignKey("VetDoctorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("VetDoctor");
+                });
+
             modelBuilder.Entity("MyVetAppointment.Data.Entities.PrescriptionDrug", b =>
                 {
                     b.HasOne("MyVetAppointment.Data.Entities.Bill", null)
@@ -249,11 +286,15 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.Navigation("Animals");
 
                     b.Navigation("Appointments");
+
+                    b.Navigation("VetDoctors");
                 });
 
             modelBuilder.Entity("MyVetAppointment.Data.Entities.VetDoctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }
