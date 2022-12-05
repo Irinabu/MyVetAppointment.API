@@ -1,17 +1,9 @@
-﻿using MyVetAppointment.Business.Models.User;
-using MyVetAppointment.IntegrationTests.Config;
-using Newtonsoft.Json;
+﻿using MyVetAppointment.IntegrationTests.Config;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Enums;
-using Newtonsoft.Json.Linq;
 
 namespace MyVetAppointment.IntegrationTests.Controllers
 {
