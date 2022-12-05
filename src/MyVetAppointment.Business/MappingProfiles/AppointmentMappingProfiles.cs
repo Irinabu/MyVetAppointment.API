@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Data.Entities;
@@ -17,5 +18,7 @@ public class AppointmentMappingProfiles : Profile
         CreateMap<PrescriptionDrug, PrescriptionDrugRequest>();
         CreateMap<DrugRequest, Drug>();
         CreateMap<Drug, DrugResponse>();
+        CreateMap<AnimalRequest, Animal>();
+        CreateMap<Animal, AnimalResponse>();
     }
 }

@@ -15,6 +15,7 @@ public static class DataDI
         services.AddTransient<IBillRepository, BillRepository>();
         services.AddTransient<IDrugRepository, DrugRepository>();
         services.AddTransient<IPrescriptionDrugRepository, PrescriptionDrugRepository>();
+        services.AddTransient<IAnimalRepository, AnimalRepository>();
 
         return services;
     }

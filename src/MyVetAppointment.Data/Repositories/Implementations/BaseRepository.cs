@@ -36,7 +36,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return await DbSet.Where(predicate).ToListAsync();
     }
 
-    public async Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter,
+    public async Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> predicate,
         params Expression<Func<TEntity, object>>[] includes)
     {
         includes.ToList().ForEach(x => DbSet.Include(x).Load());
@@ -50,11 +50,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return (await DbSet.Where(predicate).FirstOrDefaultAsync())!;
     }
 
-    public async Task<TEntity> GetFirstLazyLoad(Expression<Func<TEntity, bool>> filter,
+    public async Task<TEntity> GetFirstLazyLoad(Expression<Func<TEntity, bool>> predicate,
         params Expression<Func<TEntity, object>>[] includes)
     {
         includes.ToList().ForEach(x => DbSet.Include(x).Load());
-        return await DbSet.FirstOrDefaultAsync(filter);
+        return await DbSet.FirstOrDefaultAsync(predicate);
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Services.Implementations;
+using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers;
 
@@ -36,4 +39,11 @@ public class CustomerController : BaseController
         return Ok(_customerService.GetCustomerByEmailAsync(email));
     }
 
+    [HttpPost("add-animal")]
+    public async Task<IActionResult> AddNewAnimal([FromBody] AnimalRequest model)
+    {
+        var user = HttpContext.Items["User"] as User;
+        var response = await _customerService.AddAnimalAsync(model, user);
+        return Created("af", response);
+    }
 }
