@@ -21,5 +21,4 @@ public interface IBaseRepository<TEntity>
 
     Task<TEntity> DeleteAsync(TEntity entity);
     Task<bool> SaveChangesAsync();
-    bool HasChanges();
 }
