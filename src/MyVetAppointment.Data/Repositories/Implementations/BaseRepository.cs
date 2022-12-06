@@ -69,12 +69,4 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         return await Context.SaveChangesAsync() > 0;
     }
-
-    public bool HasChanges()
-    {
-        Context.ChangeTracker.DetectChanges();
-        var changes = Context.ChangeTracker.HasChanges();
-
-        return changes;
-    }
 }
