@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Entities;
+using Newtonsoft.Json;
 
 namespace MyVetAppointment.API.Controllers;
 
@@ -35,11 +36,12 @@ public class AppointmentController : ControllerBase
         return Created("af", response);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, Guid id)
+    [HttpPost("update-appointment")]
+    public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, [FromQuery]string id)
     {
+        Guid _id = Guid.Parse(id);
         var user = HttpContext.Items["User"] as User;
-        var response = await _appointmentService.UpdateAppointment(model, id, user);
+        var response = await _appointmentService.UpdateAppointment(model, _id, user);
         return Ok(response);
     }
 }
