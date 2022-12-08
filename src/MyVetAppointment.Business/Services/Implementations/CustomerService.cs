@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MyVetAppointment.Business.Models.Animal;
-using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 

@@ -66,4 +66,11 @@ public class AppointmentService : IAppointmentService
         return _mapper.Map<Appointment, AppointmentResponse>(
             await _appointmentRepository.UpdateAsync(appointmentEntity));
     }
+
+    public async Task<AppointmentResponse> DeleteAppointment(Guid id)
+    {
+        var appointmentEntity =
+            await _appointmentRepository.GetFirstLazyLoad(x => x.Id == id, x => x.VetDoctor, x => x.Customer);
+        return _mapper.Map <Appointment, AppointmentResponse>(await _appointmentRepository.DeleteAsync(appointmentEntity));
+    }
 }

@@ -21,8 +21,10 @@ public class DatabaseContext : DbContext
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Bill>()
-            .HasOne(x => x.Appointment);
+        builder.Entity<Appointment>()
+            .HasOne(b => b.Bill)
+            .WithOne(a => a.Appointment)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Entity<Appointment>()
             .HasOne(x => x.Customer)

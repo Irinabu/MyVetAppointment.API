@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Services.Implementations;
 using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers;

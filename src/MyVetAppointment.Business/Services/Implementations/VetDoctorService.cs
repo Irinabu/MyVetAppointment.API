@@ -1,5 +1,4 @@
-﻿using MyVetAppointment.Business.Models.User;
-using MyVetAppointment.Data.Entities;
+﻿using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.Business.Services.Implementations;
