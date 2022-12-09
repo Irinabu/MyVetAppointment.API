@@ -39,7 +39,7 @@ public class AppointmentController : ControllerBase
     [HttpPost("update-appointment")]
     public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, [FromQuery]string id)
     {
-        Guid _id = Guid.Parse(id);
+        var _id = Guid.Parse(id);
         var user = HttpContext.Items["User"] as User;
         var response = await _appointmentService.UpdateAppointment(model, _id, user);
         return Ok(response);

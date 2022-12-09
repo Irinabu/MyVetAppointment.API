@@ -17,6 +17,18 @@ public class DrugController : ControllerBase
         _drugService = drugService;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetDrugs()
+    {
+        var response = await _drugService.GetAllDrugsAsync();
+        if (response.Count == 0)
+        {
+            return NoContent();
+        }
+
+        return Ok(response);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> AddDrug([FromBody] DrugRequest model)
     {

@@ -16,6 +16,12 @@ namespace MyVetAppointment.Business.Services.Implementations
             _mapper = mapper;
         }
 
+        public async Task<List<DrugResponse>> GetAllDrugsAsync()
+        {
+            var drugs = await _drugRepository.GetAllAsync(exp => true);
+            return _mapper.Map<List<Drug>, List<DrugResponse>>(drugs);
+        }
+        
         public async Task<DrugResponse> AddDrugAsync(DrugRequest drug)
         {
             var drugEntity = _mapper.Map<DrugRequest, Drug>(drug);

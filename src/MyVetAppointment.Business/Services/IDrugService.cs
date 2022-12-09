@@ -6,4 +6,6 @@ public interface IDrugService
 {
     public Task<DrugResponse> AddDrugAsync(DrugRequest drug);
 
+    public Task<List<DrugResponse>> GetAllDrugsAsync();
+
 }
