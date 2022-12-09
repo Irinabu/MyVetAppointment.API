@@ -29,6 +29,7 @@ namespace MyVetAppointment.Business.Services.Implementations
         {
             var billEntity = _mapper.Map<BillRequest, Bill>(bill);
             var appointment = await _appointmentRepository.GetFirstLazyLoad(x => x.Id == idAppointment);
+            appointment.Bill = billEntity;
             billEntity.Appointment = appointment;
 
             var prescriptionDrugs = new List<PrescriptionDrug>();

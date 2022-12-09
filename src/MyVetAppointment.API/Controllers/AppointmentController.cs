@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Entities;
-using Newtonsoft.Json;
 
 namespace MyVetAppointment.API.Controllers;
 
@@ -44,4 +43,12 @@ public class AppointmentController : ControllerBase
         var response = await _appointmentService.UpdateAppointment(model, _id, user);
         return Ok(response);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAppointment(Guid id)
+    {
+        await _appointmentService.DeleteAppointment(id);
+        return NoContent();
+    }
+
 }

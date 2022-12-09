@@ -11,4 +11,6 @@ public class Appointment
     public AppointmentStatus AppointmentStatus { get; set; }
     public Customer Customer { get; set; }
     public VetDoctor VetDoctor { get; set; }
+
+    public Bill? Bill { get; set; }
 }

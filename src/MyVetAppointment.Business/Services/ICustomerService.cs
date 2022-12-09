@@ -1,5 +1,4 @@
 ﻿using MyVetAppointment.Business.Models.Animal;
-using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.Business.Services;
