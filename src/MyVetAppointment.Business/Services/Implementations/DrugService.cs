@@ -27,5 +27,11 @@ namespace MyVetAppointment.Business.Services.Implementations
             var drugEntity = _mapper.Map<DrugRequest, Drug>(drug);
             return _mapper.Map<Drug, DrugResponse>(await _drugRepository.AddAsync(drugEntity));
         }
+
+        public async Task<DrugResponse> DeleteDrugAsync(Guid id)
+        {
+            var drug = await _drugRepository.GetFirstLazyLoad(x => x.Id == id);
+            return _mapper.Map<Drug, DrugResponse>(await _drugRepository.DeleteAsync(drug));
+        }
     }
 }

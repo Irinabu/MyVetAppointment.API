@@ -8,17 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89337746-e30b-4fa2-839c-cef447a0779c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MyVetAppointment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MyVetAppointment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.API/Controllers/AppointmentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.API/Controllers/AppointmentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.API/Controllers/DrugController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.API/Controllers/DrugController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.Business/Models/Drugs/DrugRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.Business/Models/Drugs/DrugRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.Business/Models/Drugs/DrugResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.Business/Models/Drugs/DrugResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.Business/Services/IDrugService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.Business/Services/IDrugService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.Business/Services/Implementations/DrugService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.Business/Services/Implementations/DrugService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVetAppointment.Data/Entities/Drug.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVetAppointment.Data/Entities/Drug.cs" afterDir="false" />
-    </list>
+    <list default="true" id="89337746-e30b-4fa2-839c-cef447a0779c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,6 +85,7 @@
       <workItem from="1670256220806" duration="145000" />
       <workItem from="1670336035716" duration="31000" />
       <workItem from="1670583046002" duration="2212000" />
+      <workItem from="1670660002366" duration="600000" />
     </task>
     <servers />
   </component>

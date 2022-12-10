@@ -28,11 +28,19 @@ public class DrugController : ControllerBase
 
         return Ok(response);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> AddDrug([FromBody] DrugRequest model)
     {
         var response = await _drugService.AddDrugAsync(model);
         return Created("af", response);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDrug(Guid id)
+    {
+        await _drugService.DeleteDrugAsync(id);
+        return NoContent();
+    }
+
 }
