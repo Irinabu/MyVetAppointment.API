@@ -47,6 +47,7 @@ public class DITests : IDisposable
         services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
 
         services.AddTransient<IAuthenticateService, AuthenticateService>();
+        services.AddTransient<IDrugService, DrugService>();
         services.AddTransient<JwtService>();
         return services;
     }

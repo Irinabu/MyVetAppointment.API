@@ -76,7 +76,9 @@ public static class DatabaseContextSeed
             {
                 Id = Guid.NewGuid(),
                 Name = "Paracetamol",
-                TotalQuantity = 50
+                Price = 20,
+                TotalQuantity = 50,
+                ExpirationDate = DateTime.Now
             };
             await drugRepository.AddAsync(drug);
 
