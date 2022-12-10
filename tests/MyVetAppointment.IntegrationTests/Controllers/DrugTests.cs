@@ -10,13 +10,44 @@ namespace MyVetAppointment.IntegrationTests.Controllers
     public class DrugTests : CustomBaseTest
     {
         [Test]
+        public async Task Should_GetDrugs()
+        {
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.GetAsync("/Drug");
+
+            //Assert
+            Assert.IsNotNull(response);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public async Task Should_NOT_GetDrugs()
+        {
+            //Arrange
+            var client = GetClient();
+            // var token = await LoginCustomer();
+            // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //Act
+            var response = await client.GetAsync("/Drug");
+
+            //Assert
+            Assert.IsNotNull(response);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+        }
+        [Test]
         public async Task Should_PostDrug()
         {
             //Arrange
             var drug = new Drug
             {
                 Name = "Paracetamol",
-                TotalQuantity = 50
+                TotalQuantity = 50,
+                Price = 5,
+                ExpirationDate = DateTime.MaxValue
+
             };
 
             var json = JsonContent.Create(drug);

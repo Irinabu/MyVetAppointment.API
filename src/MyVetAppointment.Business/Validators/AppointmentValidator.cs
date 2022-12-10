@@ -12,7 +12,6 @@ namespace MyVetAppointment.Business.Validators
             RuleFor(x => x.DateTime).NotNull().NotEmpty();
             RuleFor(x => x.DateTime).GreaterThan(DateTime.Now);
 
-            RuleFor(x => x.Status).IsInEnum();
         }
     }
 }

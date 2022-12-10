@@ -63,7 +63,7 @@ public class CustomBaseTest
     {
         var appointment = new AppointmentRequest()
         {
-            DateTime = DateTime.Now,
+            DateTime = DateTime.MaxValue,
             Description =
                 "Test appointment ...",
             Title = "Test Appointment",

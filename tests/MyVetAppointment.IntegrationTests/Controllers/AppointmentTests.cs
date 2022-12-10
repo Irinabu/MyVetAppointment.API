@@ -63,7 +63,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Arrange
             var appointment = new AppointmentRequest()
             {
-                DateTime = DateTime.Now,
+                DateTime = DateTime.MaxValue,
                 Description =
                     "Pisica mea ...",
                 Title = "Pisica bolnava",
@@ -90,7 +90,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Arrange
             var appointment = new AppointmentRequest()
             {
-                DateTime = DateTime.Now,
+                DateTime = DateTime.MaxValue,
                 Description =
                     "Pisica mea ...",
                 Title = "Pisica bolnava",
@@ -109,6 +109,38 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Assert
             Assert.IsNotNull(response);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        }
+
+        [Test]
+        public async Task Should_DeleteAppointment()
+        {
+            var id = await AddAppointment();
+            
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //Act
+            var response = await client.DeleteAsync("/Appointment/" + id);
+
+            //Assert
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
+        }
+
+        [Test]
+        public async Task Should_NOT_DeleteAppointment()
+        {
+            var id = await AddAppointment();
+
+            var client = GetClient();
+            // var token = await LoginCustomer();
+            // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //Act
+            var response = await client.DeleteAsync("/Appointment/" + id);
+
+            //Assert
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
         //
         // [Test]
