@@ -16,7 +16,7 @@ public class ExternalServicesMock
                 var underlyingType = x.PropertyType.GetGenericArguments()[0];
                 var value = x.GetValue(this) as Mock;
 
-                return (underlyingType, value.Object);
+                return (underlyingType, value!.Object);
             })
             .ToArray();
     }

@@ -9,7 +9,7 @@ D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Entit
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Entities\VetDoctor.cs
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Enums\AnimalType.cs
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Enums\AppointmentStatus.cs
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Exceptions\ResourceNotFoundException.cs
+D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Exceptions\BadRequestException.cs
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Persistence\AutomatedMigrations.cs
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Persistence\DatabaseContext.cs
 D:\Facultate\DotNet-Proiect\MyVetAppointment.API\src\MyVetAppointment.Data\Persistence\DatabaseContextSeed.cs

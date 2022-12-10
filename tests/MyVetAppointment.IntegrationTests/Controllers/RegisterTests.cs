@@ -36,8 +36,11 @@ public class RegisterTests : CustomBaseTest
         Console.WriteLine();
 
         //Assert
-        Assert.IsNotNull(responseDeserialized);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseDeserialized, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        });
     }
 
     [Test]
@@ -61,8 +64,11 @@ public class RegisterTests : CustomBaseTest
         var responseMessage = await response.Content.ReadAsStringAsync();
 
         //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseMessage, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        });
     }
 
     [Test]
@@ -91,8 +97,11 @@ public class RegisterTests : CustomBaseTest
         Console.WriteLine();
 
         //Assert
-        Assert.IsNotNull(responseDeserialized);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseDeserialized, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        });
     }
 
     [Test]
@@ -116,7 +125,10 @@ public class RegisterTests : CustomBaseTest
         var responseMessage = await response.Content.ReadAsStringAsync();
 
         //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseMessage, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        });
     }
 }

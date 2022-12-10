@@ -31,16 +31,16 @@ namespace MyVetAppointment.Business.Services.Implementations
         public async Task<DrugResponse> DeleteDrugAsync(Guid id)
         {
             var drug = await _drugRepository.GetFirstLazyLoad(x => x.Id == id);
-            return _mapper.Map<Drug, DrugResponse>(await _drugRepository.DeleteAsync(drug));
+            return _mapper.Map<Drug, DrugResponse>(await _drugRepository.DeleteAsync(drug!));
         }
 
-        public async Task<DrugResponse> UpdateDrugAsync(DrugRequest drug, Guid id)
+        public async Task<DrugResponse> UpdateDrugAsync(DrugRequest model, Guid id)
         {
             var drugEntity = await _drugRepository.GetFirstAsync(x => x.Id == id);
-            drugEntity.Name = drug.Name;
-            drugEntity.Price = drug.Price;
-            drugEntity.TotalQuantity = drug.TotalQuantity;
-            drugEntity.ExpirationDate = drug.ExpirationDate;
+            drugEntity.Name = model.Name;
+            drugEntity.Price = model.Price;
+            drugEntity.TotalQuantity = model.TotalQuantity;
+            drugEntity.ExpirationDate = model.ExpirationDate;
             return _mapper.Map<Drug, DrugResponse>(await _drugRepository.UpdateAsync(drugEntity));
         }
     }

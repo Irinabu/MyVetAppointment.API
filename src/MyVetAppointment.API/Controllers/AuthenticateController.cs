@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
@@ -20,7 +21,7 @@ public class AuthenticateController : BaseController
     {
         var response = await _authenticateService.LoginAsync(model);
 
-        return Ok(response);
+        return Ok(response);  
     }
 
     [HttpPost("register-customer")]

@@ -1,8 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Exceptions;
 using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.Business.Services.Implementations;
@@ -29,10 +31,13 @@ public class AuthenticateService : IAuthenticateService
     {
         var user = await _userRepository.GetFirstAsync(x => x.Email == loginRequest.Email);
         if (user == null)
-            throw new Exception("Email or password is incorrect");
-        var hashedGivenPassword = HashPassword(loginRequest.Password);
-        if (user.Password != hashedGivenPassword)
-            throw new Exception("Email or password is incorrect");
+            throw new BadRequestException("Email or password is incorrect");
+        if (loginRequest.Password != null)
+        {
+            var hashedGivenPassword = HashPassword(loginRequest.Password);
+            if (user.Password != hashedGivenPassword)
+                throw new BadRequestException("Email or password is incorrect");
+        }
 
 
         var type = user.GetType().ToString().Split(".");
@@ -83,21 +88,24 @@ public class AuthenticateService : IAuthenticateService
         };
     }
 
-    private async Task<string> CheckUser(RegisterRequest registerRequest)
+    private async Task<string?> CheckUser(RegisterRequest registerRequest)
     {
         var isAlreadyRegistered = await _userRepository.GetFirstAsync(x => x.Email == registerRequest.Email);
-        if (isAlreadyRegistered != null) throw new Exception("Email already registered");
+        if (isAlreadyRegistered != null) throw new BadRequestException("Email already registered");
 
-        var hashedPassword = HashPassword(registerRequest.Password);
-
-        return hashedPassword;
+        if (registerRequest.Password != null)
+        {
+            var hashedPassword = HashPassword(registerRequest.Password);
+            return hashedPassword;
+        }
+        return null;
     }
 
-    private string HashPassword(string password)
+    private static string HashPassword(string password)
     {
         using (var sha256 = SHA256.Create())
         {
-            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
         }
     }

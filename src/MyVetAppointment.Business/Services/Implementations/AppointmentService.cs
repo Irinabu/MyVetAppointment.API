@@ -57,7 +57,7 @@ public class AppointmentService : IAppointmentService
     {
         var appointmentEntity =
             await _appointmentRepository.GetFirstLazyLoad(x => x.Id == id, x => x.VetDoctor!, x => x.Customer!);
-        appointmentEntity.AppointmentStatus = appointment.Status;
+        appointmentEntity!.AppointmentStatus = appointment.Status;
         appointmentEntity.Description = appointment.Description;
         appointmentEntity.Title = appointment.Title;
         appointmentEntity.DateTime = appointment.DateTime;
@@ -70,6 +70,6 @@ public class AppointmentService : IAppointmentService
     {
         var appointmentEntity =
             await _appointmentRepository.GetFirstLazyLoad(x => x.Id == id, x => x.VetDoctor!, x => x.Customer!);
-        return _mapper.Map <Appointment, AppointmentResponse>(await _appointmentRepository.DeleteAsync(appointmentEntity));
+        return _mapper.Map <Appointment, AppointmentResponse>(await _appointmentRepository.DeleteAsync(appointmentEntity!));
     }
 }

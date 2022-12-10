@@ -30,7 +30,7 @@ public class BillTests : CustomBaseTest
         var response = await client.PostAsync("/Bill/" + id, json);
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
     }
 
@@ -52,7 +52,7 @@ public class BillTests : CustomBaseTest
         var response = await client.PostAsync("/Bill/1", json);
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
 }

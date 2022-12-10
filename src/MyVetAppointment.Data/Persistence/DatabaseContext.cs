@@ -17,21 +17,21 @@ public class DatabaseContext : DbContext
     public DbSet<VetDoctor> VetDoctors { get; set; }
     public DbSet<User> Users { get; set; }
   
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
 
-        builder.Entity<Appointment>()
+        modelBuilder.Entity<Appointment>()
             .HasOne(b => b.Bill)
             .WithOne(a => a.Appointment)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Entity<Appointment>()
+        modelBuilder.Entity<Appointment>()
             .HasOne(x => x.Customer)
             .WithMany(x => x.Appointments)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.Entity<Appointment>()
+        modelBuilder.Entity<Appointment>()
             .HasOne(x => x.VetDoctor)
             .WithMany(x => x.Appointments)
             .OnDelete(DeleteBehavior.NoAction);

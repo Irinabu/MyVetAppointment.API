@@ -29,9 +29,13 @@ public class AuthenticateTests : CustomBaseTest
         var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
         //Assert
-        Assert.IsNotNull(responseDeserialized);
-        Assert.IsNotNull(responseDeserialized.Token);
-        Assert.AreEqual("VetDoctor", responseDeserialized.Role);
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseDeserialized, Is.Not.Null);
+            Assert.That(responseDeserialized!.Token, Is.Not.Null);
+            Assert.That(responseDeserialized.Role, Is.EqualTo("VetDoctor"));
+        });
+
     }
 
     [Test]
@@ -52,7 +56,10 @@ public class AuthenticateTests : CustomBaseTest
         var responseMessage = await response.Content.ReadAsStringAsync();
 
         //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseMessage, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        });
     }
 }

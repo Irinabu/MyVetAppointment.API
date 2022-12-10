@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Azure;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Enums;
@@ -25,7 +26,7 @@ public class CustomerTests : CustomBaseTest
         var response = await client.GetAsync("/Customer/customers");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
@@ -42,7 +43,7 @@ public class CustomerTests : CustomBaseTest
         var response = await client.GetAsync($"/Customer/{email}");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
@@ -59,7 +60,7 @@ public class CustomerTests : CustomBaseTest
         var response = await client.DeleteAsync($"Customer/delete-customer/{id}");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
@@ -89,14 +90,17 @@ public class CustomerTests : CustomBaseTest
         var responseMessage = await customer.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<GetUserResponse>(responseMessage);
 
-        var id = responseDeserialized.Id.ToString();
+        var id = responseDeserialized!.Id.ToString();
         var responseDelete = await client.DeleteAsync($"https://localhost:5001/Customer/delete-customer/{id}");
 
 
         //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.IsNotNull(responseDelete);
-        Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseMessage, Is.Not.Null);
+            Assert.That(responseDelete, Is.Not.Null);
+            Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        });
     }
 
     [Test]
@@ -116,7 +120,7 @@ public class CustomerTests : CustomBaseTest
         var response = await client.PostAsync("/Customer/add-animal", json);
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
     }
 
@@ -137,7 +141,7 @@ public class CustomerTests : CustomBaseTest
         var response = await client.PostAsync("/Customer/add-animal", json);
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 

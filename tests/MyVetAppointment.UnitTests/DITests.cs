@@ -30,7 +30,7 @@ public class DITests : IDisposable
         GC.Collect();
     }
 
-    public ServiceCollection InitializeCommonServices()
+    public static ServiceCollection InitializeCommonServices()
     {
         var services = new ServiceCollection();
 
@@ -53,6 +53,6 @@ public class DITests : IDisposable
 
     public T ResolveService<T>()
     {
-        return _serviceProvider.GetService<T>();
+        return _serviceProvider.GetService<T>()!;
     }
 }

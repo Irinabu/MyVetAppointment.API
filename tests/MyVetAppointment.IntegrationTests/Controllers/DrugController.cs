@@ -26,7 +26,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Drug", json);
          
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         }
 
@@ -45,7 +45,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Drug", json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
     }

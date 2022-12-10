@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using System.Net;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Enums;
+using Azure;
 
 namespace MyVetAppointment.IntegrationTests.Controllers
 {
@@ -22,7 +23,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
@@ -38,7 +39,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
@@ -54,7 +55,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
@@ -81,7 +82,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Appointment", json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         }
 
@@ -108,7 +109,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Appointment", json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
         }
 
@@ -138,7 +139,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var responseUpdate = await client.PutAsync("/Appointment/" + id, json);
 
             //Assert
-            Assert.IsNotNull(responseUpdate);
+            Assert.That(responseUpdate, Is.Not.Null);
             Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
@@ -168,7 +169,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PutAsync("/Appointment/" + new Guid(), json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
         }
 

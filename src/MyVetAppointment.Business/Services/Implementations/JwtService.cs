@@ -24,7 +24,7 @@ public class JwtService
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-            new Claim(ClaimsIdentity.DefaultNameClaimType, userInfo.Email),
+            new Claim(ClaimsIdentity.DefaultNameClaimType, userInfo.Email!),
             new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
         };
 
@@ -41,7 +41,7 @@ public class JwtService
         return _jwtSecurityTokenHandler.WriteToken(token);
     }
 
-    public string ValidateToken(string token)
+    public string? ValidateToken(string token)
     {
         if (token == null)
             return null;

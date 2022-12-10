@@ -23,7 +23,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             {
                 foreach (var (interfaceType, serviceMock) in _externalServicesMock.GetMocks())
                 {
-                    services.Remove(services.SingleOrDefault(d => d.ServiceType == interfaceType));
+                    services.Remove(services.SingleOrDefault(d => d.ServiceType == interfaceType)!);
 
                     services.AddSingleton(interfaceType, serviceMock);
                 }

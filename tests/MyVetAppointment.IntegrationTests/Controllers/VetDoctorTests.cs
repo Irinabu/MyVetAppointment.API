@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Azure;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
@@ -22,7 +23,7 @@ public class VetDoctorTests : CustomBaseTest
         var response = await client.GetAsync("/VetDoctor/vets");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
@@ -39,7 +40,7 @@ public class VetDoctorTests : CustomBaseTest
         var response = await client.GetAsync($"/VetDoctor/{email}");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
@@ -56,7 +57,7 @@ public class VetDoctorTests : CustomBaseTest
         var response = await client.DeleteAsync($"VetDoctor/delete-vet/{id}");
 
         //Assert
-        Assert.IsNotNull(response);
+        Assert.That(response, Is.Not.Null);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
@@ -86,14 +87,17 @@ public class VetDoctorTests : CustomBaseTest
         var responseMessage = await doc.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<GetUserResponse>(responseMessage);
 
-        var id = responseDeserialized.Id.ToString();
+        var id = responseDeserialized!.Id.ToString();
         var responseDelete = await client.DeleteAsync($"https://localhost:5001/VetDoctor/delete-vet/{id}");
 
 
         //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.IsNotNull(responseDelete);
-        Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.Multiple(() =>
+        {
+            Assert.That(responseMessage, Is.Not.Null);
+            Assert.That(responseDelete, Is.Not.Null);
+            Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        });
     }
 
     public async Task<string> LoginVet()
@@ -111,6 +115,6 @@ public class VetDoctorTests : CustomBaseTest
         var responseMessage = await responseLogin.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
-        return responseDeserialized.Token;
+        return responseDeserialized!.Token!;
     }
 }

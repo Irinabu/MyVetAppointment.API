@@ -38,7 +38,7 @@ public class CustomBaseTest
         var responseMessage = await responseLogin.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
-        return responseDeserialized.Token;
+        return responseDeserialized!.Token!;
     }
 
     public async Task<string> LoginVetDoctor()
@@ -56,7 +56,7 @@ public class CustomBaseTest
         var responseMessage = await responseLogin.Content.ReadAsStringAsync();
         var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
-        return responseDeserialized.Token;
+        return responseDeserialized!.Token!;
     }
 
     public async Task<Guid> AddAppointment()
