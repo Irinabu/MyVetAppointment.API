@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Validators;
 using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers;
@@ -30,6 +31,13 @@ public class AppointmentController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddAppointment([FromBody] AppointmentRequest model)
     {
+        AppointmentValidator validator = new AppointmentValidator();
+        var validationResult = validator.Validate(model);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         var user = HttpContext.Items["User"] as User;
         var response = await _appointmentService.AddAppointment(model, user);
         return Created("af", response);
@@ -38,6 +46,13 @@ public class AppointmentController : ControllerBase
     [HttpPost("update-appointment")]
     public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, [FromQuery]string id)
     {
+        AppointmentValidator validator = new AppointmentValidator();
+        var validationResult = validator.Validate(model);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         var _id = Guid.Parse(id);
         var user = HttpContext.Items["User"] as User;
         var response = await _appointmentService.UpdateAppointment(model, _id, user);

@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moq;
+﻿using Moq;
 using MyVetAppointment.Data.Entities;
-using MyVetAppointment.Data.Persistence;
 using MyVetAppointment.Data.Repositories;
-using MyVetAppointment.Data.Repositories.Implementations;
 
 namespace MyVetAppointment.UnitTests.Repositories;
 
