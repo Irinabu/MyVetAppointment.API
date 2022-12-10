@@ -4,7 +4,7 @@ namespace MyVetAppointment.Business.Models.Animal
 {
     public class AnimalResponse
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public AnimalType AnimalType { get; set; }
     }
 }

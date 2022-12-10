@@ -22,17 +22,24 @@ public class AppointmentController : ControllerBase
     public async Task<IActionResult> GetAppointments()
     {
         var user = HttpContext.Items["User"] as User;
-        var response = await _appointmentService.GetUserAppointments(user);
-
-        return Ok(response);
+        if(user != null)
+        {
+            var response = await _appointmentService.GetUserAppointments(user);
+            return Ok(response);
+        }
+        return NotFound();
     }
 
     [HttpPost]
     public async Task<IActionResult> AddAppointment([FromBody] AppointmentRequest model)
     {
         var user = HttpContext.Items["User"] as User;
-        var response = await _appointmentService.AddAppointment(model, user);
-        return Created("af", response);
+        if (user != null)
+        {
+            var response = await _appointmentService.AddAppointment(model, user);
+            return Created("af", response);
+        }
+        return NotFound();
     }
 
     [HttpPost("update-appointment")]
@@ -40,8 +47,12 @@ public class AppointmentController : ControllerBase
     {
         var _id = Guid.Parse(id);
         var user = HttpContext.Items["User"] as User;
-        var response = await _appointmentService.UpdateAppointment(model, _id, user);
-        return Ok(response);
+        if (user != null)
+        {
+            var response = await _appointmentService.UpdateAppointment(model, _id, user);
+            return Ok(response);
+        }
+        return NotFound();  
     }
 
     [HttpDelete("{id}")]

@@ -22,27 +22,30 @@ public class CustomerController : BaseController
     [HttpDelete("delete-customer/{id}")]
     public async Task<IActionResult> DeleteCustomer(string id)
     {
-        return Ok(_customerService.DeleteCustomer(id));
+        return await Task.Run(()=>Ok(_customerService.DeleteCustomer(id)));
     }
-
 
     [HttpGet("customers")]
     public async Task<IActionResult> GetCustomers()
     {
-        return Ok(_customerService.GetAllAsync());
+        return await Task.Run(() => Ok(_customerService.GetAllAsync()));
     }
 
     [HttpGet("{email}")]
     public async Task<IActionResult> GetCustomerByEmail(string email)
     {
-        return Ok(_customerService.GetCustomerByEmailAsync(email));
+        return await Task.Run(() => Ok(_customerService.GetCustomerByEmailAsync(email)));
     }
 
     [HttpPost("add-animal")]
     public async Task<IActionResult> AddNewAnimal([FromBody] AnimalRequest model)
     {
         var user = HttpContext.Items["User"] as User;
-        var response = await _customerService.AddAnimalAsync(model, user);
-        return Created("af", response);
+        if(user != null)
+        {
+            var response = await _customerService.AddAnimalAsync(model, user);
+            return Created("af", response);
+        }
+        return BadRequest();
     }
 }

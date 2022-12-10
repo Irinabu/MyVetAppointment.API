@@ -2,5 +2,5 @@
 
 public class VetDoctor : User
 {
-    public ICollection<Appointment> Appointments { get; set; }
+    public ICollection<Appointment>? Appointments { get; set; }
 }

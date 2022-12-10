@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Services.Implementations;
 
 namespace MyVetAppointment.API.Controllers;
 
@@ -19,19 +20,19 @@ public class VetDoctorController : BaseController
     [HttpDelete("delete-vet/{id}")]
     public async Task<IActionResult> DeleteVet(string id)
     {
-        return Ok(_vetDoctorService.DeleteVetDoctor(id));
+        return await Task.Run(() => Ok(_vetDoctorService.DeleteVetDoctor(id)));
     }
 
     [HttpGet("vets")]
     public async Task<IActionResult> GetVets()
     {
-        return Ok(_vetDoctorService.GetAllAsync());
+        return await Task.Run(() => Ok(_vetDoctorService.GetAllAsync()));
     }
 
     [HttpGet("{email}")]
     public async Task<IActionResult> GetVetByEmail(string email)
     {
-        return Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email));
+        return await Task.Run(() => Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email)));
     }
 
 }
