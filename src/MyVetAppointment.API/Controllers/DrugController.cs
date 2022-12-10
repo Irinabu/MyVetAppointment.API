@@ -43,4 +43,11 @@ public class DrugController : ControllerBase
         return NoContent();
     }
 
+    [HttpPut]
+    public async Task<IActionResult> UpdateDrug([FromBody] DrugRequest model, [FromQuery] string id)
+    {
+        var _id = Guid.Parse(id);
+        var response = await _drugService.UpdateDrugAsync(model, _id);
+        return Ok(response);
+    }
 }
