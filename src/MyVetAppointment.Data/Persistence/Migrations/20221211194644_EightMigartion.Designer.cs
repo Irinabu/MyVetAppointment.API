@@ -12,8 +12,8 @@ using MyVetAppointment.Data.Persistence;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221209115158_AddExpDateToDrug")]
-    partial class AddExpDateToDrug
+    [Migration("20221211194644_EightMigartion")]
+    partial class EightMigartion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
