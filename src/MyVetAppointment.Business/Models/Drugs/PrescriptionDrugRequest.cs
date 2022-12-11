@@ -3,7 +3,6 @@
     public class PrescriptionDrugRequest
     {
         public Guid DrugId { get; set; }
-        public string DrugName { get; set; }
         public double QuantityPerDay { get; set; }
     }
 }

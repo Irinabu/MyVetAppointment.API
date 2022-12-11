@@ -39,7 +39,6 @@ namespace MyVetAppointment.Business.Services.Implementations
                 var drug = await _drugRepository.GetFirstAsync(x => x.Id == prescriptionDrug.DrugId);
                 prescriptionDrugEntity.Drug = drug;
                 prescriptionDrugs.Add(prescriptionDrugEntity);
-                await _prescriptionDrugRepository.AddAsync(prescriptionDrugEntity);
             }
 
             billEntity.PrescriptionDrugs = prescriptionDrugs;

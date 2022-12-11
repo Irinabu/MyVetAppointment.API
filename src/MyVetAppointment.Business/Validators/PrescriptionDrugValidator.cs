@@ -7,7 +7,6 @@ namespace MyVetAppointment.Business.Validators
     {
         public PrescriptionDrugValidator()
         {
-            RuleFor(x => x.DrugName).NotNull().NotEmpty();
             RuleFor(x => x.QuantityPerDay).GreaterThan(0);
         }
     }
