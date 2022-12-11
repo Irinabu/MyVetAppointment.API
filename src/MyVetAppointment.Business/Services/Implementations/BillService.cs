@@ -36,7 +36,7 @@ namespace MyVetAppointment.Business.Services.Implementations
             foreach (var prescriptionDrug in bill.PrescriptionDrugs)
             {
                 var prescriptionDrugEntity = _mapper.Map<PrescriptionDrugRequest, PrescriptionDrug>(prescriptionDrug);
-                var drug = await _drugRepository.GetFirstAsync(x => x.Name == prescriptionDrug.DrugName);
+                var drug = await _drugRepository.GetFirstAsync(x => x.Id == prescriptionDrug.DrugId);
                 prescriptionDrugEntity.Drug = drug;
                 prescriptionDrugs.Add(prescriptionDrugEntity);
                 await _prescriptionDrugRepository.AddAsync(prescriptionDrugEntity);
