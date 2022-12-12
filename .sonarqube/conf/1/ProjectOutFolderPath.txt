@@ -1,1 +1,0 @@
-D:\Facultate\DotNet-Proiect\MyVetAppointment.API\.sonarqube\out\1
