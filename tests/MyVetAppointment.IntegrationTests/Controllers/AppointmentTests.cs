@@ -3,8 +3,6 @@ using NUnit.Framework;
 using System.Net.Http.Json;
 using System.Net;
 using MyVetAppointment.Business.Models.Appointment;
-using MyVetAppointment.Data.Enums;
-using Azure;
 
 namespace MyVetAppointment.IntegrationTests.Controllers
 {
@@ -65,7 +63,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Arrange
             var appointment = new AppointmentRequest()
             {
-                DateTime = DateTime.Now,
+                DateTime = DateTime.MaxValue,
                 Description =
                     "Pisica mea ...",
                 Title = "Pisica bolnava",
@@ -92,7 +90,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Arrange
             var appointment = new AppointmentRequest()
             {
-                DateTime = DateTime.Now,
+                DateTime = DateTime.MaxValue,
                 Description =
                     "Pisica mea ...",
                 Title = "Pisica bolnava",
@@ -114,64 +112,96 @@ namespace MyVetAppointment.IntegrationTests.Controllers
         }
 
         [Test]
-        public async Task Should_UpdateAppointment()
+        public async Task Should_DeleteAppointment()
         {
-            //Arrange
             var id = await AddAppointment();
-
-            var appointmentUpdated = new AppointmentRequest()
-            {
-                DateTime = DateTime.Now,
-                Description =
-                    "Test appointment ...",
-                Title = "Test Appointment",
-                FirstName = "Doctor",
-                LastName = "Test,parola:string12",
-                Status = AppointmentStatus.Accepted
-            };
-
-            var json = JsonContent.Create(appointmentUpdated);
+            
             var client = GetClient();
             var token = await LoginCustomer();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
             //Act
-            var responseUpdate = await client.PutAsync("/Appointment/" + id, json);
+            var response = await client.DeleteAsync("/Appointment/" + id);
 
             //Assert
-            Assert.That(responseUpdate, Is.Not.Null);
-            Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
 
         [Test]
-        public async Task Should_NOT_UpdateAppointment()
+        public async Task Should_NOT_DeleteAppointment()
         {
-            //Arrange
             var id = await AddAppointment();
 
-            var appointment = new AppointmentRequest()
-            {
-                DateTime = DateTime.Now,
-                Description =
-                    "Test appointment ...",
-                Title = "Test Appointment",
-                FirstName = "Doctor",
-                LastName = "Test,parola:string12",
-                Status = AppointmentStatus.Accepted
-            };
-
-            var json = JsonContent.Create(appointment);
             var client = GetClient();
-            var token = await LoginVetDoctor();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            // var token = await LoginCustomer();
+            // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
             //Act
-            var response = await client.PutAsync("/Appointment/" + new Guid(), json);
+            var response = await client.DeleteAsync("/Appointment/" + id);
 
             //Assert
-            Assert.That(response, Is.Not.Null);
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
+        //
+        // [Test]
+        // public async Task Should_UpdateAppointment()
+        // {
+        //     //Arrange
+        //     var id = await AddAppointment();
+        //
+        //     var appointmentUpdated = new AppointmentRequest()
+        //     {
+        //         DateTime = DateTime.Now,
+        //         Description =
+        //             "Test appointment ...",
+        //         Title = "Test Appointment",
+        //         FirstName = "Doctor",
+        //         LastName = "Test,parola:string12",
+        //         Status = AppointmentStatus.Accepted
+        //     };
+        //
+        //     var json = JsonContent.Create(appointmentUpdated);
+        //     var client = GetClient();
+        //     var token = await LoginCustomer();
+        //     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        //
+        //     //Act
+        //     var responseUpdate = await client.PostAsync("/Appointment/update-appointment/" + id, json);
+        //
+        //     //Assert
+        //     Assert.IsNotNull(responseUpdate);
+        //     Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        // }
+        //
+        // [Test]
+        // public async Task Should_NOT_UpdateAppointment()
+        // {
+        //     //Arrange
+        //     var id = await AddAppointment();
+        //
+        //     var appointment = new AppointmentRequest()
+        //     {
+        //         DateTime = DateTime.Now,
+        //         Description =
+        //             "Test appointment ...",
+        //         Title = "Test Appointment",
+        //         FirstName = "Doctor",
+        //         LastName = "Test,parola:string12",
+        //         Status = AppointmentStatus.Accepted
+        //     };
+        //
+        //     var json = JsonContent.Create(appointment);
+        //     var client = GetClient();
+        //     var token = await LoginVetDoctor();
+        //     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        //
+        //     //Act
+        //     var response = await client.PostAsync("/Appointment/update-appointment/" + new Guid(), json);
+        //
+        //     //Assert
+        //     Assert.IsNotNull(response);
+        //     Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        // }
 
     }
 }

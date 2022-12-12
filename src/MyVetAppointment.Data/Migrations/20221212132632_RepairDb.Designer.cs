@@ -9,11 +9,11 @@ using MyVetAppointment.Data.Persistence;
 
 #nullable disable
 
-namespace MyVetAppointment.Data.Persistence.Migrations
+namespace MyVetAppointment.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221209115158_AddExpDateToDrug")]
-    partial class AddExpDateToDrug
+    [Migration("20221212132632_RepairDb")]
+    partial class RepairDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

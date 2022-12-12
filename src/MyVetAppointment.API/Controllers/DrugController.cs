@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.API.Controllers;
 
@@ -32,6 +33,13 @@ public class DrugController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddDrug([FromBody] DrugRequest model)
     {
+        DrugValidator validator = new DrugValidator();
+        var validationResult = validator.Validate(model);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         var response = await _drugService.AddDrugAsync(model);
         return Created("af", response);
     }
@@ -46,6 +54,13 @@ public class DrugController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateDrug([FromBody] DrugRequest model, [FromQuery] string id)
     {
+        DrugValidator validator = new DrugValidator();
+        var validationResult = validator.Validate(model);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         var _id = Guid.Parse(id);
         var response = await _drugService.UpdateDrugAsync(model, _id);
         return Ok(response);

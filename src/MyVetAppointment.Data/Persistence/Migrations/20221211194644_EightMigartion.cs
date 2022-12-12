@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddExpDateToDrug : Migration
+    public partial class EightMigartion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,13 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<double>(
+                name: "Price",
+                table: "Drugs",
+                type: "float",
+                nullable: false,
+                defaultValue: 0.0);
         }
 
         /// <inheritdoc />
@@ -24,6 +31,10 @@ namespace MyVetAppointment.Data.Persistence.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "ExpirationDate",
+                table: "Drugs");
+
+            migrationBuilder.DropColumn(
+                name: "Price",
                 table: "Drugs");
         }
     }

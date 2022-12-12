@@ -12,8 +12,8 @@ using MyVetAppointment.Data.Persistence;
 namespace MyVetAppointment.Data.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221209114128_Test")]
-    partial class Test
+    [Migration("20221211194644_EightMigartion")]
+    partial class EightMigartion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,8 @@ namespace MyVetAppointment.Data.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
 
                     b.ToTable("Bills");
                 });
@@ -108,6 +109,9 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -230,8 +234,8 @@ namespace MyVetAppointment.Data.Persistence.Migrations
             modelBuilder.Entity("MyVetAppointment.Data.Entities.Bill", b =>
                 {
                     b.HasOne("MyVetAppointment.Data.Entities.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId")
+                        .WithOne("Bill")
+                        .HasForeignKey("MyVetAppointment.Data.Entities.Bill", "AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -251,6 +255,11 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Drug");
+                });
+
+            modelBuilder.Entity("MyVetAppointment.Data.Entities.Appointment", b =>
+                {
+                    b.Navigation("Bill");
                 });
 
             modelBuilder.Entity("MyVetAppointment.Data.Entities.Bill", b =>

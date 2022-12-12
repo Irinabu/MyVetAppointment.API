@@ -9,11 +9,11 @@ using MyVetAppointment.Data.Persistence;
 
 #nullable disable
 
-namespace MyVetAppointment.Data.Persistence.Migrations
+namespace MyVetAppointment.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221208202549_EigthMigration")]
-    partial class EigthMigration
+    [Migration("20221212142306_temporary")]
+    partial class temporary
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,9 +110,15 @@ namespace MyVetAppointment.Data.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalQuantity")
                         .HasColumnType("float");

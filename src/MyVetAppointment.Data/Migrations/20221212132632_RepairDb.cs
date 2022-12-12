@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace MyVetAppointment.Data.Persistence.Migrations
+namespace MyVetAppointment.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class RepairDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
