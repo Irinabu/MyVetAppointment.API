@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Cryptography.X509Certificates;
+using AutoMapper;
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
@@ -27,8 +28,8 @@ namespace MyVetAppointment.Business.Services.Implementations
         
         public async Task<List<BillResponse>> GetBillsAsync()
         {
-            var bills = await _billRepository.GetAllAsync(exp => true);
-            return _mapper.Map<List<Bill>, List<BillResponse>>(bills);
+            var bills = await _billRepository.GetAllLazyLoad(exp => true, x => x.PrescriptionDrugs);
+            return _mapper.Map<List<Bill>, List<BillResponse>>(bills.ToList());
         }
 
         public async Task<BillResponse> AddBillAsync(BillRequest bill, Guid idAppointment)
