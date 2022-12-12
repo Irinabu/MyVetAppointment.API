@@ -24,6 +24,12 @@ namespace MyVetAppointment.Business.Services.Implementations
             _drugRepository = drugRepository;
             _mapper = mapper;
         }
+        
+        public async Task<List<BillResponse>> GetBillsAsync()
+        {
+            var bills = await _billRepository.GetAllAsync(exp => true);
+            return _mapper.Map<List<Bill>, List<BillResponse>>(bills);
+        }
 
         public async Task<BillResponse> AddBillAsync(BillRequest bill, Guid idAppointment)
         {
@@ -44,5 +50,21 @@ namespace MyVetAppointment.Business.Services.Implementations
             billEntity.PrescriptionDrugs = prescriptionDrugs;
             return _mapper.Map<Bill, BillResponse>(await _billRepository.AddAsync(billEntity));
         }
+
+        public async Task DeleteBillAsync(Guid billId)
+        {
+            var bill = await _billRepository.GetFirstAsync(x => x.Id == billId);
+
+            if (bill.PrescriptionDrugs != null)
+            {
+                foreach (var prescriptionDrug in bill.PrescriptionDrugs)
+                {
+                    await _prescriptionDrugRepository.DeleteAsync(prescriptionDrug);
+                }
+            }
+
+            await _billRepository.DeleteAsync(bill);
+        }
+
     }
 }

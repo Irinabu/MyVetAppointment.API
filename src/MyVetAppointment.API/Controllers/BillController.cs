@@ -31,4 +31,18 @@ public class BillController : ControllerBase
         var response = await _billService.AddBillAsync(model, idAppointment);
         return Created("af", response);
     }
+
+    [HttpDelete("{billId}")]
+    public async Task<IActionResult> DeleteBill(Guid billId)
+    {
+        await _billService.DeleteBillAsync(billId);
+        return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetBills()
+    {
+        var response = await _billService.GetBillsAsync();
+        return Ok(response);
+    }
 }
