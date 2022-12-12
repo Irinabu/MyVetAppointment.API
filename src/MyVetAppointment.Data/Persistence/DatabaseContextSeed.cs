@@ -50,7 +50,7 @@ public static class DatabaseContextSeed
                 Id = Guid.NewGuid(),
                 Customer = user1,
                 VetDoctor = user,
-                DateTime = DateTime.Now,
+                DateTime = DateTime.Now.AddMonths(6),
                 Description =
                     "Pisicii mele prea birmaneze i-a cazut un whiskas de asta sau cum se cheama. Ajutor domn' doctor va rog.",
                 Title = "Pisica fara un whisker",
@@ -64,7 +64,7 @@ public static class DatabaseContextSeed
                 Id = Guid.NewGuid(),
                 Customer = user1,
                 VetDoctor = user,
-                DateTime = DateTime.Now,
+                DateTime = DateTime.Now.AddMonths(6),
                 Description = "De cateva zile vad ca nu mai stie sa inoate Nemo asta a meu. Ce ii fac",
                 Title = "Peste inecat",
                 AppointmentStatus = AppointmentStatus.Pending
@@ -76,29 +76,11 @@ public static class DatabaseContextSeed
             {
                 Id = Guid.NewGuid(),
                 Name = "Paracetamol",
-                Price = 20,
+                Price = 10.5,
                 TotalQuantity = 50,
-                ExpirationDate = DateTime.Now
+                ExpirationDate = DateTime.Now.AddMonths(6)
             };
             await drugRepository.AddAsync(drug);
-
-            var prescriptionDrug = new PrescriptionDrug
-            {
-                Id = Guid.NewGuid(),
-                Drug = drug,
-                QuantityPerDay = 10
-            };
-            await prescriptionDrugRepository.AddAsync(prescriptionDrug);
-
-            var bill = new Bill()
-            {
-                Appointment = appointment,
-                Diagnose = "test",
-                Id = Guid.NewGuid(),
-                PrescriptionDrugs = new List<PrescriptionDrug>() { prescriptionDrug }
-
-            };
-            await billRepository.AddAsync(bill);
         }
 
         await context.SaveChangesAsync();
