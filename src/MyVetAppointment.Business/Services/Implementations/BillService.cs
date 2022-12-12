@@ -28,7 +28,7 @@ namespace MyVetAppointment.Business.Services.Implementations
         
         public async Task<List<BillResponse>> GetBillsAsync()
         {
-            var bills = await _billRepository.GetAllLazyLoad(exp => true, x => x.PrescriptionDrugs);
+            var bills = await _billRepository.GetAllLazyLoad(exp => true, x => x.PrescriptionDrugs!);
             return _mapper.Map<List<Bill>, List<BillResponse>>(bills.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace MyVetAppointment.Business.Services.Implementations
             billEntity.Appointment = appointment;
 
             var prescriptionDrugs = new List<PrescriptionDrug>();
-            foreach (var prescriptionDrug in bill.PrescriptionDrugs)
+            foreach (var prescriptionDrug in bill.PrescriptionDrugs!)
             {
                 var prescriptionDrugEntity = _mapper.Map<PrescriptionDrugRequest, PrescriptionDrug>(prescriptionDrug);
                 var drug = await _drugRepository.GetFirstAsync(x => x.Id == prescriptionDrug.DrugId);

@@ -100,7 +100,7 @@ public class VetDoctorTests : CustomBaseTest
         });
     }
 
-    public async Task<string> LoginVet()
+    private async Task<string> LoginVet()
     {
         var clientLogin = GetClient();
 
