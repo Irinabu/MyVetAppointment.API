@@ -4,6 +4,7 @@ using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Enums;
 
 namespace MyVetAppointment.Business.Services.Implementations
 {
@@ -49,6 +50,7 @@ namespace MyVetAppointment.Business.Services.Implementations
             }
 
             billEntity.PrescriptionDrugs = prescriptionDrugs;
+            billEntity.BillStatus = BillStatus.Pending;
             return _mapper.Map<Bill, BillResponse>(await _billRepository.AddAsync(billEntity));
         }
 
