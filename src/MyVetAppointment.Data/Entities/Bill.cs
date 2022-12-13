@@ -1,4 +1,6 @@
-﻿namespace MyVetAppointment.Data.Entities;
+﻿using MyVetAppointment.Data.Enums;
+
+namespace MyVetAppointment.Data.Entities;
 
 public class Bill
 {
@@ -8,4 +10,5 @@ public class Bill
 
     public Guid AppointmentId { get; set; }
     public Appointment Appointment { get; set; }
+    public BillStatus BillStatus { get; set; }
 }
