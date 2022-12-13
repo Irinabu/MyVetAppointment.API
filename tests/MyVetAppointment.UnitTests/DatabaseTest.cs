@@ -20,5 +20,6 @@ public class DatabaseTest : IDisposable
     {
         context.Database.EnsureDeleted();
         context.Dispose();
+        GC.SuppressFinalize(true);
     }
 }

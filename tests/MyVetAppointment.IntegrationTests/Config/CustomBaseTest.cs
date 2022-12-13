@@ -1,7 +1,10 @@
 ﻿using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.User;
+using MyVetAppointment.Data.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace MyVetAppointment.IntegrationTests.Config;
@@ -80,4 +83,42 @@ public class CustomBaseTest
         return appointmentResponse.id;
     }
 
+    public async Task<Guid> AddBill()
+    {
+        var id = await AddAppointment();
+
+        var bill = new Bill()
+        {
+            Diagnose = "test",
+            PrescriptionDrugs = new List<PrescriptionDrug>()
+        };
+
+        var json = JsonContent.Create(bill);
+        var client = GetClient();
+        var token = await LoginVetDoctor();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+        var response = await client.PostAsync("/Bill/" + id, json);
+        dynamic billResponse = JObject.Parse(await response.Content.ReadAsStringAsync());
+        return billResponse.id;
+    }
+
+    public async Task<Guid> AddDrug()
+    {
+        var drug = new Drug
+        {
+            Name = "Paracetamol",
+            TotalQuantity = 50,
+            Price = 5,
+            ExpirationDate = DateTime.MaxValue
+        };
+
+        var json = JsonContent.Create(drug);
+        var client = GetClient();
+        var token = await LoginCustomer();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        var response = await client.PostAsync("/Drug", json);
+        dynamic drugResponse = JObject.Parse(await response.Content.ReadAsStringAsync());
+        return drugResponse.id;
+    }
 }

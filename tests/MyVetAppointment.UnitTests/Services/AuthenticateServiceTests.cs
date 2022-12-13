@@ -1,6 +1,7 @@
 ﻿using Application.UnitTests;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Data.Exceptions;
 
 namespace MyVetAppointment.UnitTests.Services;
 
@@ -17,7 +18,7 @@ public class AuthenticateServiceTests
 
 
     [Fact]
-    public async void Login_Should_Return_Token()
+    public async Task Login_Should_Return_Token()
     {
         //ARRANGE
         var loginService = diKernel.ResolveService<IAuthenticateService>();
@@ -36,7 +37,7 @@ public class AuthenticateServiceTests
     }
 
     [Fact]
-    public async void Login_Should_Return_Error()
+    public async Task Login_Should_Return_Error()
     {
         //ARRANGE
         var loginService = diKernel.ResolveService<IAuthenticateService>();
@@ -49,12 +50,12 @@ public class AuthenticateServiceTests
 
         //ACT
 
-        await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
+        await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
         //ASSERT
     }
 
     [Fact]
-    public async void Login_Should_Fail_With_Null_Email()
+    public async Task Login_Should_Fail_With_Null_Email()
     {
         //ARRANGE
         var loginService = diKernel.ResolveService<IAuthenticateService>();
@@ -67,7 +68,7 @@ public class AuthenticateServiceTests
 
         //ACT
 
-        await Assert.ThrowsAsync<Exception>(() => authenticateServiceMock.LoginAsync(loginRequest));
+        await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
         //ASSERT
     }
 }

@@ -10,7 +10,7 @@ public class Bill
 
     public Guid AppointmentId { get; set; }
 
-    public Appointment Appointment { get; set; }
+    public Appointment? Appointment { get; set; }
     public BillStatus BillStatus { get; set; }
 
 }

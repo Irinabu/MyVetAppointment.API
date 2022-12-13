@@ -1,6 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using MyVetAppointment.Business.Models.Appointment;
+using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Enums;
 using MyVetAppointment.IntegrationTests.Config;
 using NUnit.Framework;
 
@@ -78,6 +81,92 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Assert
             Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+        }
+
+        [Test]
+        public async Task Should_DeleteDrug()
+        {
+            var id = await AddDrug();
+
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //Act
+            var response = await client.DeleteAsync("/Drug/" + id);
+
+            //Assert
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
+        }
+
+        [Test]
+        public async Task Should_NOT_DeleteDelete()
+        {
+            var id = await AddDrug();
+
+            var client = GetClient();
+            // var token = await LoginCustomer();
+            // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //Act
+            var response = await client.DeleteAsync("/Bill/" + id);
+
+            //Assert
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+        }
+
+        [Test]
+        public async Task Should_UpdateAppointment()
+        {
+            //Arrange
+            var id = await AddDrug();
+        
+            var drugUpdated = new DrugRequest()
+            {
+                Name = "Paracetamol",
+                TotalQuantity = 50,
+                Price = 5,
+                ExpirationDate = DateTime.MaxValue
+            };
+        
+            var json = JsonContent.Create(drugUpdated);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        
+            //Act
+            var responseUpdate = await client.PutAsync("/Drug?id=" + id, json);
+        
+            //Assert
+            Assert.IsNotNull(responseUpdate);
+            Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+        
+        [Test]
+        public async Task Should_NOT_UpdateDrug()
+        {
+            //Arrange
+            var id = await AddDrug();
+
+            var drugUpdated = new DrugRequest()
+            {
+                Name = "Paracetamol",
+                TotalQuantity = 50,
+                Price = 5,
+                ExpirationDate = DateTime.MaxValue
+            };
+
+            var json = JsonContent.Create(drugUpdated);
+            var client = GetClient();
+            var token = await LoginVetDoctor();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        
+            //Act
+            var response = await client.PutAsync("/Drug?id=" + new Guid(), json);
+        
+            //Assert
+            Assert.IsNotNull(response);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
         }
     }
 }
