@@ -3,36 +3,38 @@ using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Services.Implementations;
 
-namespace MyVetAppointment.API.Controllers;
-
-[ApiController]
-[Authorize]
-[Route("[controller]")]
-public class VetDoctorController : BaseController
+namespace MyVetAppointment.API.Controllers
 {
-    private readonly IVetDoctorService _vetDoctorService;
 
-    public VetDoctorController(IVetDoctorService vetDoctorService)
+    [ApiController]
+    [Authorize]
+    [Route("[controller]")]
+    public class VetDoctorController : BaseController
     {
-        _vetDoctorService = vetDoctorService;
-    }
+        private readonly IVetDoctorService _vetDoctorService;
 
-    [HttpDelete("delete-vet/{id}")]
-    public async Task<IActionResult> DeleteVet(string id)
-    {
-        return await Task.Run(() => Ok(_vetDoctorService.DeleteVetDoctor(id)));
-    }
+        public VetDoctorController(IVetDoctorService vetDoctorService)
+        {
+            _vetDoctorService = vetDoctorService;
+        }
 
-    [HttpGet("vets")]
-    public async Task<IActionResult> GetVets()
-    {
-        return await Task.Run(() => Ok(_vetDoctorService.GetAllAsync()));
-    }
+        [HttpDelete("delete-vet/{id}")]
+        public async Task<IActionResult> DeleteVet(string id)
+        {
+            return await Task.Run(() => Ok(_vetDoctorService.DeleteVetDoctor(id)));
+        }
 
-    [HttpGet("{email}")]
-    public async Task<IActionResult> GetVetByEmail(string email)
-    {
-        return await Task.Run(() => Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email)));
-    }
+        [HttpGet("vets")]
+        public async Task<IActionResult> GetVets()
+        {
+            return await Task.Run(() => Ok(_vetDoctorService.GetAllAsync()));
+        }
 
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetVetByEmail(string email)
+        {
+            return await Task.Run(() => Ok(_vetDoctorService.GetVetDoctorByEmailAsync(email)));
+        }
+
+    }
 }

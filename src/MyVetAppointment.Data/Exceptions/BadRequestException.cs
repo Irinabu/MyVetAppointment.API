@@ -1,17 +1,19 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MyVetAppointment.Data.Exceptions;
-
-[Serializable]
-public class BadRequestException : Exception
+namespace MyVetAppointment.Data.Exceptions
 {
-    public BadRequestException(string message) : base(message)
+
+    [Serializable]
+    public class BadRequestException : Exception
     {
+        public BadRequestException(string message) : base(message)
+        {
 
-    }
+        }
 
-    protected BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
+        protected BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
 
+        }
     }
 }

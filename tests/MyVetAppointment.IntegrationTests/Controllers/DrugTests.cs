@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Azure;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Data.Entities;
@@ -100,7 +101,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
         }
 
         [Test]
-        public async Task Should_NOT_DeleteDelete()
+        public async Task Should_NOT_DeleteDrug()
         {
             var id = await AddDrug();
 
@@ -116,7 +117,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
         }
 
         [Test]
-        public async Task Should_UpdateAppointment()
+        public async Task Should_UpdateDrug()
         {
             //Arrange
             var id = await AddDrug();
@@ -136,9 +137,10 @@ namespace MyVetAppointment.IntegrationTests.Controllers
         
             //Act
             var responseUpdate = await client.PutAsync("/Drug?id=" + id, json);
-        
+
             //Assert
-            Assert.IsNotNull(responseUpdate);
+            Assert.That(responseUpdate, Is.Not.Null);
+
             Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
         
@@ -163,9 +165,9 @@ namespace MyVetAppointment.IntegrationTests.Controllers
         
             //Act
             var response = await client.PutAsync("/Drug?id=" + new Guid(), json);
-        
+
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
         }
     }

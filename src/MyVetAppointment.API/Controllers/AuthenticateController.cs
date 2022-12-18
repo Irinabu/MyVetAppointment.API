@@ -5,60 +5,65 @@ using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Validators;
 
-namespace MyVetAppointment.API.Controllers;
-
-[AllowAnonymous]
-public class AuthenticateController : BaseController
+namespace MyVetAppointment.API.Controllers
 {
-    private readonly IAuthenticateService _authenticateService;
 
-    public AuthenticateController(IAuthenticateService authenticateService)
+    [AllowAnonymous]
+    public class AuthenticateController : BaseController
     {
-        _authenticateService = authenticateService;
-    }
+        private readonly IAuthenticateService _authenticateService;
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest model)
-    {
-        LoginValidator validator = new LoginValidator();
-        var validationResult = validator.Validate(model);
-
-        if (!validationResult.IsValid)
+        public AuthenticateController(IAuthenticateService authenticateService)
         {
-            return BadRequest(validationResult.Errors);
+            _authenticateService = authenticateService;
         }
-        var response = await _authenticateService.LoginAsync(model);
 
-        return Ok(response);  
-    }
-
-    [HttpPost("register-customer")]
-    public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest model)
-    {
-        RegisterValidator validator = new RegisterValidator();
-        var validationResult = validator.Validate(model);
-
-        if (!validationResult.IsValid)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            return BadRequest(validationResult.Errors);
+            LoginValidator validator = new LoginValidator();
+            var validationResult = validator.Validate(model);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            var response = await _authenticateService.LoginAsync(model);
+
+            return Ok(response);
         }
-        var response = await _authenticateService.RegisterCustomerAsync(model);
 
-        return Created("af", response);
-    }
-
-    [HttpPost("register-vet-doctor")]
-    public async Task<IActionResult> RegisterVetDoctor([FromBody] RegisterRequest model)
-    {
-        RegisterValidator validator = new RegisterValidator();
-        var validationResult = validator.Validate(model);
-
-        if (!validationResult.IsValid)
+        [HttpPost("register-customer")]
+        public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest model)
         {
-            return BadRequest(validationResult.Errors);
-        }
-        var response = await _authenticateService.RegisterVetDoctorAsync(model);
+            RegisterValidator validator = new RegisterValidator();
+            var validationResult = validator.Validate(model);
 
-        return Created("af", response);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            var response = await _authenticateService.RegisterCustomerAsync(model);
+
+            return Created("af", response);
+        }
+
+        [HttpPost("register-vet-doctor")]
+        public async Task<IActionResult> RegisterVetDoctor([FromBody] RegisterRequest model)
+        {
+            RegisterValidator validator = new RegisterValidator();
+            var validationResult = validator.Validate(model);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            var response = await _authenticateService.RegisterVetDoctorAsync(model);
+
+            return Created("af", response);
+        }
     }
 }

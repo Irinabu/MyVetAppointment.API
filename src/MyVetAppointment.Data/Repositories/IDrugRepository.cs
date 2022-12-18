@@ -1,7 +1,9 @@
 ﻿using MyVetAppointment.Data.Entities;
 
-namespace MyVetAppointment.Data.Repositories;
-
-public interface IDrugRepository : IBaseRepository<Drug>
+namespace MyVetAppointment.Data.Repositories
 {
+
+    public interface IDrugRepository : IBaseRepository<Drug>
+    {
+    }
 }

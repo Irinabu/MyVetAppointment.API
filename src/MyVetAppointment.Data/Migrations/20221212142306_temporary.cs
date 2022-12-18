@@ -10,13 +10,13 @@ namespace MyVetAppointment.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            throw new System.NotImplementedException();
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            throw new System.NotImplementedException();
         }
     }
 }

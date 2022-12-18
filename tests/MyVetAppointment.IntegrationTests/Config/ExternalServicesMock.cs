@@ -1,23 +1,25 @@
 ﻿using System.Reflection;
 using Moq;
 
-namespace MyVetAppointment.IntegrationTests.Config;
-
-public class ExternalServicesMock
+namespace MyVetAppointment.IntegrationTests.Config
 {
-    //public Mock<IAuthenticateService> _authenticateService { get; }
-    //public Mock<IUserRepository> _userRepository { get; }
 
-    public IEnumerable<(Type, object)> GetMocks()
+    public class ExternalServicesMock
     {
-        return GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Select(x =>
-            {
-                var underlyingType = x.PropertyType.GetGenericArguments()[0];
-                var value = x.GetValue(this) as Mock;
+        //public Mock<IAuthenticateService> _authenticateService { get; }
+        //public Mock<IUserRepository> _userRepository { get; }
 
-                return (underlyingType, value!.Object);
-            })
-            .ToArray();
+        public IEnumerable<(Type, object)> GetMocks()
+        {
+            return GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Select(x =>
+                {
+                    var underlyingType = x.PropertyType.GetGenericArguments()[0];
+                    var value = x.GetValue(this) as Mock;
+
+                    return (underlyingType, value!.Object);
+                })
+                .ToArray();
+        }
     }
 }

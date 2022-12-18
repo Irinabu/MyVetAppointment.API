@@ -8,141 +8,143 @@ using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace MyVetAppointment.IntegrationTests.Services;
-
-[TestFixture]
-public class CustomerTests : CustomBaseTest
+namespace MyVetAppointment.IntegrationTests.Services
 {
-    [Test]
-    public async Task GET_Customers_ShouldBe_Status_OK()
+
+    [TestFixture]
+    public class CustomerTests : CustomBaseTest
     {
-        //Arrange
-        var client = GetClient();
-        var token = await LoginCustomer();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        Console.WriteLine("Token: " + token);
-
-        //Act
-        var response = await client.GetAsync("/Customer/customers");
-
-        //Assert
-        Assert.That(response, Is.Not.Null);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-    }
-
-    [Test]
-    public async Task GET_CustomerByEmail_ShouldBe_Status_OK()
-    {
-        //Arrange
-        var email = "customer.test@test.com";
-        var client = GetClient();
-        var token = await LoginCustomer();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-
-        //Act
-        var response = await client.GetAsync($"/Customer/{email}");
-
-        //Assert
-        Assert.That(response, Is.Not.Null);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-    }
-
-    [Test]
-    public async Task DELETE_Customer_ShouldBe_Status_NotFound()
-    {
-        //Arrange
-        var client = GetClient();
-        var id = "123";
-        var token = await LoginCustomer();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-
-        //Act
-        var response = await client.DeleteAsync($"Customer/delete-customer/{id}");
-
-        //Assert
-        Assert.That(response, Is.Not.Null);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-    }
-
-
-    [Test]
-    public async Task DELETE_Customer_ShouldBe_Status_OK()
-    {
-        //Arrange
-        var register = new RegisterRequest
+        [Test]
+        public async Task GET_Customers_ShouldBe_Status_OK()
         {
-            Email = "proba2Customer@test.com",
-            FirstName = "Proba",
-            LastName = "string",
-            Password = "string",
-            PasswordConfirm = "string"
-        };
+            //Arrange
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            Console.WriteLine("Token: " + token);
 
-        var json = JsonContent.Create(register);
-        var client = GetClient();
-        var token = await LoginCustomer();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            //Act
+            var response = await client.GetAsync("/Customer/customers");
 
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
 
-        //Act
-        await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
-        var customer = await client.GetAsync($"https://localhost:5001/Customer/{register.Email}");
-        var responseMessage = await customer.Content.ReadAsStringAsync();
-        var responseDeserialized = JsonConvert.DeserializeObject<GetUserResponse>(responseMessage);
-
-        var id = responseDeserialized!.Id.ToString();
-        var responseDelete = await client.DeleteAsync($"https://localhost:5001/Customer/delete-customer/{id}");
-
-
-        //Assert
-        Assert.Multiple(() =>
+        [Test]
+        public async Task GET_CustomerByEmail_ShouldBe_Status_OK()
         {
-            Assert.That(responseMessage, Is.Not.Null);
-            Assert.That(responseDelete, Is.Not.Null);
-            Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        });
-    }
+            //Arrange
+            var email = "customer.test@test.com";
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-    [Test]
-    public async Task Should_PostAnimal()
-    {
-        //Arrange
-        var animal = new Animal
+            //Act
+            var response = await client.GetAsync($"/Customer/{email}");
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public async Task DELETE_Customer_ShouldBe_Status_NotFound()
         {
-            Name = "Azorel",
-            AnimalType = AnimalType.Cat
-        };
+            //Arrange
+            var client = GetClient();
+            var id = "123";
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-        var json = JsonContent.Create(animal);
-        var client = GetClient();
-        var token = await LoginCustomer();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        var response = await client.PostAsync("/Customer/add-animal", json);
+            //Act
+            var response = await client.DeleteAsync($"Customer/delete-customer/{id}");
 
-        //Assert
-        Assert.That(response, Is.Not.Null);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-    }
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        }
 
-    [Test]
-    public async Task Should_NOT_PostAnimal()
-    {
-        //Arrange
-        var animal = new Animal
+
+        [Test]
+        public async Task DELETE_Customer_ShouldBe_Status_OK()
         {
-            Name = "Azorel",
-            AnimalType = AnimalType.Cat
-        };
+            //Arrange
+            var register = new RegisterRequest
+            {
+                Email = "proba2Customer@test.com",
+                FirstName = "Proba",
+                LastName = "string",
+                Password = "string",
+                PasswordConfirm = "string"
+            };
 
-        var json = JsonContent.Create(animal);
-        var client = GetClient();
-        var token = await LoginVetDoctor();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        var response = await client.PostAsync("/Customer/add-animal", json);
+            var json = JsonContent.Create(register);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-        //Assert
-        Assert.That(response, Is.Not.Null);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+
+            //Act
+            await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
+            var customer = await client.GetAsync($"https://localhost:5001/Customer/{register.Email}");
+            var responseMessage = await customer.Content.ReadAsStringAsync();
+            var responseDeserialized = JsonConvert.DeserializeObject<GetUserResponse>(responseMessage);
+
+            var id = responseDeserialized!.Id.ToString();
+            var responseDelete = await client.DeleteAsync($"https://localhost:5001/Customer/delete-customer/{id}");
+
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseMessage, Is.Not.Null);
+                Assert.That(responseDelete, Is.Not.Null);
+                Assert.That(responseDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            });
+        }
+
+        [Test]
+        public async Task Should_PostAnimal()
+        {
+            //Arrange
+            var animal = new Animal
+            {
+                Name = "Azorel",
+                AnimalType = AnimalType.Cat
+            };
+
+            var json = JsonContent.Create(animal);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PostAsync("/Customer/add-animal", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        }
+
+        [Test]
+        public async Task Should_NOT_PostAnimal()
+        {
+            //Arrange
+            var animal = new Animal
+            {
+                Name = "Azorel",
+                AnimalType = AnimalType.Cat
+            };
+
+            var json = JsonContent.Create(animal);
+            var client = GetClient();
+            var token = await LoginVetDoctor();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PostAsync("/Customer/add-animal", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        }
+
     }
-
 }

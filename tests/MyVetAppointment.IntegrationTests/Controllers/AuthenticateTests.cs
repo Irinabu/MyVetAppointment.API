@@ -5,61 +5,63 @@ using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace MyVetAppointment.IntegrationTests.Services;
-
-[TestFixture]
-public class AuthenticateTests : CustomBaseTest
+namespace MyVetAppointment.IntegrationTests.Services
 {
-    [Test]
-    public async Task Should_LoginVetDoctor()
+
+    [TestFixture]
+    public class AuthenticateTests : CustomBaseTest
     {
-        //Arrange
-        var expected = new LoginRequest
+        [Test]
+        public async Task Should_LoginVetDoctor()
         {
-            Email = "doctor.test@test.com",
-            Password = "string12"
-        };
+            //Arrange
+            var expected = new LoginRequest
+            {
+                Email = "doctor.test@test.com",
+                Password = "string12"
+            };
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/login", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
-        var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/login", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
+            var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
-        //Assert
-        Assert.Multiple(() =>
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseDeserialized, Is.Not.Null);
+                Assert.That(responseDeserialized!.Token, Is.Not.Null);
+                Assert.That(responseDeserialized.Role, Is.EqualTo("VetDoctor"));
+            });
+
+        }
+
+        [Test]
+        public async Task Should_NOT_LoginVetDoctor()
         {
-            Assert.That(responseDeserialized, Is.Not.Null);
-            Assert.That(responseDeserialized!.Token, Is.Not.Null);
-            Assert.That(responseDeserialized.Role, Is.EqualTo("VetDoctor"));
-        });
+            //Arrange
+            var expected = new LoginRequest
+            {
+                Email = "doctor.test@test.com",
+                Password = "string1"
+            };
 
-    }
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-    [Test]
-    public async Task Should_NOT_LoginVetDoctor()
-    {
-        //Arrange
-        var expected = new LoginRequest
-        {
-            Email = "doctor.test@test.com",
-            Password = "string1"
-        };
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/login", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
-
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/login", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
-
-        //Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(responseMessage, Is.Not.Null);
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-        });
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseMessage, Is.Not.Null);
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            });
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace MyVetAppointment.Data.Enums;
-
-public enum BillStatus
+﻿namespace MyVetAppointment.Data.Enums
 {
-    Paid,
-    Pending
+
+    public enum BillStatus
+    {
+        Paid,
+        Pending
+    }
 }
 

@@ -1,11 +1,13 @@
-﻿namespace MyVetAppointment.Data.Enums;
-
-public enum AnimalType
+﻿namespace MyVetAppointment.Data.Enums
 {
-    Dog,
-    Cat,
-    Bird,
-    Fish,
-    Reptile,
-    Other
+
+    public enum AnimalType
+    {
+        Dog,
+        Cat,
+        Bird,
+        Fish,
+        Reptile,
+        Other
+    }
 }

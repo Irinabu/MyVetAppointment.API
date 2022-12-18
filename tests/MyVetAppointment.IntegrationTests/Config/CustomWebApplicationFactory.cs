@@ -2,31 +2,33 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MyVetAppointment.IntegrationTests.Config;
-
-public class CustomWebApplicationFactory : WebApplicationFactory<Program>
+namespace MyVetAppointment.IntegrationTests.Config
 {
-    private readonly ExternalServicesMock _externalServicesMock;
 
-    public CustomWebApplicationFactory(ExternalServicesMock externalServicesMock)
+    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        _externalServicesMock = externalServicesMock;
-    }
+        private readonly ExternalServicesMock _externalServicesMock;
 
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
-    {
-        builder.UseEnvironment("IntegrationTesting");
-        base.ConfigureWebHost(builder);
+        public CustomWebApplicationFactory(ExternalServicesMock externalServicesMock)
+        {
+            _externalServicesMock = externalServicesMock;
+        }
 
-        builder
-            .ConfigureServices(services =>
-            {
-                foreach (var (interfaceType, serviceMock) in _externalServicesMock.GetMocks())
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        {
+            builder.UseEnvironment("IntegrationTesting");
+            base.ConfigureWebHost(builder);
+
+            builder
+                .ConfigureServices(services =>
                 {
-                    services.Remove(services.SingleOrDefault(d => d.ServiceType == interfaceType)!);
+                    foreach (var (interfaceType, serviceMock) in _externalServicesMock.GetMocks())
+                    {
+                        services.Remove(services.SingleOrDefault(d => d.ServiceType == interfaceType)!);
 
-                    services.AddSingleton(interfaceType, serviceMock);
-                }
-            });
+                        services.AddSingleton(interfaceType, serviceMock);
+                    }
+                });
+        }
     }
 }

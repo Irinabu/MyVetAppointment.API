@@ -1,6 +1,8 @@
-﻿namespace MyVetAppointment.Data.Entities;
-
-public class VetDoctor : User
+﻿namespace MyVetAppointment.Data.Entities
 {
-    public ICollection<Appointment>? Appointments { get; set; }
+
+    public class VetDoctor : User
+    {
+        public ICollection<Appointment>? Appointments { get; set; }
+    }
 }

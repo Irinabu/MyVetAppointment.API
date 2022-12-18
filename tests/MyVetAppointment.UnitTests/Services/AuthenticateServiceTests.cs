@@ -3,72 +3,74 @@ using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Exceptions;
 
-namespace MyVetAppointment.UnitTests.Services;
-
-public class AuthenticateServiceTests
+namespace MyVetAppointment.UnitTests.Services
 {
-    private readonly IAuthenticateService authenticateServiceMock;
-    private readonly DITests diKernel;
 
-    public AuthenticateServiceTests()
+    public class AuthenticateServiceTests
     {
-        diKernel = new DITests();
-        authenticateServiceMock = diKernel.ResolveService<IAuthenticateService>();
-    }
+        private readonly IAuthenticateService authenticateServiceMock;
+        private readonly DITests diKernel;
 
-
-    [Fact]
-    public async Task Login_Should_Return_Token()
-    {
-        //ARRANGE
-        var loginService = diKernel.ResolveService<IAuthenticateService>();
-
-        var loginRequest = new LoginRequest
+        public AuthenticateServiceTests()
         {
-            Email = "test@test.com",
-            Password = "string12"
-        };
+            diKernel = new DITests();
+            authenticateServiceMock = diKernel.ResolveService<IAuthenticateService>();
+        }
 
-        //ACT
-        var loginResponse = await loginService.LoginAsync(loginRequest);
 
-        //ASSERT
-        Assert.False(string.IsNullOrEmpty(loginResponse.Token));
-    }
-
-    [Fact]
-    public async Task Login_Should_Return_Error()
-    {
-        //ARRANGE
-        var loginService = diKernel.ResolveService<IAuthenticateService>();
-
-        var loginRequest = new LoginRequest
+        [Fact]
+        public async Task Login_Should_Return_Token()
         {
-            Email = "test@test.com",
-            Password = "string123"
-        };
+            //ARRANGE
+            var loginService = diKernel.ResolveService<IAuthenticateService>();
 
-        //ACT
+            var loginRequest = new LoginRequest
+            {
+                Email = "test@test.com",
+                Password = "string12"
+            };
 
-        await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
-        //ASSERT
-    }
+            //ACT
+            var loginResponse = await loginService.LoginAsync(loginRequest);
 
-    [Fact]
-    public async Task Login_Should_Fail_With_Null_Email()
-    {
-        //ARRANGE
-        var loginService = diKernel.ResolveService<IAuthenticateService>();
+            //ASSERT
+            Assert.False(string.IsNullOrEmpty(loginResponse.Token));
+        }
 
-        var loginRequest = new LoginRequest
+        [Fact]
+        public async Task Login_Should_Return_Error()
         {
-            Email = null,
-            Password = "string123"
-        };
+            //ARRANGE
+            var loginService = diKernel.ResolveService<IAuthenticateService>();
 
-        //ACT
+            var loginRequest = new LoginRequest
+            {
+                Email = "test@test.com",
+                Password = "string123"
+            };
 
-        await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
-        //ASSERT
+            //ACT
+
+            await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
+            //ASSERT
+        }
+
+        [Fact]
+        public async Task Login_Should_Fail_With_Null_Email()
+        {
+            //ARRANGE
+            var loginService = diKernel.ResolveService<IAuthenticateService>();
+
+            var loginRequest = new LoginRequest
+            {
+                Email = null,
+                Password = "string123"
+            };
+
+            //ACT
+
+            await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
+            //ASSERT
+        }
     }
 }
