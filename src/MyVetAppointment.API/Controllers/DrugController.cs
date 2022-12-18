@@ -34,12 +34,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDrug([FromBody] DrugRequest model)
         {
-            DrugValidator validator = new DrugValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var response = await _drugService.AddDrugAsync(model);
@@ -56,12 +53,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateDrug([FromBody] DrugRequest model, [FromQuery] string id)
         {
-            DrugValidator validator = new DrugValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var _id = Guid.Parse(id);

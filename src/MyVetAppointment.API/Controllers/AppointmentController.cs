@@ -36,12 +36,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAppointment([FromBody] AppointmentRequest model)
         {
-            AppointmentValidator validator = new AppointmentValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var user = HttpContext.Items["User"] as User;
@@ -57,12 +54,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost("update-appointment")]
         public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest model, [FromQuery] string id)
         {
-            AppointmentValidator validator = new AppointmentValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var _id = Guid.Parse(id);
