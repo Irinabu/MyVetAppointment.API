@@ -2,23 +2,26 @@
 using MyVetAppointment.Data.Persistence;
 using MyVetAppointment.UnitTests;
 
-namespace Application.UnitTests;
-
-public class DatabaseTest : IDisposable
+namespace Application.UnitTests
 {
-    protected readonly DatabaseContextTest context;
 
-    public DatabaseTest()
+    public class DatabaseTest : IDisposable
     {
-        var options = new DbContextOptionsBuilder<DatabaseContext>().UseInMemoryDatabase("TestDatabase").Options;
-        context = new DatabaseContextTest(options);
-        context.Database.EnsureCreated();
-        DatabaseInitializer.Initialize(context);
-    }
+        protected readonly DatabaseContextTest context;
 
-    public void Dispose()
-    {
-        context.Database.EnsureDeleted();
-        context.Dispose();
+        public DatabaseTest()
+        {
+            var options = new DbContextOptionsBuilder<DatabaseContext>().UseInMemoryDatabase("TestDatabase").Options;
+            context = new DatabaseContextTest(options);
+            context.Database.EnsureCreated();
+            DatabaseInitializer.Initialize(context);
+        }
+
+        public void Dispose()
+        {
+            context.Database.EnsureDeleted();
+            context.Dispose();
+            GC.SuppressFinalize(true);
+        }
     }
 }

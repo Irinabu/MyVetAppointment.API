@@ -29,19 +29,20 @@ namespace MyVetAppointment.Business.Services.Implementations
         
         public async Task<List<BillResponse>> GetBillsAsync()
         {
-            var bills = await _billRepository.GetAllLazyLoad(exp => true, x => x.PrescriptionDrugs);
+            var bills = await _billRepository.GetAllLazyLoad(exp => true, x => x.PrescriptionDrugs!);
             return _mapper.Map<List<Bill>, List<BillResponse>>(bills.ToList());
         }
 
         public async Task<BillResponse> AddBillAsync(BillRequest bill, Guid idAppointment)
         {
             var billEntity = _mapper.Map<BillRequest, Bill>(bill);
-            var appointment = await _appointmentRepository.GetFirstLazyLoad(x => x.Id == idAppointment);
-            appointment.Bill = billEntity;
+            var appointment = await _appointmentRepository.GetFirstLazyLoad(x => x.Id == idAppointment, x => x.Customer);
+            appointment!.Bill = billEntity;
+           
             billEntity.Appointment = appointment;
 
             var prescriptionDrugs = new List<PrescriptionDrug>();
-            foreach (var prescriptionDrug in bill.PrescriptionDrugs)
+            foreach (var prescriptionDrug in bill.PrescriptionDrugs!)
             {
                 var prescriptionDrugEntity = _mapper.Map<PrescriptionDrugRequest, PrescriptionDrug>(prescriptionDrug);
                 var drug = await _drugRepository.GetFirstAsync(x => x.Id == prescriptionDrug.DrugId);

@@ -1,16 +1,18 @@
 ﻿using Application.UnitTests;
 using MyVetAppointment.Business.Services;
 
-namespace MyVetAppointment.UnitTests.Services;
-
-internal class CustomerServiceTests
+namespace MyVetAppointment.UnitTests.Services
 {
-    private readonly ICustomerService customerService;
-    private readonly DITests diKernel;
 
-    public CustomerServiceTests()
+    internal class CustomerServiceTests
     {
-        diKernel = new DITests();
-        customerService = diKernel.ResolveService<ICustomerService>();
+        private readonly ICustomerService customerService;
+        private readonly DITests diKernel;
+
+        public CustomerServiceTests()
+        {
+            diKernel = new DITests();
+            customerService = diKernel.ResolveService<ICustomerService>();
+        }
     }
 }

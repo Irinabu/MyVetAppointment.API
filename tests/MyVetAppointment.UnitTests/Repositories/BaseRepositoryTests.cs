@@ -32,6 +32,6 @@ public class BaseRepositoryTests
         var repository = new Mock<IBaseRepository<Customer>>();
         repository.Setup(c => c.GetAllAsync(x => true).Result).Returns(bookInMemoryDatabase);
 
-        Assert.Equal(repository.Object.GetAllAsync(x => true).Result.Count, 0);
+        Assert.Empty(repository.Object.GetAllAsync(x => true).Result);
     }
 }

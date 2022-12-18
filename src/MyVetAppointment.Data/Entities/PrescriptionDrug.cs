@@ -1,9 +1,11 @@
-﻿namespace MyVetAppointment.Data.Entities;
-
-public class PrescriptionDrug
+﻿namespace MyVetAppointment.Data.Entities
 {
-    public Guid Id { get; set; }
-    public Guid DrugId { get; set; }
-    public Drug Drug { get; set; }
-    public double QuantityPerDay { get; set; }
+
+    public class PrescriptionDrug
+    {
+        public Guid Id { get; set; }
+        public Guid DrugId { get; set; }
+        public Drug? Drug { get; set; }
+        public double QuantityPerDay { get; set; }
+    }
 }

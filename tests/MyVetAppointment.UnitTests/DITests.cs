@@ -8,52 +8,54 @@ using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Repositories.Implementations;
 using MyVetAppointment.UnitTests;
 
-namespace Application.UnitTests;
-
-public class DITests : IDisposable
+namespace Application.UnitTests
 {
-    private readonly ServiceProvider _serviceProvider;
 
-    public DITests()
+    public class DITests : IDisposable
     {
-        var services = InitializeCommonServices();
+        private readonly ServiceProvider _serviceProvider;
 
-        _serviceProvider = services.BuildServiceProvider();
+        public DITests()
+        {
+            var services = InitializeCommonServices();
 
-        DatabaseInitializer.Initialize(ResolveService<DatabaseContext>());
-    }
+            _serviceProvider = services.BuildServiceProvider();
 
-    public void Dispose()
-    {
-        ResolveService<DatabaseContext>().Database.EnsureDeleted();
-        _serviceProvider.Dispose();
-        GC.Collect();
-    }
+            DatabaseInitializer.Initialize(ResolveService<DatabaseContext>());
+        }
 
-    public ServiceCollection InitializeCommonServices()
-    {
-        var services = new ServiceCollection();
+        public void Dispose()
+        {
+            ResolveService<DatabaseContext>().Database.EnsureDeleted();
+            _serviceProvider.Dispose();
+            GC.Collect();
+        }
 
-        services.AddAutoMapper(typeof(IMappingProfilesMarker));
-        services.AddDbContext<DatabaseContext>(options =>
-            {
-                options.UseInMemoryDatabase(Guid.NewGuid().ToString());
-                options.EnableSensitiveDataLogging();
-            }
-        );
+        public static ServiceCollection InitializeCommonServices()
+        {
+            var services = new ServiceCollection();
 
-        services.AddTransient<IUserRepository, UserRepository>();
-        services.AddTransient<ICustomerRepository, CustomerRepository>();
-        services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
+            services.AddAutoMapper(typeof(IMappingProfilesMarker));
+            services.AddDbContext<DatabaseContext>(options =>
+                {
+                    options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                    options.EnableSensitiveDataLogging();
+                }
+            );
 
-        services.AddTransient<IAuthenticateService, AuthenticateService>();
-        services.AddTransient<IDrugService, DrugService>();
-        services.AddTransient<JwtService>();
-        return services;
-    }
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
 
-    public T ResolveService<T>()
-    {
-        return _serviceProvider.GetService<T>();
+            services.AddTransient<IAuthenticateService, AuthenticateService>();
+            services.AddTransient<IDrugService, DrugService>();
+            services.AddTransient<JwtService>();
+            return services;
+        }
+
+        public T ResolveService<T>()
+        {
+            return _serviceProvider.GetService<T>()!;
+        }
     }
 }

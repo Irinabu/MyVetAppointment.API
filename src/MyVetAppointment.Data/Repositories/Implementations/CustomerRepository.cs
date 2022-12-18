@@ -1,11 +1,13 @@
 ﻿using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Persistence;
 
-namespace MyVetAppointment.Data.Repositories.Implementations;
-
-public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
+namespace MyVetAppointment.Data.Repositories.Implementations
 {
-    public CustomerRepository(DatabaseContext appDbContext) : base(appDbContext)
+
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
+        public CustomerRepository(DatabaseContext appDbContext) : base(appDbContext)
+        {
+        }
     }
 }

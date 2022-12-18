@@ -5,118 +5,132 @@ using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace MyVetAppointment.IntegrationTests.Controllers;
-
-[TestFixture]
-public class RegisterTests : CustomBaseTest
+namespace MyVetAppointment.IntegrationTests.Controllers
 {
-    [Test]
-    public async Task Should_RegisterVetDoctor()
+
+    [TestFixture]
+    public class RegisterTests : CustomBaseTest
     {
-        //Arrange
-        var random = new Random();
-        var expected = new RegisterRequest
+        [Test]
+        public async Task Should_RegisterVetDoctor()
         {
-            Email = "doctor" + random.Next() + ".test@gmail.com",
-            FirstName = "DoctorTest",
-            LastName = "DoctorTest",
-            Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest"
-        };
+            //Arrange
+            var random = new Random();
+            var expected = new RegisterRequest
+            {
+                Email = "doctor" + random.Next() + ".test@gmail.com",
+                FirstName = "DoctorTest",
+                LastName = "DoctorTest",
+                Password = "PasswordTest",
+                PasswordConfirm = "PasswordTest"
+            };
 
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/register-vet-doctor", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
-        var responseDeserialized = JsonConvert.DeserializeObject<RegisterResponse>(responseMessage);
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/register-vet-doctor", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
+            var responseDeserialized = JsonConvert.DeserializeObject<RegisterResponse>(responseMessage);
 
-        Console.WriteLine();
+            Console.WriteLine();
 
-        //Assert
-        Assert.IsNotNull(responseDeserialized);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-    }
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseDeserialized, Is.Not.Null);
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+            });
+        }
 
-    [Test]
-    public async Task Should_NOT_RegisterVetDoctor()
-    {
-        //Arrange
-        var expected = new RegisterRequest
+        [Test]
+        public async Task Should_NOT_RegisterVetDoctor()
         {
-            Email = "doctor.test@test.com",
-            FirstName = "DoctorTest",
-            LastName = "DoctorTest",
-            Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest"
-        };
+            //Arrange
+            var expected = new RegisterRequest
+            {
+                Email = "doctor.test@test.com",
+                FirstName = "DoctorTest",
+                LastName = "DoctorTest",
+                Password = "PasswordTest",
+                PasswordConfirm = "PasswordTest"
+            };
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/register-vet-doctor", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/register-vet-doctor", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
 
-        //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-    }
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseMessage, Is.Not.Null);
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            });
+        }
 
-    [Test]
-    public async Task Should_RegisterCustomer()
-    {
-        //Arrange
-        var random = new Random();
-        var expected = new RegisterRequest
+        [Test]
+        public async Task Should_RegisterCustomer()
         {
-            Email = "cust" + random.Next() + ".test@gmail.com",
-            FirstName = "custTest",
-            LastName = "custTest",
-            Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest"
-        };
+            //Arrange
+            var random = new Random();
+            var expected = new RegisterRequest
+            {
+                Email = "cust" + random.Next() + ".test@gmail.com",
+                FirstName = "custTest",
+                LastName = "custTest",
+                Password = "PasswordTest",
+                PasswordConfirm = "PasswordTest"
+            };
 
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
-        var responseDeserialized = JsonConvert.DeserializeObject<RegisterResponse>(responseMessage);
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
+            var responseDeserialized = JsonConvert.DeserializeObject<RegisterResponse>(responseMessage);
 
-        Console.WriteLine();
+            Console.WriteLine();
 
-        //Assert
-        Assert.IsNotNull(responseDeserialized);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-    }
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseDeserialized, Is.Not.Null);
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+            });
+        }
 
-    [Test]
-    public async Task Should_NOT_RegisterCustomer()
-    {
-        //Arrange
-        var expected = new RegisterRequest
+        [Test]
+        public async Task Should_NOT_RegisterCustomer()
         {
-            Email = "customer.test@test.com",
-            FirstName = "custTest",
-            LastName = "custTest",
-            Password = "PasswordTest",
-            PasswordConfirm = "PasswordTest"
-        };
+            //Arrange
+            var expected = new RegisterRequest
+            {
+                Email = "customer.test@test.com",
+                FirstName = "custTest",
+                LastName = "custTest",
+                Password = "PasswordTest",
+                PasswordConfirm = "PasswordTest"
+            };
 
-        var json = JsonContent.Create(expected);
-        var client = GetClient();
+            var json = JsonContent.Create(expected);
+            var client = GetClient();
 
-        //Act
-        var response = await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
-        var responseMessage = await response.Content.ReadAsStringAsync();
+            //Act
+            var response = await client.PostAsync("https://localhost:5001/Authenticate/register-customer", json);
+            var responseMessage = await response.Content.ReadAsStringAsync();
 
-        //Assert
-        Assert.IsNotNull(responseMessage);
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseMessage, Is.Not.Null);
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            });
+        }
     }
 }

@@ -1,14 +1,16 @@
 ﻿using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Data.Entities;
 
-namespace MyVetAppointment.Business.Services;
-
-public interface ICustomerService
+namespace MyVetAppointment.Business.Services
 {
-    Customer GetCustomerByEmailAsync(string email);
-    bool DeleteCustomer(string id);
 
-    List<Customer> GetAllAsync();
+    public interface ICustomerService
+    {
+        Customer GetCustomerByEmailAsync(string email);
+        bool DeleteCustomer(string id);
 
-    public Task<AnimalResponse> AddAnimalAsync(AnimalRequest animal, User user);
+        List<Customer> GetAllAsync();
+
+        public Task<AnimalResponse> AddAnimalAsync(AnimalRequest animal, User user);
+    }
 }

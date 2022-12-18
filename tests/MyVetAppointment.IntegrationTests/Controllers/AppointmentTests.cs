@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Net.Http.Json;
 using System.Net;
 using MyVetAppointment.Business.Models.Appointment;
+using MyVetAppointment.Data.Enums;
 
 namespace MyVetAppointment.IntegrationTests.Controllers
 {
@@ -21,7 +22,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
@@ -37,7 +38,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
@@ -53,7 +54,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.GetAsync("/Appointment");
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
@@ -80,7 +81,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Appointment", json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         }
 
@@ -107,7 +108,7 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             var response = await client.PostAsync("/Appointment", json);
 
             //Assert
-            Assert.IsNotNull(response);
+            Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
         }
 
@@ -142,66 +143,66 @@ namespace MyVetAppointment.IntegrationTests.Controllers
             //Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
-        //
-        // [Test]
-        // public async Task Should_UpdateAppointment()
-        // {
-        //     //Arrange
-        //     var id = await AddAppointment();
-        //
-        //     var appointmentUpdated = new AppointmentRequest()
-        //     {
-        //         DateTime = DateTime.Now,
-        //         Description =
-        //             "Test appointment ...",
-        //         Title = "Test Appointment",
-        //         FirstName = "Doctor",
-        //         LastName = "Test,parola:string12",
-        //         Status = AppointmentStatus.Accepted
-        //     };
-        //
-        //     var json = JsonContent.Create(appointmentUpdated);
-        //     var client = GetClient();
-        //     var token = await LoginCustomer();
-        //     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        //
-        //     //Act
-        //     var responseUpdate = await client.PostAsync("/Appointment/update-appointment/" + id, json);
-        //
-        //     //Assert
-        //     Assert.IsNotNull(responseUpdate);
-        //     Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        // }
-        //
-        // [Test]
-        // public async Task Should_NOT_UpdateAppointment()
-        // {
-        //     //Arrange
-        //     var id = await AddAppointment();
-        //
-        //     var appointment = new AppointmentRequest()
-        //     {
-        //         DateTime = DateTime.Now,
-        //         Description =
-        //             "Test appointment ...",
-        //         Title = "Test Appointment",
-        //         FirstName = "Doctor",
-        //         LastName = "Test,parola:string12",
-        //         Status = AppointmentStatus.Accepted
-        //     };
-        //
-        //     var json = JsonContent.Create(appointment);
-        //     var client = GetClient();
-        //     var token = await LoginVetDoctor();
-        //     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        //
-        //     //Act
-        //     var response = await client.PostAsync("/Appointment/update-appointment/" + new Guid(), json);
-        //
-        //     //Assert
-        //     Assert.IsNotNull(response);
-        //     Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-        // }
-
+        
+    //     [Test]
+    //     public async Task Should_UpdateAppointment()
+    //     {
+    //         //Arrange
+    //         var id = await AddAppointment();
+    //     
+    //         var appointmentUpdated = new AppointmentRequest()
+    //         {
+    //             DateTime = DateTime.Now,
+    //             Description =
+    //                 "Test appointment ...",
+    //             Title = "Test Appointment",
+    //             FirstName = "Doctor",
+    //             LastName = "Test,parola:string12",
+    //             Status = AppointmentStatus.Accepted
+    //         };
+    //     
+    //         var json = JsonContent.Create(appointmentUpdated);
+    //         var client = GetClient();
+    //         var token = await LoginCustomer();
+    //         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+    //     
+    //         //Act
+    //         var responseUpdate = await client.PostAsync("/Appointment/update-appointment?id=" + id, json);
+    //     
+    //         //Assert
+    //         Assert.IsNotNull(responseUpdate);
+    //         Assert.That(responseUpdate.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+    //     }
+    //     
+    //     [Test]
+    //     public async Task Should_NOT_UpdateAppointment()
+    //     {
+    //         //Arrange
+    //         var id = await AddAppointment();
+    //     
+    //         var appointment = new AppointmentRequest()
+    //         {
+    //             DateTime = DateTime.Now,
+    //             Description =
+    //                 "Test appointment ...",
+    //             Title = "Test Appointment",
+    //             FirstName = "Doctor",
+    //             LastName = "Test,parola:string12",
+    //             Status = AppointmentStatus.Accepted
+    //         };
+    //     
+    //         var json = JsonContent.Create(appointment);
+    //         var client = GetClient();
+    //         var token = await LoginVetDoctor();
+    //         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+    //     
+    //         //Act
+    //         var response = await client.PostAsync("/Appointment/update-appointment?id=" + new Guid(), json);
+    //     
+    //         //Assert
+    //         Assert.IsNotNull(response);
+    //         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+    //     }
+    //
     }
 }
