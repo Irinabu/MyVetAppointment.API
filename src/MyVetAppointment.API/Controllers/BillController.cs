@@ -22,12 +22,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost("{idAppointment}")]
         public async Task<IActionResult> AddBill([FromBody] BillRequest model, Guid idAppointment)
         {
-            BillValidator validator = new BillValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var response = await _billService.AddBillAsync(model, idAppointment);
