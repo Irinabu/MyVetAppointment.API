@@ -12,5 +12,7 @@ namespace MyVetAppointment.Business.Services
         List<Customer> GetAllAsync();
 
         public Task<AnimalResponse> AddAnimalAsync(AnimalRequest animal, User user);
+
+        public Task<List<AnimalResponse>?> GetUserAnimals(User user);
     }
 }

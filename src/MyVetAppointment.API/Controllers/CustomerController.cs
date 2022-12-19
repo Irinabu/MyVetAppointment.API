@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyVetAppointment.API.Commands;
+using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Services;
+using MyVetAppointment.Business.Services.Implementations;
 using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers
@@ -9,33 +14,66 @@ namespace MyVetAppointment.API.Controllers
 
     [ApiController]
     [Authorize]
+    //[AllowAnonymous]
     [Route("[controller]")]
     public class CustomerController : BaseController
-
     {
-        private readonly ICustomerService _customerService;
+        private readonly IMediator _mediator;
+        private readonly ICustomerService _customerService;//
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(IMediator mediator, ICustomerService customerService)
         {
-            _customerService = customerService;
-        }
-
-        [HttpDelete("delete-customer/{id}")]
-        public async Task<IActionResult> DeleteCustomer(string id)
-        {
-            return await Task.Run(() => Ok(_customerService.DeleteCustomer(id)));
+            _mediator = mediator;
+            _customerService = customerService;//
         }
 
         [HttpGet("customers")]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<IActionResult> GetAll()
         {
-            return await Task.Run(() => Ok(_customerService.GetAllAsync()));
+            var result = await _mediator.Send(new GetCustomersQuery());
+
+            return Ok(result);
         }
 
         [HttpGet("{email}")]
-        public async Task<IActionResult> GetCustomerByEmail(string email)
+        public async Task<IActionResult> Get([FromRoute] string email)
         {
-            return await Task.Run(() => Ok(_customerService.GetCustomerByEmailAsync(email)));
+            var result = await _mediator.Send(new GetCustomerByEmailQuery
+            {
+                Email = email
+            });
+
+            return Ok(result);
+        }
+        
+        [HttpDelete("delete-customer/{id}")]
+        public async Task<IActionResult> DeleteCustomer([FromRoute] string id)
+        {
+            var result = await _mediator.Send(new DeleteCustomerByIdCommand
+            {
+                Id = id
+            });
+            if(result.Equals("")) {
+                return BadRequest($"No customer found with the id {id}");
+            }
+            return Ok(true);
+        }
+
+
+        [HttpGet("animals")]
+        public async Task<IActionResult> GetAnimals()
+        {
+            var user = HttpContext.Items["User"] as User;
+            if (user != null)
+            {
+                var result = await _mediator.Send(new GetCustomerAnimalsQuery
+                {
+                    Id = user.Id.ToString()
+                });
+                return Ok(result);
+            }
+
+            return NotFound();
         }
 
         [HttpPost("add-animal")]
@@ -44,8 +82,12 @@ namespace MyVetAppointment.API.Controllers
             var user = HttpContext.Items["User"] as User;
             if (user != null)
             {
-                var response = await _customerService.AddAnimalAsync(model, user);
-                return Created("af", response);
+                var result = await _mediator.Send(new AddNewAnimalCommand
+                {
+                    AnimalRequest=model,
+                    UserId = user.Id.ToString()
+                });
+                return Created("af", result);
             }
 
             return BadRequest();

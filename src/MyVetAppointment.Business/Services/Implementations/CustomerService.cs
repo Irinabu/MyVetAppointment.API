@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MyVetAppointment.Business.Models.Animal;
+using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
 
@@ -46,6 +47,26 @@ namespace MyVetAppointment.Business.Services.Implementations
             var animalEntity = _mapper.Map<AnimalRequest, Animal>(animal);
             animalEntity.Owner = (Customer)user;
             return _mapper.Map<Animal, AnimalResponse>(await _animalRepository.AddAsync(animalEntity));
+        }
+
+        public async Task<List<AnimalResponse>?> GetUserAnimals(User user)
+        {
+            //var type = user.GetType().ToString().Split(".");
+            //var role = type[type.Length - 1];
+            //if (role == "Customer")
+            //{
+            //    var appointments =
+            //        await _appointmentRepository.GetAllLazyLoad(x => x.Customer!.Id == user.Id, x => x.VetDoctor!,
+            //            x => x.Customer!, x => x.Bill, x => x.Bill.PrescriptionDrugs);
+            //    return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.ToList());
+            //}
+
+            var animals = await _animalRepository.GetAllLazyLoad(x =>x.Owner.Id==user.Id);
+            return _mapper.Map<List<Animal>, List<AnimalResponse>>(animals.ToList());
+
+
+
+            //return null;
         }
 
     }
