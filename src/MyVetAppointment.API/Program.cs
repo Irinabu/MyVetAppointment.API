@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Text;
-using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -15,21 +14,7 @@ using MyVetAppointment.Data.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddAutoMapper(typeof(IMappingProfilesMarker));
-
 builder.Services.AddControllers();
-//validators
-builder.Services.AddFluentValidation(options =>
-{
-    // Validate child properties and root collection elements
-    options.ImplicitlyValidateChildProperties = true;
-    options.ImplicitlyValidateRootCollectionElements = true;
-
-    // Automatic registration of validators in assembly
-    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-});
-
 builder.Services.AddApiVersioning(o =>
 {
     o.AssumeDefaultVersionWhenUnspecified = true;

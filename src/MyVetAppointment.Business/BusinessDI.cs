@@ -1,5 +1,8 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using MyVetAppointment.Business.MappingProfiles;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
@@ -14,6 +17,18 @@ public static class BusinessDI
 {
     public static IServiceCollection InjectBusinessServices(this IServiceCollection services)
     {
+        // Add services to the container.
+        services.AddAutoMapper(typeof(IMappingProfilesMarker));
+        //validators
+        services.AddFluentValidation(options =>
+        {
+            // Validate child properties and root collection elements
+            options.ImplicitlyValidateChildProperties = true;
+            options.ImplicitlyValidateRootCollectionElements = true;
+
+            // Automatic registration of validators in assembly
+            options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        });
         services.AddTransient<IAuthenticateService, AuthenticateService>();
         services.AddTransient<ICustomerService, CustomerService>();
         services.AddTransient<IVetDoctorService, VetDoctorService>();
