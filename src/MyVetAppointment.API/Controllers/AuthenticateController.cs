@@ -21,12 +21,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            LoginValidator validator = new LoginValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var response = await _authenticateService.LoginAsync(model);
@@ -37,12 +34,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost("register-customer")]
         public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest model)
         {
-            RegisterValidator validator = new RegisterValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var response = await _authenticateService.RegisterCustomerAsync(model);
@@ -53,12 +47,9 @@ namespace MyVetAppointment.API.Controllers
         [HttpPost("register-vet-doctor")]
         public async Task<IActionResult> RegisterVetDoctor([FromBody] RegisterRequest model)
         {
-            RegisterValidator validator = new RegisterValidator();
-            var validationResult = validator.Validate(model);
-
-            if (!validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ModelState.Values);
             }
 
             var response = await _authenticateService.RegisterVetDoctorAsync(model);
