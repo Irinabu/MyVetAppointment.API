@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Azure;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;

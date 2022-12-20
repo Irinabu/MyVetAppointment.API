@@ -3,8 +3,6 @@ using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using System.Net;
 using System.Net.Http.Json;
 
 namespace MyVetAppointment.IntegrationTests.Config
