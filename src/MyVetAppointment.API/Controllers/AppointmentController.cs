@@ -7,11 +7,7 @@ using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers
 {
-
-    [ApiController]
-    [Authorize]
-    [Route("[controller]")]
-    public class AppointmentController : ControllerBase
+    public class AppointmentController : BaseController
     {
         private readonly IAppointmentService _appointmentService;
 

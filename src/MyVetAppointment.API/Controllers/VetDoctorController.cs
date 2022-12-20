@@ -1,19 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
-using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Services.Implementations;
 
 namespace MyVetAppointment.API.Controllers
 {
-
-    [ApiController]
-    [Authorize]
-    //[AllowAnonymous]
-    [Route("[controller]")]
     public class VetDoctorController : BaseController
     {
         private readonly IMediator _mediator;

@@ -12,11 +12,6 @@ using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers
 {
-
-    [ApiController]
-    [Authorize]
-    //[AllowAnonymous]
-    [Route("[controller]")]
     public class CustomerController : BaseController
     {
         private readonly IMediator _mediator;

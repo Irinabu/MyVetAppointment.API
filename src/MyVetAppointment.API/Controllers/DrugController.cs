@@ -6,11 +6,7 @@ using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.API.Controllers
 {
-
-    [ApiController]
-    [Authorize]
-    [Route("[controller]")]
-    public class DrugController : ControllerBase
+    public class DrugController : BaseController
     {
         private readonly IDrugService _drugService;
 

@@ -6,11 +6,7 @@ using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.API.Controllers
 {
-
-    [ApiController]
-    [Authorize]
-    [Route("[controller]")]
-    public class BillController : ControllerBase
+    public class BillController : BaseController
     {
         private readonly IBillService _billService;
 
