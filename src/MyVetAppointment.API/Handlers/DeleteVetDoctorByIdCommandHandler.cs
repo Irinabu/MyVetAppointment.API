@@ -14,7 +14,7 @@ namespace MyVetAppointment.API.Handlers
         }
         public async Task<string> Handle(DeleteVetDoctorByIdCommand request, CancellationToken cancellationToken)
         {
-            var user = _vetDoctorRepository.GetFirstAsync(u => u.Id == Guid.Parse(request.Id));
+            var user = _vetDoctorRepository.GetFirstAsync(u => u.Id == Guid.Parse(request.Id!));
             if (user == null)
                 return "";
             await _vetDoctorRepository.DeleteAsync(user.Result);

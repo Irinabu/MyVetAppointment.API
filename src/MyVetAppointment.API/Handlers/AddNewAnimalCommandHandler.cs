@@ -23,9 +23,9 @@ namespace MyVetAppointment.API.Handlers
 
         public async Task<AnimalResponse> Handle(AddNewAnimalCommand request, CancellationToken cancellationToken)
         {
-            var animalEntity = _mapper.Map<AnimalRequest, Animal>(request.AnimalRequest);
-            var user = await _customerRepository.GetFirstAsync(x => x.Id == Guid.Parse(request.UserId));
-            animalEntity.Owner = (Customer)user;
+            var animalEntity = _mapper.Map<AnimalRequest, Animal>(request.AnimalRequest!);
+            var user = await _customerRepository.GetFirstAsync(x => x.Id == Guid.Parse(request.UserId!));
+            animalEntity.Owner = user;
             var dbAnimal = await _animalRepository.AddAsync(animalEntity);
             return _mapper.Map<Animal, AnimalResponse>(dbAnimal);
         }

@@ -21,7 +21,7 @@ namespace Application.UnitTests
         {
             context.Database.EnsureDeleted();
             context.Dispose();
-            GC.SuppressFinalize(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

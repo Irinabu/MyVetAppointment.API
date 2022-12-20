@@ -17,7 +17,7 @@ namespace MyVetAppointment.API.Handlers
 
         public async Task<VetDoctor> Handle(GetVetDoctorByEmailQuery request, CancellationToken cancellationToken)
         {
-            return  _vetDoctorRepository.GetFirstAsync(u => u.Email == request.Email).Result;
+            return  await _vetDoctorRepository.GetFirstAsync(u => u.Email == request.Email);
         }
     }
 }

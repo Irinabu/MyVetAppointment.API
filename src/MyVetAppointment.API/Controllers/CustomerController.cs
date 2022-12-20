@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
@@ -19,12 +20,10 @@ namespace MyVetAppointment.API.Controllers
     public class CustomerController : BaseController
     {
         private readonly IMediator _mediator;
-        private readonly ICustomerService _customerService;//
 
         public CustomerController(IMediator mediator, ICustomerService customerService)
         {
             _mediator = mediator;
-            _customerService = customerService;//
         }
 
         [HttpGet("customers")]
@@ -53,7 +52,7 @@ namespace MyVetAppointment.API.Controllers
             {
                 Id = id
             });
-            if(result.Equals("")) {
+            if(result.IsNullOrEmpty()) {
                 return BadRequest($"No customer found with the id {id}");
             }
             return Ok(true);

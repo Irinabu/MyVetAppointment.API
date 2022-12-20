@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Services;
@@ -29,7 +30,7 @@ namespace MyVetAppointment.API.Controllers
             {
                 Id = id
             });
-            if (result.Equals(""))
+            if (result.IsNullOrEmpty())
             {
                 return BadRequest($"No customer found with the id {id}");
             }

@@ -12,7 +12,6 @@ namespace MyVetAppointment.API.Handlers
 {
     public class GetCustomerAnimalsQueryHandler : IRequestHandler<GetCustomerAnimalsQuery, List<AnimalResponse>>
     {
-        private readonly ICustomerRepository _customerRepository;
         private readonly IAnimalRepository _animalRepository;
         private readonly IMapper _mapper;
 
@@ -25,7 +24,7 @@ namespace MyVetAppointment.API.Handlers
         public async Task<List<AnimalResponse>> Handle(GetCustomerAnimalsQuery request, CancellationToken cancellationToken)
         {
 
-            var animals = await _animalRepository.GetAllLazyLoad(x => x.Owner.Id == Guid.Parse(request.Id));
+            var animals = await _animalRepository.GetAllLazyLoad(x => x.Owner!.Id == Guid.Parse(request.Id!));
             return _mapper.Map<List<Animal>, List<AnimalResponse>>(new List<Animal>(animals));
         }
 
