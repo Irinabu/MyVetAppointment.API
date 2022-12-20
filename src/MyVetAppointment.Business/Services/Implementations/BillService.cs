@@ -36,7 +36,7 @@ namespace MyVetAppointment.Business.Services.Implementations
         public async Task<BillResponse> AddBillAsync(BillRequest bill, Guid idAppointment)
         {
             var billEntity = _mapper.Map<BillRequest, Bill>(bill);
-            var appointment = await _appointmentRepository.GetFirstLazyLoad(x => x.Id == idAppointment, x => x.Customer);
+            var appointment = await _appointmentRepository.GetFirstLazyLoad(x => x.Id == idAppointment, x => x.Customer!);
             appointment!.Bill = billEntity;
            
             billEntity.Appointment = appointment;

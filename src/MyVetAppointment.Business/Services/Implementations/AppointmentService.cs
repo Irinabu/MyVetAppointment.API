@@ -29,14 +29,14 @@ namespace MyVetAppointment.Business.Services.Implementations
             {
                 var appointments =
                     await _appointmentRepository.GetAllLazyLoad(x => x.Customer!.Id == user.Id, x => x.VetDoctor!,
-                        x => x.Customer!, x => x.Bill, x => x.Bill.PrescriptionDrugs);
+                        x => x.Customer!, x => x.Bill!, x => x.Bill!.PrescriptionDrugs!);
                 return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.ToList());
             }
 
             if (role == "VetDoctor")
             {
                 var appointments = await _appointmentRepository.GetAllLazyLoad(x => x.VetDoctor!.Id == user.Id,
-                    x => x.VetDoctor!, x => x.Customer!, x => x.Bill, x => x.Bill.PrescriptionDrugs);
+                    x => x.VetDoctor!, x => x.Customer!, x => x.Bill!, x => x.Bill!.PrescriptionDrugs!);
                 return _mapper.Map<List<Appointment>, List<AppointmentResponse>>(appointments.ToList());
             }
 

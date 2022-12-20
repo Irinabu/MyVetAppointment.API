@@ -1,5 +1,7 @@
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
+using MediatR;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -33,6 +35,12 @@ builder.Services.AddVersionedApiExplorer(
         options.SubstituteApiVersionInUrl = true;
     });
 
+// Add services to the container.
+builder.Services.AddAutoMapper(typeof(IMappingProfilesMarker));
+
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions
+                .ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -97,6 +105,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -126,4 +135,5 @@ app.Run();
 
 public partial class Program
 {
+    protected Program() { }
 }

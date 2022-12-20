@@ -48,5 +48,11 @@ namespace MyVetAppointment.Business.Services.Implementations
             return _mapper.Map<Animal, AnimalResponse>(await _animalRepository.AddAsync(animalEntity));
         }
 
+        public async Task<List<AnimalResponse>?> GetUserAnimals(User user)
+        {
+            var animals = await _animalRepository.GetAllLazyLoad(x =>x.Owner!.Id==user.Id);
+            return _mapper.Map<List<Animal>, List<AnimalResponse>>(animals.ToList());
+        }
+
     }
 }
