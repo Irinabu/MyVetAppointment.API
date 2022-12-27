@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
+using MyVetAppointment.Business.Models;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Services.Implementations;
 using MyVetAppointment.Data.Entities;
@@ -82,6 +83,31 @@ namespace MyVetAppointment.API.Controllers
                     UserId = user.Id.ToString()
                 });
                 return Created("af", result);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] UpdateUserRequest updateCustomerModel)
+        {
+            var user = HttpContext.Items["User"] as User;
+            if (user != null)
+            {
+                if (updateCustomerModel!.Password.Equals(updateCustomerModel.PasswordConfirm))
+                {
+                    var result = await _mediator.Send(new UpdateCustomerCommand
+                    {
+                        UpdateCustomerRequest = updateCustomerModel,
+                        CustomerId = user.Id
+                    });
+
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Wrong PasswordConfirm");
+                }
             }
 
             return BadRequest();
