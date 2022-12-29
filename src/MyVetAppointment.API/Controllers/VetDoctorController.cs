@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
+using MyVetAppointment.Business.Models;
+using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers
 {
@@ -46,6 +48,31 @@ namespace MyVetAppointment.API.Controllers
             });
 
             return Ok(result);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] UpdateUserRequest updateVetDoctorModel)
+        {
+            var user = HttpContext.Items["User"] as User;
+            if (user != null)
+            {
+                if (updateVetDoctorModel!.Password.Equals(updateVetDoctorModel.PasswordConfirm))
+                {
+                    var result = await _mediator.Send(new UpdateVetDoctorCommand
+                    {
+                        UpdateVetDoctorRequest = updateVetDoctorModel,
+                        VetDoctorId = user.Id
+                    });
+
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Wrong PasswordConfirm");
+                }
+            }
+
+            return BadRequest();
         }
 
     }
