@@ -28,7 +28,7 @@ namespace Application.UnitTests
         {
             ResolveService<DatabaseContext>().Database.EnsureDeleted();
             _serviceProvider.Dispose();
-            GC.Collect();
+            GC.SuppressFinalize(this);
         }
 
         public static ServiceCollection InitializeCommonServices()

@@ -1,9 +1,7 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.API.Controllers
 {

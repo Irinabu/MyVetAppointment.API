@@ -2,6 +2,7 @@
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Repositories.Implementations;
 using System.Reflection;
+using MediatR;
 
 namespace MyVetAppointment.Data
 {
@@ -18,7 +19,6 @@ namespace MyVetAppointment.Data
             services.AddTransient<IDrugRepository, DrugRepository>();
             services.AddTransient<IPrescriptionDrugRepository, PrescriptionDrugRepository>();
             services.AddTransient<IAnimalRepository, AnimalRepository>();
-
             return services;
         }
     }

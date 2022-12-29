@@ -1,10 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Azure;
-using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Data.Entities;
-using MyVetAppointment.Data.Enums;
 using MyVetAppointment.IntegrationTests.Config;
 using NUnit.Framework;
 

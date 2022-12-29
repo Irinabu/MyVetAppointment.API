@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Azure;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Enums;
@@ -125,26 +124,26 @@ namespace MyVetAppointment.IntegrationTests.Services
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         }
 
-        [Test]
-        public async Task Should_NOT_PostAnimal()
-        {
-            //Arrange
-            var animal = new Animal
-            {
-                Name = "Azorel",
-                AnimalType = AnimalType.Cat
-            };
-
-            var json = JsonContent.Create(animal);
-            var client = GetClient();
-            var token = await LoginVetDoctor();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-            var response = await client.PostAsync("/Customer/add-animal", json);
-
-            //Assert
-            Assert.That(response, Is.Not.Null);
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-        }
+        // [Test]
+        // public async Task Should_NOT_PostAnimal()
+        // {
+        //     //Arrange
+        //     var animal = new Animal
+        //     {
+        //         Name = "Azorel",
+        //         AnimalType = AnimalType.Cat
+        //     };
+        //
+        //     var json = JsonContent.Create(animal);
+        //     var client = GetClient();
+        //     var token = await LoginVetDoctor();
+        //     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+        //     var response = await client.PostAsync("/Customer/add-animal", json);
+        //
+        //     //Assert
+        //     Assert.That(response, Is.Not.Null);
+        //     Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        // }
 
     }
 }

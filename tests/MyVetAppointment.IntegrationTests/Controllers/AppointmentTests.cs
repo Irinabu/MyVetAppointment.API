@@ -3,7 +3,6 @@ using NUnit.Framework;
 using System.Net.Http.Json;
 using System.Net;
 using MyVetAppointment.Business.Models.Appointment;
-using MyVetAppointment.Data.Enums;
 
 namespace MyVetAppointment.IntegrationTests.Controllers
 {
