@@ -46,6 +46,7 @@ namespace Application.UnitTests
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
+            services.AddTransient<IDrugRepository, DrugRepository>();
 
             services.AddTransient<IAuthenticateService, AuthenticateService>();
             services.AddTransient<IDrugService, DrugService>();

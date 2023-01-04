@@ -39,6 +39,19 @@ namespace MyVetAppointment.UnitTests
             context.Users.AddRange(users);
 
             context.SaveChanges();
+
+            var drugs = new[]
+            {
+                new Drug()
+                {
+                    Id = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa89c"),
+                    Name = "Paracetamol",
+                    TotalQuantity = 20
+                }
+            };
+            
+            context.Drugs.AddRange(drugs);
+            context.SaveChanges();
         }
     }
 }

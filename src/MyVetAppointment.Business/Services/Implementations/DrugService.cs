@@ -2,6 +2,7 @@
 using AutoMapper;
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Data.Exceptions;
 
 namespace MyVetAppointment.Business.Services.Implementations
 {
@@ -21,7 +22,7 @@ namespace MyVetAppointment.Business.Services.Implementations
             var drugs = await _drugRepository.GetAllAsync(exp => true);
             return _mapper.Map<List<Drug>, List<DrugResponse>>(drugs);
         }
-        
+
         public async Task<DrugResponse> AddDrugAsync(DrugRequest drug)
         {
             var drugEntity = _mapper.Map<DrugRequest, Drug>(drug);
@@ -31,12 +32,18 @@ namespace MyVetAppointment.Business.Services.Implementations
         public async Task<DrugResponse> DeleteDrugAsync(Guid id)
         {
             var drug = await _drugRepository.GetFirstLazyLoad(x => x.Id == id);
+            if (drug == null)
+                throw new RecordNotFoundException("A drug with this id doesn't exist.");
+
             return _mapper.Map<Drug, DrugResponse>(await _drugRepository.DeleteAsync(drug!));
         }
 
         public async Task<DrugResponse> UpdateDrugAsync(DrugRequest model, Guid id)
         {
             var drugEntity = await _drugRepository.GetFirstAsync(x => x.Id == id);
+            if (drugEntity == null)
+                throw new RecordNotFoundException("A drug with this id doesn't exist.");
+
             drugEntity.Name = model.Name;
             drugEntity.Price = model.Price;
             drugEntity.TotalQuantity = model.TotalQuantity;
