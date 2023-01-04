@@ -48,7 +48,8 @@ namespace MyVetAppointment.API.Controllers
             {
                 Id = id
             });
-            if(result.IsNullOrEmpty()) {
+            if (result==false)
+            {
                 return BadRequest($"No customer found with the id {id}");
             }
             return Ok(true);
