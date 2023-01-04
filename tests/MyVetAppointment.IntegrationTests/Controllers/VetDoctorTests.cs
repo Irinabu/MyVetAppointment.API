@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using MyVetAppointment.Business.Models;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.IntegrationTests.Config;
 using Newtonsoft.Json;
@@ -116,6 +117,50 @@ namespace MyVetAppointment.IntegrationTests.Services
             var responseDeserialized = JsonConvert.DeserializeObject<LoginResponse>(responseMessage);
 
             return responseDeserialized!.Token!;
+        }
+
+        [Test]
+        public async Task Should_Update_VetDoctor()
+        {
+            var updateVetDoctorModel = new UpdateUserRequest
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                Email = "Test@test.com",
+                Password = "test11",
+                PasswordConfirm = "test11"
+            };
+            var json = JsonContent.Create(updateVetDoctorModel);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PutAsync("/VetDoctor/update", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public async Task Should_Not_Update_VetDoctor()
+        {
+            var updateVetDoctorModel = new UpdateUserRequest
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                Email = "Test@test.com",
+                Password = "test11",
+                PasswordConfirm = "test12"
+            };
+            var json = JsonContent.Create(updateVetDoctorModel);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PutAsync("/VetDoctor/update", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
         }
     }
 }
