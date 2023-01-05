@@ -4,7 +4,7 @@ using MyVetAppointment.Data.Repositories;
 
 namespace MyVetAppointment.API.Handlers
 {
-    public class DeleteCustomerByIdCommandHandler : IRequestHandler<DeleteCustomerByIdCommand, string>
+    public class DeleteCustomerByIdCommandHandler : IRequestHandler<DeleteCustomerByIdCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -13,14 +13,14 @@ namespace MyVetAppointment.API.Handlers
             _customerRepository = customerRepository;
         }
 
-        public async Task<string> Handle(DeleteCustomerByIdCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteCustomerByIdCommand request, CancellationToken cancellationToken)
         {
             var user = _customerRepository.GetFirstAsync(u => u.Id == Guid.Parse(request.Id!));
             if (user == null)
-                return "";
+                return false;
             await _customerRepository.DeleteAsync(user.Result);
             await _customerRepository.SaveChangesAsync();
-            return "true";
+            return true;
         }
     }
     

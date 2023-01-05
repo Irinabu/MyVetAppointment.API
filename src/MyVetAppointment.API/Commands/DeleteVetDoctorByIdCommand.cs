@@ -2,7 +2,7 @@
 
 namespace MyVetAppointment.API.Commands
 {
-    public class DeleteVetDoctorByIdCommand: IRequest<string>
+    public class DeleteVetDoctorByIdCommand: IRequest<bool>
     {
         public string? Id { get; set; }
     }

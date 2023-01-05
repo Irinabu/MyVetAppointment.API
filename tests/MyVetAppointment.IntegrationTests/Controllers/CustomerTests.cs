@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using MyVetAppointment.Business.Models;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Enums;
@@ -123,6 +124,51 @@ namespace MyVetAppointment.IntegrationTests.Services
             Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         }
+
+        [Test]
+        public async Task Should_Update_Customer()
+        {
+            var updateCustomerModel = new UpdateUserRequest
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                Email = "Test@test.com",
+                Password = "test11",
+                PasswordConfirm = "test11"
+            };
+            var json = JsonContent.Create(updateCustomerModel);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PutAsync("/Customer/update", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public async Task Should_Not_Update_Customer()
+        {
+            var updateCustomerModel = new UpdateUserRequest
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                Email = "Test@test.com",
+                Password = "test11",
+                PasswordConfirm = "test12"
+            };
+            var json = JsonContent.Create(updateCustomerModel);
+            var client = GetClient();
+            var token = await LoginCustomer();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = await client.PutAsync("/Customer/update", json);
+
+            //Assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
 
         // [Test]
         // public async Task Should_NOT_PostAnimal()
