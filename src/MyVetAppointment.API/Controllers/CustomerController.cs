@@ -1,6 +1,4 @@
-﻿using Azure;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
@@ -8,7 +6,6 @@ using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Models;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Services.Implementations;
 using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Controllers

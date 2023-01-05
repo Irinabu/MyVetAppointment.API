@@ -1,12 +1,7 @@
 ﻿using Application.UnitTests;
-using Azure;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Drugs;
-using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Exceptions;
-using System.Net;
 
 namespace MyVetAppointment.UnitTests.Services
 {

@@ -4,13 +4,8 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MyVetAppointment.Business.MappingProfiles;
-using MyVetAppointment.Business.Models.Animal;
-using MyVetAppointment.Business.Models.Appointment;
-using MyVetAppointment.Business.Models.Drugs;
-using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Services.Implementations;
-using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.Business;
 
