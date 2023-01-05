@@ -4,9 +4,6 @@ using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
-using MyVetAppointment.Data.Repositories.Implementations;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MyVetAppointment.API.Handlers
 {

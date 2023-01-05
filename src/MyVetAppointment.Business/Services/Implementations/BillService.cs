@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using AutoMapper;
+﻿using AutoMapper;
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Business.Validators;
 
 namespace MyVetAppointment.API.Controllers
 {

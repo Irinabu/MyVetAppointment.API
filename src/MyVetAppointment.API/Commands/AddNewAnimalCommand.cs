@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using MyVetAppointment.Business.Models.Animal;
-using MyVetAppointment.Data.Entities;
-using MyVetAppointment.Data.Enums;
 
 namespace MyVetAppointment.API.Commands
 {

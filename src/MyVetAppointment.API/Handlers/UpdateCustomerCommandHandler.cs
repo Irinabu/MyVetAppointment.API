@@ -2,10 +2,8 @@
 using MediatR;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.Business.Models;
-using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;
-using MyVetAppointment.Data.Repositories.Implementations;
 
 namespace MyVetAppointment.API.Handlers
 {

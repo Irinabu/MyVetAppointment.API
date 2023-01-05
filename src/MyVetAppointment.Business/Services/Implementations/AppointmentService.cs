@@ -72,6 +72,7 @@ namespace MyVetAppointment.Business.Services.Implementations
         {
             var appointmentEntity =
                 await _appointmentRepository.GetFirstLazyLoad(x => x.Id == id, x => x.VetDoctor!, x => x.Customer!);
+            
             return _mapper.Map<Appointment, AppointmentResponse>(
                 await _appointmentRepository.DeleteAsync(appointmentEntity!));
         }

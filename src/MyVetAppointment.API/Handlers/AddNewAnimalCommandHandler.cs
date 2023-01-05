@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using MyVetAppointment.API.Commands;
-using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Repositories;

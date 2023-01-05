@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MyVetAppointment.Data.Entities;
 
 namespace MyVetAppointment.API.Queries
 {

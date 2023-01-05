@@ -2,7 +2,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using MediatR;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;

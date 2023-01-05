@@ -46,9 +46,15 @@ namespace Application.UnitTests
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IVetDoctorRepository, VetDoctorRepository>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+            services.AddTransient<IDrugRepository, DrugRepository>();
+            services.AddTransient<IBillRepository, BillRepository>();
+            services.AddTransient<IPrescriptionDrugRepository, PrescriptionDrugRepository>();
 
             services.AddTransient<IAuthenticateService, AuthenticateService>();
             services.AddTransient<IDrugService, DrugService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IBillService, BillService>();
             services.AddTransient<JwtService>();
             return services;
         }

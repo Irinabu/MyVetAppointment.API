@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MyVetAppointment.Data.Repositories;
 using MyVetAppointment.Data.Repositories.Implementations;
-using System.Reflection;
-using MediatR;
 
 namespace MyVetAppointment.Data
 {
