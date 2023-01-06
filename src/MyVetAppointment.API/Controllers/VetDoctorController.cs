@@ -26,7 +26,7 @@ namespace MyVetAppointment.API.Controllers
             });
             if (result==false)
             {
-                return BadRequest($"No customer found with the id {id}");
+                return BadRequest($"No vet found with the id {id}");
             }
             return Ok(true);
         }

@@ -1,7 +1,10 @@
 ﻿using Application.UnitTests;
+using Microsoft.IdentityModel.Tokens;
+using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Exceptions;
+using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
 {
@@ -72,5 +75,40 @@ namespace MyVetAppointment.UnitTests.Services
             await Assert.ThrowsAsync<BadRequestException>(() => authenticateServiceMock.LoginAsync(loginRequest));
             //ASSERT
         }
+
+        [Fact]
+        public void Should_RegisterCustomerAsync()
+        {
+            var registerRequest = new RegisterRequest
+            {
+                Email = "customer_for_test",
+                FirstName = "custtst",
+                LastName = "tstcust",
+                Password = "lalacust",
+                PasswordConfirm = "lalacust"
+            };
+
+            var registerResponse=authenticateServiceMock.RegisterCustomerAsync(registerRequest);
+            Debug.WriteLine("orifce: "+registerResponse);
+            Assert.True(registerResponse != null);
+        }
+
+        [Fact]
+        public void Should_RegisterVetDoctorrAsync()
+        {
+            var registerRequest = new RegisterRequest
+            {
+                Email = "doc_for_test",
+                FirstName = "doctst",
+                LastName = "tstdoc",
+                Password = "laladoc",
+                PasswordConfirm = "laladoc"
+            };
+
+            var registerResponse = authenticateServiceMock.RegisterVetDoctorAsync(registerRequest);
+            Assert.True(registerResponse != null);
+        }
+
+
     }
 }

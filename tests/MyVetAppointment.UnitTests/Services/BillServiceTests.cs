@@ -3,6 +3,7 @@ using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Entities;
+using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
 {
@@ -69,6 +70,14 @@ namespace MyVetAppointment.UnitTests.Services
             };
 
             await Assert.ThrowsAsync<NullReferenceException>(() => billServiceMock.AddBillAsync(bill, guid1));
+        }
+
+        [Fact]
+        public async void Should_GetBills()
+        {
+            var billsResponse = await billServiceMock.GetBillsAsync();
+            Debug.WriteLine("bills: " + billsResponse);
+            Assert.True(billsResponse.Count > 0);
         }
     }
 }

@@ -2,6 +2,8 @@
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Business.Models.User;
+using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
 { 
@@ -87,5 +89,35 @@ namespace MyVetAppointment.UnitTests.Services
            
             await Assert.ThrowsAsync<ArgumentNullException>(() => appointmentServiceMock.DeleteAppointment(guid1));
         }
+
+        [Fact]
+        public async void Should_GetCustomerAppointments()
+        {
+            var appointment = new AppointmentRequest()
+            {
+                DateTime = DateTime.MaxValue,
+                Description =
+                    "Appointment for get...",
+                Title = "Test Appointment",
+                FirstName = "appointment",
+                LastName = "appointment"
+            };
+
+            var user = new Customer()
+            {
+                Id = Guid.Parse("ef4e79d1-b867-43d6-82cd-96a7a53fb213"),
+                FirstName = "customer",
+                LastName = "customer",
+                Password = "6a6a15287530d0de99de4a998ea33e5f36d204337da797254cee9326af502334",
+                Email = "customer_cust@test.com"
+            };
+
+            var appointmentResponse = await appointmentServiceMock.AddAppointment(appointment, user);
+
+            var appontments = await appointmentServiceMock.GetUserAppointments(user);
+
+            Assert.True(appontments.Count > 0);
+        }
+        
     }
 }
