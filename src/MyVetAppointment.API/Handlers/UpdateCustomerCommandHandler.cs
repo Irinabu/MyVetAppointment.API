@@ -23,7 +23,7 @@ namespace MyVetAppointment.API.Handlers
             var entity = await _customerRepository.GetFirstAsync(x => x.Id.Equals(request.CustomerId));
             if (entity != null)
             {
-                entity.FirstName=request.UpdateCustomerRequest.FirstName;
+                entity.FirstName=request.UpdateCustomerRequest!.FirstName;
                 entity.LastName=request.UpdateCustomerRequest.LastName;
                 entity.Email=request.UpdateCustomerRequest.Email;
                 entity.Password=request.UpdateCustomerRequest.Password;

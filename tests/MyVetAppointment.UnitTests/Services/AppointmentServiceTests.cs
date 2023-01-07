@@ -116,7 +116,7 @@ namespace MyVetAppointment.UnitTests.Services
 
             var appontments = await appointmentServiceMock.GetUserAppointments(user);
 
-            Assert.True(appontments.Count > 0);
+            Assert.True(appontments!.Count > 0);
         }
         
     }

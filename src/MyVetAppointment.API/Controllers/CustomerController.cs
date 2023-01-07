@@ -45,7 +45,7 @@ namespace MyVetAppointment.API.Controllers
             {
                 Id = id
             });
-            if (result==false)
+            if (!result)
             {
                 return BadRequest($"No customer found with the id {id}");
             }
@@ -92,7 +92,7 @@ namespace MyVetAppointment.API.Controllers
             var user = HttpContext.Items["User"] as User;
             if (user != null)
             {
-                if (updateCustomerModel!.Password.Equals(updateCustomerModel.PasswordConfirm))
+                if (updateCustomerModel!.Password!.Equals(updateCustomerModel.PasswordConfirm))
                 {
                     var result = await _mediator.Send(new UpdateCustomerCommand
                     {

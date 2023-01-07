@@ -23,7 +23,7 @@ namespace MyVetAppointment.API.Handlers
             var entity = await _vetDoctorRepository.GetFirstAsync(x => x.Id.Equals(request.VetDoctorId));
             if (entity != null)
             {
-                entity.FirstName = request.UpdateVetDoctorRequest.FirstName;
+                entity.FirstName = request.UpdateVetDoctorRequest!.FirstName;
                 entity.LastName = request.UpdateVetDoctorRequest.LastName;
                 entity.Email = request.UpdateVetDoctorRequest.Email;
                 entity.Password = request.UpdateVetDoctorRequest.Password;
