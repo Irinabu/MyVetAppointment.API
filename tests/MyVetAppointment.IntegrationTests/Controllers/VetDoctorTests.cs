@@ -132,7 +132,7 @@ namespace MyVetAppointment.IntegrationTests.Services
             };
             var json = JsonContent.Create(updateVetDoctorModel);
             var client = GetClient();
-            var token = await LoginCustomer();
+            var token = await LoginVetDoctor();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             var response = await client.PutAsync("/VetDoctor/update", json);
 
@@ -154,7 +154,7 @@ namespace MyVetAppointment.IntegrationTests.Services
             };
             var json = JsonContent.Create(updateVetDoctorModel);
             var client = GetClient();
-            var token = await LoginCustomer();
+            var token = await LoginVetDoctor();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             var response = await client.PutAsync("/VetDoctor/update", json);
 
