@@ -1,6 +1,4 @@
 ﻿using Application.UnitTests;
-using Microsoft.IdentityModel.Tokens;
-using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Exceptions;

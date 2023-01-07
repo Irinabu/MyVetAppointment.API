@@ -17,7 +17,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
 
         [Fact]
-        public async void Should_PostDrug()
+        public async Task Should_PostDrug()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
         
@@ -32,7 +32,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
         
         [Fact]
-        public async void Should_GetDrugs()
+        public async Task Should_GetDrugs()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
 
@@ -41,7 +41,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
         
         [Fact]
-        public async void Should_UpdateDrug()
+        public async Task Should_UpdateDrug()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
             var drugModel = new DrugRequest()
@@ -55,7 +55,7 @@ namespace MyVetAppointment.UnitTests.Services
         } 
         
         [Fact]
-        public async void Should_NOT_UpdateDrug()
+        public async Task Should_NOT_UpdateDrug()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
             var drugModel = new DrugRequest()
@@ -70,7 +70,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
         
         [Fact]
-        public async void Should_DeleteDrug()
+        public async Task Should_DeleteDrug()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
             
@@ -80,7 +80,7 @@ namespace MyVetAppointment.UnitTests.Services
         } 
         
         [Fact]
-        public async void Should_NOT_DeleteDrug()
+        public async Task Should_NOT_DeleteDrug()
         {
             var drugService = diKernel.ResolveService<IDrugService>();
            

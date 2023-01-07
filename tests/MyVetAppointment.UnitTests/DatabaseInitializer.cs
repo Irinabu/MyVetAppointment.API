@@ -1,6 +1,4 @@
-﻿using MyVetAppointment.Business.Models.Appointment;
-using MyVetAppointment.Business.Models.Drugs;
-using MyVetAppointment.Data.Entities;
+﻿using MyVetAppointment.Data.Entities;
 using MyVetAppointment.Data.Enums;
 using MyVetAppointment.Data.Persistence;
 

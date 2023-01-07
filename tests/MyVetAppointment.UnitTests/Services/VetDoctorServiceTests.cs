@@ -1,10 +1,6 @@
 ﻿using Application.UnitTests;
-using MyVetAppointment.Business.Models.Appointment;
-using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Business.Models.User;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Data.Entities;
-using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
 {

@@ -2,7 +2,6 @@
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Business.Models.Drugs;
 using MyVetAppointment.Business.Services;
-using MyVetAppointment.Data.Entities;
 using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
@@ -19,7 +18,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
 
         [Fact]
-        public async void Should_PostBill()
+        public async Task Should_PostBill()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa89c");
             var bill = new BillRequest()
@@ -33,7 +32,7 @@ namespace MyVetAppointment.UnitTests.Services
         } 
         
         [Fact]
-        public async void Should_NOT_PostBill()
+        public async Task Should_NOT_PostBill()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa88c");
             var bill = new BillRequest()
@@ -46,7 +45,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
         
         [Fact]
-        public async void Should_DeleteBill()
+        public async Task Should_DeleteBill()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa89c");
             var bill = new BillRequest()
@@ -60,7 +59,7 @@ namespace MyVetAppointment.UnitTests.Services
         }  
         
         [Fact]
-        public async void Should_NOT_DeleteBill()
+        public async Task Should_NOT_DeleteBill()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa88c");
             var bill = new BillRequest()
@@ -73,7 +72,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
 
         [Fact]
-        public async void Should_GetBills()
+        public async Task Should_GetBills()
         {
             var billsResponse = await billServiceMock.GetBillsAsync();
             Debug.WriteLine("bills: " + billsResponse);

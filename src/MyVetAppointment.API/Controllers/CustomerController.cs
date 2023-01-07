@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models.Animal;

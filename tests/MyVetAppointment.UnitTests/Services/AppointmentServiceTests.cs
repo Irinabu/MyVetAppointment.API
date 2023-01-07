@@ -2,8 +2,6 @@
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Business.Models.Appointment;
 using MyVetAppointment.Data.Entities;
-using MyVetAppointment.Business.Models.User;
-using System.Diagnostics;
 
 namespace MyVetAppointment.UnitTests.Services
 { 
@@ -19,7 +17,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
 
         [Fact]
-        public async void Should_PostAppointment()
+        public async Task Should_PostAppointment()
         {
 
             var appointment = new AppointmentRequest()
@@ -46,7 +44,7 @@ namespace MyVetAppointment.UnitTests.Services
         } 
         
         [Fact]
-        public async void Should_UpdateAppointment()
+        public async Task Should_UpdateAppointment()
         {
 
             var appointment = new AppointmentRequest()
@@ -73,7 +71,7 @@ namespace MyVetAppointment.UnitTests.Services
         }        
         
         [Fact]
-        public async void Should_DeleteAppointment()
+        public async Task Should_DeleteAppointment()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa89c");
 
@@ -83,7 +81,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
         
         [Fact]
-        public async void Should_NOT_DeleteAppointment()
+        public async Task Should_NOT_DeleteAppointment()
         {
             var guid1 = Guid.Parse("c74faa1b-3f57-41f3-806c-1d7710faa88c");
            
@@ -91,7 +89,7 @@ namespace MyVetAppointment.UnitTests.Services
         }
 
         [Fact]
-        public async void Should_GetCustomerAppointments()
+        public async Task Should_GetCustomerAppointments()
         {
             var appointment = new AppointmentRequest()
             {
