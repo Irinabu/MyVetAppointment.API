@@ -6,6 +6,9 @@ using MyVetAppointment.Business.Models.Animal;
 using MyVetAppointment.Business.Models;
 using MyVetAppointment.Business.Services;
 using MyVetAppointment.Data.Entities;
+using MyVetAppointment.Business.Services.Implementations;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace MyVetAppointment.API.Controllers
 {
@@ -93,6 +96,11 @@ namespace MyVetAppointment.API.Controllers
             {
                 if (updateCustomerModel!.Password!.Equals(updateCustomerModel.PasswordConfirm))
                 {
+                    using (var sha256 = SHA256.Create())
+                    {
+                        var hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(updateCustomerModel.Password));
+                        updateCustomerModel.Password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                    }
                     var result = await _mediator.Send(new UpdateCustomerCommand
                     {
                         UpdateCustomerRequest = updateCustomerModel,

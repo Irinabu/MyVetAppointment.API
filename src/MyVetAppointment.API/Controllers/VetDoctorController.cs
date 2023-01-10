@@ -4,6 +4,8 @@ using MyVetAppointment.API.Commands;
 using MyVetAppointment.API.Queries;
 using MyVetAppointment.Business.Models;
 using MyVetAppointment.Data.Entities;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MyVetAppointment.API.Controllers
 {
@@ -55,8 +57,13 @@ namespace MyVetAppointment.API.Controllers
             var user = HttpContext.Items["User"] as User;
             if (user != null)
             {
-                if (updateVetDoctorModel!.Password!.Equals(updateVetDoctorModel.PasswordConfirm))
+                if (updateVetDoctorModel!.Password!.Equals(updateVetDoctorModel.PasswordConfirm) && updateVetDoctorModel.Password != "")
                 {
+                    using (var sha256 = SHA256.Create())
+                    {
+                        var hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(updateVetDoctorModel.Password));
+                        updateVetDoctorModel.Password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                    }
                     var result = await _mediator.Send(new UpdateVetDoctorCommand
                     {
                         UpdateVetDoctorRequest = updateVetDoctorModel,
@@ -67,7 +74,7 @@ namespace MyVetAppointment.API.Controllers
                 }
                 else
                 {
-                    return BadRequest("Wrong PasswordConfirm");
+                    return BadRequest("Password cannot be empty!");
                 }
             }
 
